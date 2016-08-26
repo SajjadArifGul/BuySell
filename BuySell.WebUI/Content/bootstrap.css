@@ -6754,4 +6754,9 @@ button.close {
     display: none !important;
   }
 }
+
+.navbar-image {
+  float: left;
+  padding: 10px 5px;
+}
 /*# sourceMappingURL=bootstrap.css.map */
