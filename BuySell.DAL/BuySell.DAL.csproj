@@ -30,7 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +49,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DataContext.cs" />
+    <Compile Include="Migrations\201608261858509_Initial.cs" />
+    <Compile Include="Migrations\201608261858509_Initial.Designer.cs">
+      <DependentUpon>201608261858509_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AccessoryAdsRepository.cs" />
+    <Compile Include="Repository\CitiesRepositories.cs" />
+    <Compile Include="Repository\CountriesRepository.cs" />
+    <Compile Include="Repository\CurrenciesRepository.cs" />
+    <Compile Include="Repository\ImagesRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\SellersRepository.cs" />
+    <Compile Include="Repository\StatesRepository.cs" />
+    <Compile Include="Repository\VehicleAdsRepository.cs" />
+    <Compile Include="Repository\VehicleBrandsRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuySell.Contracts\BuySell.Contracts.csproj">
+      <Project>{1b1d72c2-a4e4-4eb9-b6c0-2f168150d364}</Project>
+      <Name>BuySell.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuySell.Models\BuySell.Models.csproj">
+      <Project>{af84fde6-4db1-4754-beff-645fd5f11848}</Project>
+      <Name>BuySell.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608261858509_Initial.resx">
+      <DependentUpon>201608261858509_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
