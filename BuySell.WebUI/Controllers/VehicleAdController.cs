@@ -1,4 +1,8 @@
-﻿using System;
+﻿using BuySell.Contracts.Repositories;
+using BuySell.DAL.Data;
+using BuySell.DAL.Repository;
+using BuySell.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +20,15 @@ namespace BuySell.WebUI.Controllers
 
         public ActionResult Post()
         {
+            IRepositoryBase<VehicleBrand> vehicleBrands = new VehicleBrandsRepository(new DataContext());
+            ViewBag.VehicleBrandsList = vehicleBrands.GetAll();
+
+            IRepositoryBase<Currency> currencies = new CurrenciesRepository(new DataContext());
+            ViewBag.CurrenciesList = currencies.GetAll();
+
+            IRepositoryBase<Country> countries = new CountriesRepository(new DataContext());
+            ViewBag.CountriesList = countries.GetAll();
+
             return View();
         }
     }
