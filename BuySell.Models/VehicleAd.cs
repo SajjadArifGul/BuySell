@@ -11,68 +11,68 @@ namespace BuySell.Models
     {
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Enter an eye catching Title for your Ad.")]
         [Display(Name = "Title")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Which type of vehicle is this?.")]
         [Display(Name = "Vehicle Type")]
         public string VehicleType { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Vehicle Brand is required.")]
         [Display(Name = "Vehicle Brand")]
         public int VehicleBrandID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "In which year was this vehicle was registered.")]
         [Display(Name = "Registration Year")]
         public int RegistrationYear { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "How many Kilometeres has this vehicle driven.")]
         [Display(Name = "Driven Kilometer")]
         public int DrivenKilometers { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Color of this vehcile.")]
         [Display(Name = "Color")]
         public string Color { get; set; }
         
         [Display(Name = "Insurance")]
         public Nullable<bool> Insurance { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "What is the current condition of Vehicle.")]
         [Display(Name = "Condition")]
         public string Condition { get; set; }
         
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select Currency.")]
         [Display(Name = "Currency")]
         public int CurrencyID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "How much price for this vehicle?")]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Country details is required.")]
         [Display(Name = "Country")]
         public int CountryID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select a state that belong to the selected country.")]
         [Display(Name = "State")]
         public int StateID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Which city this vehicle is being sold in?")]
         [Display(Name = "City")]
         public int CityID { get; set; }
         
         [Display(Name = "Images")]
         public ICollection<int> ImageIDs { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Seller details are must required.")]
         [Display(Name = "Seller")]
         public int SellerID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Posting Time is required.")]
         [Display(Name = "Posting Time")]
         public System.DateTime PostingTime { get; set; }
 
