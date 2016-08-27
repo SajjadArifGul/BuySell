@@ -16,11 +16,10 @@ namespace BuySell.Models
         [Display(Name = "Name")]
         public string Name { get; set; }
         
-        [Display(Name = "Logo")]
-        public int ImageID { get; set; }
+        [Display(Name = "Image")]
+        public byte[] Image { get; set; }
         
         [Display(Name = "Description")]
         public string Description { get; set; }
-        public virtual Image Image { get; set; }
     }
 }

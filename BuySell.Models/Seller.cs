@@ -45,7 +45,6 @@ namespace BuySell.Models
         [Display(Name = "Joining Date")]
         public System.DateTime JoinDate { get; set; }
         
-        [Display(Name = "Image")]
         public int ImageID { get; set; }
 
         public virtual Country Country { get; set; }

@@ -16,3 +16,4 @@ C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrat
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.GenerateResource.Cache
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.NotationsAdded.resources
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.NotationsAddedToAllModelClasses.resources
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.NotationsAddedToAllModelClasses1.resources

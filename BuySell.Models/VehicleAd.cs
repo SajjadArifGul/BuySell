@@ -65,7 +65,6 @@ namespace BuySell.Models
         [Display(Name = "City")]
         public int CityID { get; set; }
         
-        [Display(Name = "Images")]
         public ICollection<int> ImageIDs { get; set; }
 
         [Required(ErrorMessage = "Seller details are must required.")]

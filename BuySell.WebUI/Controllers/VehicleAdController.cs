@@ -2,6 +2,8 @@
 using BuySell.DAL.Data;
 using BuySell.DAL.Repository;
 using BuySell.Models;
+using BuySell.WebUI.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Web.Mvc;
 
 namespace BuySell.WebUI.Controllers
 {
+    [Authorize]
     public class VehicleAdController : Controller
     {
         // GET: VehicleAd
@@ -30,6 +33,22 @@ namespace BuySell.WebUI.Controllers
             ViewBag.CountriesList = countries.GetAll();
 
             return View();
+        }
+
+        public ActionResult FillStates(int Country)
+        {
+            IRepositoryBase<State> statesRepo = new StatesRepository(new DataContext());
+            var states = statesRepo.GetAll().ToList().Where(s=>s.CountryID == Country);
+            
+            return Json(states, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult FillCities(int State)
+        {
+            IRepositoryBase<City> citiesRepo = new CitiesRepositories(new DataContext());
+            var cities = citiesRepo.GetAll().ToList().Where(s => s.StateID == State);
+
+            return Json(cities, JsonRequestBehavior.AllowGet);
         }
     }
 }
