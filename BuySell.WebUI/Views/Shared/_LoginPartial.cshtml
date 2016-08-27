@@ -1,20 +1,23 @@
 ﻿@using Microsoft.AspNet.Identity
 @using BuySell.WebUI.Helpers
+@using BuySell.WebUI.Models
 
 @if (Request.IsAuthenticated)
 {
-    var username = User.Identity.GetUserName();
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
 
+        var manager = new UserManager<ApplicationUser>(new Microsoft.AspNet.Identity.EntityFramework.UserStore<ApplicationUser>(new ApplicationDbContext()));
+        var currentUser = manager.FindById(User.Identity.GetUserId());
+
         <div class="navbar-image">
-            @Html.GravatarImage(username, new GravatarOptions { Size = 30, CssClass = "img - circle" })
+            @Html.GravatarImage(currentUser.Email, new GravatarOptions { Size = 30, CssClass = "img - circle" })
         </div>
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " +username + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + currentUser.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
