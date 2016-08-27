@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VehicleAdController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -237,6 +238,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
+    <Content Include="Views\VehicleAd\Post.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -248,6 +250,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BuySell.Contracts\BuySell.Contracts.csproj">
+      <Project>{1b1d72c2-a4e4-4eb9-b6c0-2f168150d364}</Project>
+      <Name>BuySell.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuySell.DAL\BuySell.DAL.csproj">
+      <Project>{cdc54727-3d7b-4969-a973-ce16408c69ad}</Project>
+      <Name>BuySell.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuySell.Models\BuySell.Models.csproj">
+      <Project>{af84fde6-4db1-4754-beff-645fd5f11848}</Project>
+      <Name>BuySell.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
