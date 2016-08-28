@@ -9,6 +9,10 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BuySell.WebUI.Models;
+using BuySell.Contracts.Repositories;
+using BuySell.Models;
+using BuySell.DAL.Repository;
+using BuySell.DAL.Data;
 
 namespace BuySell.WebUI.Controllers
 {
@@ -139,7 +143,10 @@ namespace BuySell.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            IRepositoryBase<Country> Countries = new CountriesRepository(new DataContext());
+            ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name");
+
+            return View(new RegisterViewModel());
         }
 
         //
@@ -153,10 +160,12 @@ namespace BuySell.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Name = model.Name, UserName = model.Username, Country = model.Country, State = model.State, City = model.City, MobileNumber = model.MobileNumber, Email = model.Email };
+                var user = new ApplicationUser { Name = model.Name, UserName = model.Username, CountryID = model.CountryID, StateID = model.StateID, CityID = model.CityID, MobileNumber = model.MobileNumber, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
                 if (result.Succeeded)
                 {
+                    var RegsitrationResult = RegisterASeller(user);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
@@ -172,6 +181,33 @@ namespace BuySell.WebUI.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private bool RegisterASeller(ApplicationUser user)
+        {
+            IRepositoryBase<Seller> Sellers = new SellersRepository(new DataContext());
+
+            Seller seller = new Seller();
+            seller.Email = user.Email;
+            seller.Username = user.UserName;
+            seller.Name = user.Name;
+            seller.CountryID = user.CountryID;
+            seller.StateID = user.StateID;
+            seller.CityID = user.CityID;
+            seller.MobileNumber = user.MobileNumber;
+            seller.JoinDate = DateTime.Now;
+
+            Sellers.Insert(seller);
+
+            try
+            {
+                Sellers.Commit();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         //

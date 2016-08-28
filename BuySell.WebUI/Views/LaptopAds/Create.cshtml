@@ -115,7 +115,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StateID, "StateID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("StateID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("StateID", new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -123,7 +123,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CityID, "CityID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CityID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CityID", new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -150,7 +150,7 @@
         $("#CountryID").change(function () {
             if ($("#CountryID").val() != "Select Country") {
                 var CountryOptions = {};
-                CountryOptions.url = "/VehicleAd/FillStates";
+                CountryOptions.url = "/AJAX/FillStates";
                 CountryOptions.type = "POST";
                 CountryOptions.data = JSON.stringify({ Country: $("#CountryID").val() });
                 CountryOptions.datatype = "json";
@@ -188,7 +188,7 @@
         $("#StateID").change(function () {
             if ($("#StateID").val() != "Select State") {
                 var StateOptions = {};
-                StateOptions.url = "/VehicleAd/FillCities";
+                StateOptions.url = "/AJAX/FillCities";
                 StateOptions.type = "POST";
                 StateOptions.data = JSON.stringify({ State: $("#StateID").val() });
                 StateOptions.datatype = "json";

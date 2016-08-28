@@ -24,24 +24,30 @@
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
         </div>
     </div>
+
     <div class="form-group">
-        @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(model => model.CountryID, "CountryID", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+            @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StateID, "StateID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("StateID", new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CityID, "CityID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CityID", new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.MobileNumber, new { @class = "col-md-2 control-label" })
@@ -77,4 +83,74 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    $(document).ready(function () {
+        $("#StateID").prop("disabled", false);
+
+        $("#CountryID").change(function () {
+            if ($("#CountryID").val() != "Select Country") {
+                var CountryOptions = {};
+                CountryOptions.url = "/AJAX/FillStates";
+                CountryOptions.type = "POST";
+                CountryOptions.data = JSON.stringify({ Country: $("#CountryID").val() });
+                CountryOptions.datatype = "json";
+                CountryOptions.contentType = "application/json";
+                CountryOptions.success = function (StatesList) {
+                    $("#StateID").html("");
+
+                    $("#CityID").html("");
+                    $("#CityID").prop("disabled", true);
+
+                    $.each(StatesList, function (i, State) {
+                        $("#StateID").append(
+                            $('<option></option>').val(State.ID).html(State.Name));
+                    });
+
+                    $("#StateID").prop("disabled", false);
+                };
+                CountryOptions.error = function () { alert("Error in Getting States!!"); };
+                $.ajax(CountryOptions);
+            }
+            else {
+                $("#StateID").html("");
+                $("#CityID").html("");
+
+                $("#StateID").prop("disabled", true);
+                $("#CityID").prop("disabled", true);
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#CityID").prop("disabled", false);
+        $("#StateID").change(function () {
+            if ($("#StateID").val() != "Select State") {
+                var StateOptions = {};
+                StateOptions.url = "/AJAX/FillCities";
+                StateOptions.type = "POST";
+                StateOptions.data = JSON.stringify({ State: $("#StateID").val() });
+                StateOptions.datatype = "json";
+                StateOptions.contentType = "application/json";
+                StateOptions.success = function (CitiesList) {
+                    $("#CityID").html("");
+                    $.each(CitiesList, function (i, City) {
+                        $("#CityID").append(
+                            $('<option></option>').val(City.ID).html(City.Name));
+                    });
+
+                    $("#CityID").prop("disabled", false);
+                };
+                StateOptions.error = function () { alert("Error in Getting Cities!!"); };
+                $.ajax(StateOptions);
+            }
+            else {
+                $("#CityID").html("");
+                $("#CityID").prop("disabled", true);
+            }
+        });
+    });
+</script>
 }

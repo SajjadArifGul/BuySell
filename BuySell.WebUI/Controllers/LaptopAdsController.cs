@@ -127,28 +127,12 @@ namespace BuySell.WebUI.Controllers
             return View(new LaptopAdViewModel());
         }
 
-        public ActionResult FillStates(int Country)
-        {
-            IRepositoryBase<State> statesRepo = new StatesRepository(new DataContext());
-            var states = statesRepo.GetAll().ToList().Where(s => s.CountryID == Country);
-
-            return Json(states, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult FillCities(int State)
-        {
-            IRepositoryBase<City> citiesRepo = new CitiesRepository(new DataContext());
-            var cities = citiesRepo.GetAll().ToList().Where(s => s.StateID == State);
-
-            return Json(cities, JsonRequestBehavior.AllowGet);
-        }
-
         // POST: LaptopAds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFile ImageFile)
+        public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFileBase ImageFile)
         {
             //if (ModelState.IsValid)
             //{
@@ -177,11 +161,14 @@ namespace BuySell.WebUI.Controllers
                     var imagePath = Path.Combine(Server.MapPath(uploadDir), ImageFile.FileName);
                     ImageFile.SaveAs(imagePath);
 
-                    var image = new Image
-                    {
-                        Path = imagePath
-                        //AdID = ad.ID ////I think we dont need it
-                    };
+                    //var image = new Image
+                    //{
+                    //    Path = imagePath
+                    //    //AdID = ad.ID ////I think we dont need it
+                    //};
+
+                    var image = new Image();
+                    image.Path = imagePath;
 
                     ad.Images = new List<Image>();
                     ad.Images.Add(image);
@@ -310,7 +297,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFile ImageFile)
+        public ActionResult Edit([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {

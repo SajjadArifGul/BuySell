@@ -73,15 +73,15 @@ namespace BuySell.WebUI.Models
 
         [Required]
         [Display(Name = "Country")]
-        public string Country { get; set; }
+        public int CountryID { get; set; }
 
         [Required]
         [Display(Name = "State")]
-        public string State { get; set; }
+        public int StateID { get; set; }
 
         [Required]
         [Display(Name = "City")]
-        public string City { get; set; }
+        public int CityID { get; set; }
 
         [Required]
         [Display(Name = "Mobile Number")]

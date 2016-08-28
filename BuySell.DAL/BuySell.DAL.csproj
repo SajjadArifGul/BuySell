@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201608281736075_NewModelClasses.Designer.cs">
       <DependentUpon>201608281736075_NewModelClasses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608281840276_RegisterSellerAppDBMigration.cs" />
+    <Compile Include="Migrations\201608281840276_RegisterSellerAppDBMigration.Designer.cs">
+      <DependentUpon>201608281840276_RegisterSellerAppDBMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccessoryBrandsRepository.cs" />
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608281736075_NewModelClasses.resx">
       <DependentUpon>201608281736075_NewModelClasses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608281840276_RegisterSellerAppDBMigration.resx">
+      <DependentUpon>201608281840276_RegisterSellerAppDBMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,9 +18,9 @@ namespace BuySell.WebUI.Models
         }
 
         public string Name { get; set; }
-        public string Country { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
+        public int CountryID { get; set; }
+        public int StateID { get; set; }
+        public int CityID { get; set; }
         public string MobileNumber { get; set; }
     }
 
