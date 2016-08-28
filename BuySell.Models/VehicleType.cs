@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace BuySell.Models
 {
-    public class AccessoryBrand
+    public class VehicleType
     {
-        [Display(Name = "Accessory Brand ID")]
+        [Display(Name = "Vehicle Type ID")]
         public int ID { get; set; }
 
-        [Required(ErrorMessage = "Name is required.")]
-        [Display(Name = "Name")]
-        public string Name { get; set; }
-        
+        [Required(ErrorMessage = "Vehicle Type is required.")]
+        [Display(Name = "Vehicle Type")]
+        public string Type { get; set; }
+
         [Display(Name = "Description")]
         public string Description { get; set; }
     }

@@ -45,7 +45,7 @@ namespace BuySell.WebUI.Controllers
 
         public ActionResult FillCities(int State)
         {
-            IRepositoryBase<City> citiesRepo = new CitiesRepositories(new DataContext());
+            IRepositoryBase<City> citiesRepo = new CitiesRepository(new DataContext());
             var cities = citiesRepo.GetAll().ToList().Where(s => s.StateID == State);
 
             return Json(cities, JsonRequestBehavior.AllowGet);

@@ -1,8 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@using BuySell.WebUI.Helpers
-@using BuySell.WebUI.Models
-
-@if (Request.IsAuthenticated)
+﻿@if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {

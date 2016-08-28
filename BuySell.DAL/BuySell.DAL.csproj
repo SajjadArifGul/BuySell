@@ -68,16 +68,21 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\AccessoryAdsRepository.cs" />
-    <Compile Include="Repository\CitiesRepositories.cs" />
+    <Compile Include="Repository\AccessoryBrandsRepository.cs" />
+    <Compile Include="Repository\AdsRepository.cs" />
+    <Compile Include="Repository\CitiesRepository.cs" />
+    <Compile Include="Repository\ColorsRepository.cs" />
+    <Compile Include="Repository\ConditionsRepository.cs" />
     <Compile Include="Repository\CountriesRepository.cs" />
     <Compile Include="Repository\CurrenciesRepository.cs" />
     <Compile Include="Repository\ImagesRepository.cs" />
+    <Compile Include="Repository\LaptopsRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\SellersRepository.cs" />
     <Compile Include="Repository\StatesRepository.cs" />
-    <Compile Include="Repository\VehicleAdsRepository.cs" />
     <Compile Include="Repository\VehicleBrandsRepository.cs" />
+    <Compile Include="Repository\VehicleTypesRepository.cs" />
+    <Compile Include="Repository\YearsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

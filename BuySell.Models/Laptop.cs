@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BuySell.Models
 {
-    public class LaptopAds
+    public class Laptop
     {
-        [Display(Name = "Laptop AD ID")]
+        [Display(Name = "Laptop ID")]
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Accessory Brand is required.")]
@@ -36,21 +36,7 @@ namespace BuySell.Models
         [Display(Name = "Ad")]
         public int AdID { get; set; }
 
-        [Display(Name = "Images")]
-        public ICollection<int> ImageIDs { get; set; }
-
-        [Required(ErrorMessage = "Seller Details are must for contacting.")]
-        [Display(Name = "Seller")]
-        public int SellerID { get; set; }
-
-        [Required(ErrorMessage = "Posting Time is required for relevance.")]
-        [Display(Name = "Posting Time")]
-        public System.DateTime PostingTime { get; set; }
-
         public virtual AccessoryBrand AccessoryBrand { get; set; }
         public virtual Ad Ad { get; set; }
-        public virtual ICollection<Image> Images { get; set; }
-
-
     }
 }

@@ -43,11 +43,9 @@ namespace BuySell.Models
         [Display(Name = "City")]
         public int CityID { get; set; }
 
-        public ICollection<int> ImageIDs { get; set; }
-
         [Required(ErrorMessage = "Seller Details are must required.")]
         [Display(Name = "Seller")]
-        public int SellerID { get; set; }
+        public string SellerID { get; set; }
 
         [Required(ErrorMessage = "Slug is shown in URL of Browser.")]
         [Display(Name = "Slug")]
@@ -56,8 +54,9 @@ namespace BuySell.Models
         [Required(ErrorMessage = "Posting Time is required.")]
         [Display(Name = "Posting Time")]
         public System.DateTime PostingTime { get; set; }
-        
+
         public virtual Currency Currency { get; set; }
+        public virtual Condition Condition { get; set; }
         public virtual City City { get; set; }
         public virtual State State { get; set; }
         public virtual Country Country { get; set; }

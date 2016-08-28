@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BuySell.DAL.Repository
 {
-    public class CitiesRepositories : RepositoryBase<City>
+    public class CitiesRepository : RepositoryBase<City>
     {
-        public CitiesRepositories(DataContext context) : base(context)
+        public CitiesRepository(DataContext context) : base(context)
         {
             if (context == null)
                 throw new ArgumentNullException();

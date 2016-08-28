@@ -10,7 +10,8 @@ namespace BuySell.Models
     public class Seller
     {
         [Display(Name = "Seller ID")]
-        public int ID { get; set; }
+        [StringLength(128)]
+        public string ID { get; set; }
 
         [Required(ErrorMessage = "Seller Email is required.")]
         [EmailAddress]
@@ -44,12 +45,9 @@ namespace BuySell.Models
         [Required(ErrorMessage = "Joining Date of Seller is required to keep record.")]
         [Display(Name = "Joining Date")]
         public System.DateTime JoinDate { get; set; }
-        
-        public int ImageID { get; set; }
 
         public virtual Country Country { get; set; }
         public virtual State State { get; set; }
         public virtual City City { get; set; }
-        public virtual Image Image { get; set; }
     }
 }
