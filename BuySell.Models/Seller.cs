@@ -9,9 +9,7 @@ namespace BuySell.Models
 {
     public class Seller
     {
-        [Display(Name = "Seller ID")]
-        [StringLength(128)]
-        public string ID { get; set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Seller Email is required.")]
         [EmailAddress]

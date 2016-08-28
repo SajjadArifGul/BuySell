@@ -1,19 +1,39 @@
-﻿using System;
+﻿using BuySell.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace BuySell.Models
+namespace BuySell.WebUI.Models
 {
-    public class Ad
+    public class LaptopAdViewModel
     {
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Enter an eye catching Title for your Ad.")]
         [Display(Name = "Title")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage = "Laptop Brand is required.")]
+        [Display(Name = "Laptop Brand")]
+        public int AccessoryBrandID { get; set; }
+
+        [Required(ErrorMessage = "Operating System is required.")]
+        [Display(Name = "Operating System")]
+        public string OperatingSystem { get; set; }
+
+        [Required(ErrorMessage = "Ram is required.")]
+        [Display(Name = "Ram")]
+        public string Ram { get; set; }
+
+        [Required(ErrorMessage = "Processor is required.")]
+        [Display(Name = "Processor")]
+        public string Processor { get; set; }
+
+        [Required(ErrorMessage = "Hard Disk is required.")]
+        [Display(Name = "Hard Disk")]
+        public string HardDisk { get; set; }
 
         [Required(ErrorMessage = "Current Condition details are required.")]
         [Display(Name = "Condition")]
@@ -43,18 +63,12 @@ namespace BuySell.Models
         [Display(Name = "City")]
         public int CityID { get; set; }
 
-        [Required(ErrorMessage = "Seller Details are must required.")]
-        [Display(Name = "Seller")]
+        [Required(ErrorMessage = "Seller ID is a must required.")]
+        [Display(Name = "Seller ID")]
         public int SellerID { get; set; }
 
-        [Required(ErrorMessage = "Slug is shown in URL of Browser.")]
-        [Display(Name = "Slug")]
-        public string Slug { get; set; }
 
-        [Required(ErrorMessage = "Posting Time is required.")]
-        [Display(Name = "Posting Time")]
-        public System.DateTime PostingTime { get; set; }
-
+        public virtual AccessoryBrand AccessoryBrand { get; set; }
         public virtual Currency Currency { get; set; }
         public virtual Condition Condition { get; set; }
         public virtual City City { get; set; }
@@ -62,5 +76,6 @@ namespace BuySell.Models
         public virtual Country Country { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual Seller Seller { get; set; }
+
     }
 }

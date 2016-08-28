@@ -28,5 +28,7 @@ namespace BuySell.DAL.Data
         public DbSet<VehicleType> VehicleTypes { get; set; }
         public DbSet<VehicleBrand> VehicleBrands { get; set; }
         public DbSet<Year> Years { get; set; }
+
+        //public System.Data.Entity.DbSet<BuySell.WebUI.Models.LaptopAdViewModel> LaptopAdViewModels { get; set; }
     }
 }

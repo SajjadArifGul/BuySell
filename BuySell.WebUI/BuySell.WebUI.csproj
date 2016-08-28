@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LaptopAdsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VehicleAdController.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,6 +179,7 @@
     <Compile Include="Helpers\GravatarOptions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LaptopAdViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -239,9 +241,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
     <Content Include="Views\VehicleAd\Post.cshtml" />
+    <Content Include="Views\LaptopAds\Create.cshtml" />
+    <Content Include="Views\LaptopAds\Delete.cshtml" />
+    <Content Include="Views\LaptopAds\Details.cshtml" />
+    <Content Include="Views\LaptopAds\Edit.cshtml" />
+    <Content Include="Views\LaptopAds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

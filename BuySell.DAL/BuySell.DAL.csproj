@@ -66,6 +66,10 @@
     <Compile Include="Migrations\201608271010554_NotationsAddedToAllModelClasses1.Designer.cs">
       <DependentUpon>201608271010554_NotationsAddedToAllModelClasses1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608281736075_NewModelClasses.cs" />
+    <Compile Include="Migrations\201608281736075_NewModelClasses.Designer.cs">
+      <DependentUpon>201608281736075_NewModelClasses.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccessoryBrandsRepository.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608271010554_NotationsAddedToAllModelClasses1.resx">
       <DependentUpon>201608271010554_NotationsAddedToAllModelClasses1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608281736075_NewModelClasses.resx">
+      <DependentUpon>201608281736075_NewModelClasses.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
