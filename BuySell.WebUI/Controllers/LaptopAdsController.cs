@@ -18,17 +18,9 @@ namespace BuySell.WebUI.Controllers
 {
     public class LaptopAdsController : Controller
     {
-        //private DataContext db = new DataContext();
-
         // GET: LaptopAds
         public ActionResult Index()
         {
-            //var laptopAdViewModels = db.LaptopAdViewModels.Include(l => l.AccessoryBrand).Include(l => l.City).Include(l => l.Condition).Include(l => l.Country).Include(l => l.Currency).Include(l => l.State);
-            //return View(laptopAdViewModels.ToList());
-
-            //IRepositoryBase<Ad> Ads = new AdsRepository(new DataContext());
-
-
             IRepositoryBase<Laptop> Laptops = new LaptopsRepository(new DataContext());
             List<Laptop> LaptopList = Laptops.GetAll().ToList();
 
@@ -64,17 +56,6 @@ namespace BuySell.WebUI.Controllers
         // GET: LaptopAds/Details/5
         public ActionResult Details(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //LaptopAdViewModel laptopAdViewModel = db.LaptopAdViewModels.Find(id);
-            //if (laptopAdViewModel == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(laptopAdViewModel);
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,6 +86,8 @@ namespace BuySell.WebUI.Controllers
             laptopAdViewModel.State = laptop.Ad.State;
             laptopAdViewModel.City = laptop.Ad.City;
             laptopAdViewModel.Seller = laptop.Ad.Seller;
+            laptopAdViewModel.PostingTime = laptop.Ad.PostingTime;
+            laptopAdViewModel.Images = laptop.Ad.Images;
 
 
             return View(laptopAdViewModel);
@@ -134,45 +117,11 @@ namespace BuySell.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFileBase ImageFile)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    db.LaptopAdViewModels.Add(laptopAdViewModel);
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-
-            //ViewBag.AccessoryBrandID = new SelectList(db.AccessoryBrands, "ID", "Name", laptopAdViewModel.AccessoryBrandID);
-            //ViewBag.CityID = new SelectList(db.Cities, "ID", "Name", laptopAdViewModel.CityID);
-            //ViewBag.ConditionID = new SelectList(db.Conditions, "ID", "ConditionType", laptopAdViewModel.ConditionID);
-            //ViewBag.CountryID = new SelectList(db.Countries, "ID", "Name", laptopAdViewModel.CountryID);
-            //ViewBag.CurrencyID = new SelectList(db.Currencies, "ID", "Name", laptopAdViewModel.CurrencyID);
-            //ViewBag.StateID = new SelectList(db.States, "ID", "Name", laptopAdViewModel.StateID);
-            //return View(laptopAdViewModel);
-
             if (ModelState.IsValid)
             {
                 IRepositoryBase<Ad> Ads = new AdsRepository(new DataContext());
 
                 var ad = new Ad();
-
-                if (ImageFile != null && ImageFile.ContentLength > 0)
-                {
-                    var uploadDir = "~/images";
-                    var imagePath = Path.Combine(Server.MapPath(uploadDir), ImageFile.FileName);
-                    ImageFile.SaveAs(imagePath);
-
-                    //var image = new Image
-                    //{
-                    //    Path = imagePath
-                    //    //AdID = ad.ID ////I think we dont need it
-                    //};
-
-                    var image = new Image();
-                    image.Path = imagePath;
-
-                    ad.Images = new List<Image>();
-                    ad.Images.Add(image);
-                }
 
                 ad.Title = laptopAdViewModel.Title;
                 ad.ConditionID = laptopAdViewModel.ConditionID;
@@ -199,6 +148,51 @@ namespace BuySell.WebUI.Controllers
                 Ads.Insert(ad);
 
                 Ads.Commit();
+
+                //if (ImageFile != null && ImageFile.ContentLength > 0)
+                //{
+                //    var uploadDir = "~/images";
+                //    var imagePath = Path.Combine(Server.MapPath(uploadDir), ImageFile.FileName);
+                //    ImageFile.SaveAs(imagePath);
+
+                //    //var image = new Image
+                //    //{
+                //    //    Path = imagePath
+                //    //    //AdID = ad.ID ////I think we dont need it
+                //    //};
+
+                //    var image = new Image();
+                //    image.Path = imagePath;
+                //    image.AdID = ad.ID;
+
+                //    IRepositoryBase<Image> Images = new ImagesRepository(new DataContext());
+
+                //    Images.Insert(image);
+                //    Images.Commit();
+
+                //    //ad.Images = new List<Image>();
+                //    //ad.Images.Add(image);
+                //}
+
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    var uploadDir = "~/images";
+                    var NewImageName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(ImageFile.FileName);
+                    var ImagePath = Path.Combine(Server.MapPath(uploadDir), NewImageName);
+
+                    ImageFile.SaveAs(ImagePath);
+
+                    var image = new Image
+                    {
+                        Path = NewImageName, //I am saving NewImageName in path because we will use relative path in img tag like ~\images\Model.Images.First().Path etc 
+                        AdID = ad.ID
+                    };
+
+                    IRepositoryBase<Image> Images = new ImagesRepository(new DataContext());
+
+                    Images.Insert(image);
+                    Images.Commit();
+                }
 
                 IRepositoryBase<Laptop> Laptops = new LaptopsRepository(new DataContext());
 

@@ -14,7 +14,7 @@
     <div class="col-md-9">
 
         <div class="thumbnail">
-            <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+            <img class="img-responsive" src="~/images/@Model.Images.First().Path" alt="" />
             <div class="caption-full">
                 <h4 class="pull-right">@Html.DisplayFor(model => model.Currency.ISOCode) @Html.DisplayFor(model => model.Price)</h4>
                 <h4>
@@ -69,25 +69,29 @@
                             @Html.DisplayFor(model => model.Condition.ConditionType)
                         </dd>
                         <dt>
-                            @Html.DisplayNameFor(model => model.Country.Name)
+                            @Html.Label("Seller")
                         </dt>
-
                         <dd>
-                            @Html.DisplayFor(model => model.Country.Name)
+                            @Html.DisplayFor(model => model.Seller.Name)
                         </dd>
                         <dt>
-                            @Html.DisplayNameFor(model => model.State.Name)
+                            @Html.Label("Location")
                         </dt>
-
                         <dd>
-                            @Html.DisplayFor(model => model.State.Name)
+                            @Html.DisplayFor(model => model.City.Name), @Html.DisplayFor(model => model.State.Name), @Html.DisplayFor(model => model.Country.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.Label("Contact")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Seller.MobileNumber)
                         </dd>
                         <dt>
-                            @Html.DisplayNameFor(model => model.City.Name)
+                            @Html.Label("Posted On")
                         </dt>
-
                         <dd>
-                            @Html.DisplayFor(model => model.City.Name)
+                            @Html.DisplayFor(model => model.PostingTime)
                         </dd>
                     </dl>
                 </p>

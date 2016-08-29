@@ -67,6 +67,9 @@ namespace BuySell.WebUI.Models
         [Display(Name = "Seller ID")]
         public int SellerID { get; set; }
 
+        [Display(Name = "Posting Time")]
+        public System.DateTime PostingTime { get; set; }
+
 
         public virtual AccessoryBrand AccessoryBrand { get; set; }
         public virtual Currency Currency { get; set; }
