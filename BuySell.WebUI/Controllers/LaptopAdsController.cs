@@ -97,18 +97,39 @@ namespace BuySell.WebUI.Controllers
         // GET: LaptopAds/Create
         public ActionResult Create()
         {
+            IRepositoryBase<Seller> Sellers = new SellersRepository(new DataContext());
+
+            string CurrentUserName = User.Identity.GetUserName();
+
+            Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
+
+            LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
+            laptopAdViewModel.CountryID = seller.CountryID;
+            laptopAdViewModel.StateID = seller.StateID;
+            laptopAdViewModel.CityID = seller.CityID;
+
+            laptopAdViewModel.Country = seller.Country;
+            laptopAdViewModel.State = seller.State;
+            laptopAdViewModel.City = seller.City;
+
+
             IRepositoryBase<AccessoryBrand> AccessoryBrands = new AccessoryBrandsRepository(new DataContext());
             IRepositoryBase<Condition> Conditions = new ConditionsRepository(new DataContext());
             IRepositoryBase<Country> Countries = new CountriesRepository(new DataContext());
+            IRepositoryBase<State> States = new StatesRepository(new DataContext());
+            IRepositoryBase<City> Cities = new CitiesRepository(new DataContext());
             IRepositoryBase<Currency> Currencies = new CurrenciesRepository(new DataContext());
-
 
             ViewBag.AccessoryBrandID = new SelectList(AccessoryBrands.GetAll(), "ID", "Name");
             ViewBag.ConditionID = new SelectList(Conditions.GetAll(), "ID", "ConditionType");
+
             ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name");
+            ViewBag.StateID = new SelectList(States.GetAll().Where(c=>c.CountryID == seller.CountryID), "ID", "Name");
+            ViewBag.CityID = new SelectList(Cities.GetAll().Where(c=>c.StateID == seller.StateID), "ID", "Name");
+
             ViewBag.CurrencyID = new SelectList(Currencies.GetAll(), "ID", "Name");
 
-            return View(new LaptopAdViewModel());
+            return View(laptopAdViewModel);
         }
 
         // POST: LaptopAds/Create
