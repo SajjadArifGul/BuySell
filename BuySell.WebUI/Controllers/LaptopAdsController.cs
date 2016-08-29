@@ -45,6 +45,7 @@ namespace BuySell.WebUI.Controllers
                 laptopAdViewModel.State = laptop.Ad.State;
                 laptopAdViewModel.City = laptop.Ad.City;
                 laptopAdViewModel.Seller = laptop.Ad.Seller;
+                laptopAdViewModel.Images = laptop.Ad.Images;
 
                 laptopAdViewModels.Add(laptopAdViewModel);
             }

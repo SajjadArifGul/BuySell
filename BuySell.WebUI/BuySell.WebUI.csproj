@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaptopAdsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostAdController.cs" />
     <Compile Include="Controllers\VehicleAdController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -252,6 +253,7 @@
     <Content Include="Views\LaptopAds\Details.cshtml" />
     <Content Include="Views\LaptopAds\Edit.cshtml" />
     <Content Include="Views\LaptopAds\Index.cshtml" />
+    <Content Include="Views\PostAd\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

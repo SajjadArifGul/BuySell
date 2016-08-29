@@ -2,3 +2,4 @@ C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\bin\Debug\BuySell.Cont
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\bin\Debug\BuySell.Contracts.pdb
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\obj\Debug\BuySell.Contracts.dll
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\obj\Debug\BuySell.Contracts.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Contracts\obj\Debug\BuySell.Contracts.csprojResolveAssemblyReference.cache
