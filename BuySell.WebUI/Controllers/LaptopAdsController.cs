@@ -40,19 +40,19 @@ namespace BuySell.WebUI.Controllers
 
                 laptopAdViewModel.ID = laptop.ID;
                 laptopAdViewModel.Title = laptop.Ad.Title;
-                laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
+                laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
                 laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
                 laptopAdViewModel.Ram = laptop.Ram;
                 laptopAdViewModel.Processor = laptop.Processor;
                 laptopAdViewModel.HardDisk = laptop.HardDisk;
-                laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
+                laptopAdViewModel.Condition = laptop.Ad.Condition;
                 laptopAdViewModel.Description = laptop.Ad.Description;
-                laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
+                laptopAdViewModel.Currency = laptop.Ad.Currency;
                 laptopAdViewModel.Price = laptop.Ad.Price;
-                laptopAdViewModel.CountryID = laptop.Ad.CountryID;
-                laptopAdViewModel.StateID = laptop.Ad.StateID;
-                laptopAdViewModel.CityID = laptop.Ad.CityID;
-                laptopAdViewModel.SellerID = laptop.Ad.SellerID;
+                laptopAdViewModel.Country = laptop.Ad.Country;
+                laptopAdViewModel.State = laptop.Ad.State;
+                laptopAdViewModel.City = laptop.Ad.City;
+                laptopAdViewModel.Seller = laptop.Ad.Seller;
 
                 laptopAdViewModels.Add(laptopAdViewModel);
             }
@@ -92,19 +92,19 @@ namespace BuySell.WebUI.Controllers
 
             laptopAdViewModel.ID = laptop.ID;
             laptopAdViewModel.Title = laptop.Ad.Title;
-            laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
+            laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
             laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
             laptopAdViewModel.Ram = laptop.Ram;
             laptopAdViewModel.Processor = laptop.Processor;
             laptopAdViewModel.HardDisk = laptop.HardDisk;
-            laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
+            laptopAdViewModel.Condition = laptop.Ad.Condition;
             laptopAdViewModel.Description = laptop.Ad.Description;
-            laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
+            laptopAdViewModel.Currency = laptop.Ad.Currency;
             laptopAdViewModel.Price = laptop.Ad.Price;
-            laptopAdViewModel.CountryID = laptop.Ad.CountryID;
-            laptopAdViewModel.StateID = laptop.Ad.StateID;
-            laptopAdViewModel.CityID = laptop.Ad.CityID;
-            laptopAdViewModel.SellerID = laptop.Ad.SellerID;
+            laptopAdViewModel.Country = laptop.Ad.Country;
+            laptopAdViewModel.State = laptop.Ad.State;
+            laptopAdViewModel.City = laptop.Ad.City;
+            laptopAdViewModel.Seller = laptop.Ad.Seller;
 
 
             return View(laptopAdViewModel);
@@ -185,9 +185,9 @@ namespace BuySell.WebUI.Controllers
 
                 IRepositoryBase<Seller> Sellers = new SellersRepository(new DataContext());
 
-                string CurrentUserID = User.Identity.GetUserId();
+                string CurrentUserName = User.Identity.GetUserName();
 
-                int AdSellerID = Sellers.GetAll().Where(s => s.Username == CurrentUserID).FirstOrDefault().ID;
+                int AdSellerID = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault().ID;
 
                 //ad.SellerID = Sellers.GetByID(CurrentUserID).ID; //Get this from Current User
                 ad.SellerID = AdSellerID;

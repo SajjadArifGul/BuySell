@@ -1,122 +1,165 @@
 ﻿@model BuySell.WebUI.Models.LaptopAdViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Html.DisplayFor(model => model.Title);
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.Title)</h2>
 
-<div>
-    <h4>LaptopAdViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessoryBrand.Name)
-        </dt>
+<hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.AccessoryBrand.Name)
-        </dd>
+<div class="row">
+    @Html.Partial("_CategoriesPartial")
 
-        <dt>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </dt>
+    <div class="col-md-9">
 
-        <dd>
-            @Html.DisplayFor(model => model.City.Name)
-        </dd>
+        <div class="thumbnail">
+            <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+            <div class="caption-full">
+                <h4 class="pull-right">@Html.DisplayFor(model => model.Currency.ISOCode) @Html.DisplayFor(model => model.Price)</h4>
+                <h4>
+                    @Html.DisplayFor(model => model.Title)
+                </h4>
+                <p>
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.Label("Laptop Brand")
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition.ConditionType)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.AccessoryBrand.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Condition.ConditionType)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.OperatingSystem)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.OperatingSystem)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Ram)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency.Name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Ram)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Currency.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Processor)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Processor)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.State.Name)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.HardDisk)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.HardDisk)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+                        <dt>
+                            @Html.Label("Condition")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Condition.ConditionType)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Country.Name)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.OperatingSystem)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Country.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.State.Name)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.OperatingSystem)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.State.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.City.Name)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ram)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.City.Name)
+                        </dd>
+                    </dl>
+                </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ram)
-        </dd>
+                <p>@Html.DisplayFor(model => model.Description)</p>
+            </div>
+            <div class="ratings">
+                <p class="pull-right">3 reviews</p>
+                <p>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    4.0 stars
+                </p>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Processor)
-        </dt>
+        <div class="well">
 
-        <dd>
-            @Html.DisplayFor(model => model.Processor)
-        </dd>
+            <div class="text-right">
+                <a class="btn btn-success">Leave a Review</a>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HardDisk)
-        </dt>
+            <hr>
 
-        <dd>
-            @Html.DisplayFor(model => model.HardDisk)
-        </dd>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Anonymous
+                    <span class="pull-right">10 days ago</span>
+                    <p>This product was great in terms of quality. I would definitely buy another!</p>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <hr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Anonymous
+                    <span class="pull-right">12 days ago</span>
+                    <p>I've alredy ordered another one!</p>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <hr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                    Anonymous
+                    <span class="pull-right">15 days ago</span>
+                    <p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+                </div>
+            </div>
 
-    </dl>
+        </div>
+
+    </div>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

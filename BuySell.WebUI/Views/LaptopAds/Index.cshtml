@@ -12,49 +12,52 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AccessoryBrand.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Condition.ConditionType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.OperatingSystem)
+            @Html.Label("Accessory Brand Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ram)
+            @Html.Label("City Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Processor)
+            @Html.Label("Condition ConditionType")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HardDisk)
+            @Html.Label("Country Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.Label("Currency Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.Label("State Name")
+        </th>
+        <th>
+            @Html.Label("OperatingSystem")
+        </th>
+        <th>
+            @Html.Label("Ram")
+        </th>
+        <th>
+            @Html.Label("Processor")
+        </th>
+        <th>
+            @Html.Label("HardDisk")
+        </th>
+        <th>
+            @Html.Label("Description")
+        </th>
+        <th>
+            @Html.Label("Price")
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.AccessoryBrand.Name)
         </td>
@@ -72,9 +75,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.State.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.OperatingSystem)

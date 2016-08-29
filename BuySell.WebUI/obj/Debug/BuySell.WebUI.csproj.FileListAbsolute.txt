@@ -73,3 +73,5 @@ C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.WebUI\bin\BuySell.Models.dll
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.WebUI\bin\BuySell.Contracts.pdb
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.WebUI\bin\BuySell.DAL.pdb
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.WebUI\bin\BuySell.Models.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.WebUI\obj\Debug\BuySell.WebUI.Migrations.ASPUserTableMigrations.resources
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.WebUI\obj\Debug\BuySell.WebUI.csproj.GenerateResource.Cache

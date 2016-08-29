@@ -178,6 +178,11 @@
     </Compile>
     <Compile Include="Helpers\GravatarHelper.cs" />
     <Compile Include="Helpers\GravatarOptions.cs" />
+    <Compile Include="Migrations\201608290844318_ASPUserTableMigrations.cs" />
+    <Compile Include="Migrations\201608290844318_ASPUserTableMigrations.Designer.cs">
+      <DependentUpon>201608290844318_ASPUserTableMigrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaptopAdViewModel.cs" />
@@ -274,6 +279,11 @@
       <Project>{af84fde6-4db1-4754-beff-645fd5f11848}</Project>
       <Name>BuySell.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608290844318_ASPUserTableMigrations.resx">
+      <DependentUpon>201608290844318_ASPUserTableMigrations.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
