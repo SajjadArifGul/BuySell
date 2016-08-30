@@ -18,7 +18,35 @@ namespace BuySell.WebUI.Controllers
 {
     public class LaptopAdsController : Controller
     {
+        //Main DataContext object to be sent to Repository
         DataContext myDataContext = new DataContext();
+
+        //Create Repositories for DataAccess
+        IRepositoryBase<Seller> Sellers;
+        IRepositoryBase<Ad> Ads;
+        IRepositoryBase<Laptop> Laptops;
+        IRepositoryBase<AccessoryBrand> AccessoryBrands;
+        IRepositoryBase<Condition> Conditions;
+        IRepositoryBase<Currency> Currencies;
+        IRepositoryBase<Country> Countries;
+        IRepositoryBase<State> States;
+        IRepositoryBase<City> Cities;
+        IRepositoryBase<Image> Images;
+
+        public LaptopAdsController()
+        {
+            //Create Repositories for DataAccess
+            Ads = new AdsRepository(myDataContext);
+            Sellers = new SellersRepository(myDataContext);
+            Images = new ImagesRepository(myDataContext);
+            Laptops = new LaptopsRepository(myDataContext);
+            AccessoryBrands = new AccessoryBrandsRepository(myDataContext);
+            Conditions = new ConditionsRepository(myDataContext);
+            Currencies = new CurrenciesRepository(myDataContext);
+            Countries = new CountriesRepository(myDataContext);
+            States = new StatesRepository(myDataContext);
+            Cities = new CitiesRepository(myDataContext);
+        }
 
         // GET: LaptopAds
         public ActionResult Index()
@@ -83,7 +111,12 @@ namespace BuySell.WebUI.Controllers
         public ActionResult Details(int? id)
         {
             //on this page user will be looking for details of a Laptop by sending an ID
-            
+
+            //Now create a Repository for Database Access
+            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
+            IRepositoryBase<Image> Images = new ImagesRepository(myDataContext);
+
+
             //first check if there is any ID given with this page 
             if (id == null)
             {
@@ -91,35 +124,48 @@ namespace BuySell.WebUI.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
+            //Get the Laptop by Given ID
             Laptop laptop = Laptops.GetByID(id);
 
+            //Check if Laptop Exists
             if (laptop == null)
             {
+                //if not exists then Show 404 Not found
                 return HttpNotFound();
             }
 
+            //if laptop is found then Populate the LaptopAdViewModel
+            //create an object
             LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
 
+            //Populate it from Laptop Details
             laptopAdViewModel.ID = laptop.ID;
             laptopAdViewModel.Title = laptop.Ad.Title;
             laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
+            laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
             laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
             laptopAdViewModel.Ram = laptop.Ram;
             laptopAdViewModel.Processor = laptop.Processor;
             laptopAdViewModel.HardDisk = laptop.HardDisk;
             laptopAdViewModel.Condition = laptop.Ad.Condition;
+            laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
             laptopAdViewModel.Description = laptop.Ad.Description;
             laptopAdViewModel.Currency = laptop.Ad.Currency;
+            laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
             laptopAdViewModel.Price = laptop.Ad.Price;
             laptopAdViewModel.Country = laptop.Ad.Country;
+            laptopAdViewModel.CountryID = laptop.Ad.CountryID;
             laptopAdViewModel.State = laptop.Ad.State;
+            laptopAdViewModel.StateID = laptop.Ad.StateID;
             laptopAdViewModel.City = laptop.Ad.City;
+            laptopAdViewModel.CityID = laptop.Ad.CityID;
             laptopAdViewModel.Seller = laptop.Ad.Seller;
+            laptopAdViewModel.SellerID = laptop.Ad.SellerID;
             laptopAdViewModel.PostingTime = laptop.Ad.PostingTime;
-            laptopAdViewModel.Images = laptop.Ad.Images;
 
-
+            //now for Image we will go back to Images Repository & match AdID there.
+            laptopAdViewModel.Images = Images.GetAll().Where(i=>i.AdID==laptop.AdID).ToList();
+            
             return View(laptopAdViewModel);
         }
 
@@ -129,29 +175,20 @@ namespace BuySell.WebUI.Controllers
             //Displaying the form for user to create Laptop Ad
             //We have to populate the Create form for those DropDown & User Details like Country, State & City in their already.
 
-            //Create repositories for Dataacess & send them with the View
-            IRepositoryBase<Seller> Sellers = new SellersRepository(myDataContext);
-            IRepositoryBase<AccessoryBrand> AccessoryBrands = new AccessoryBrandsRepository(myDataContext);
-            IRepositoryBase<Condition> Conditions = new ConditionsRepository(myDataContext);
-            IRepositoryBase<Country> Countries = new CountriesRepository(myDataContext);
-            IRepositoryBase<State> States = new StatesRepository(myDataContext);
-            IRepositoryBase<City> Cities = new CitiesRepository(myDataContext);
-            IRepositoryBase<Currency> Currencies = new CurrenciesRepository(myDataContext);
-
             //First get Current User details so we can know about Seller
             string CurrentUserName = User.Identity.GetUserName();
-
             Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
 
             //Create a Model & populate then send it to the View
             LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
             laptopAdViewModel.CountryID = seller.CountryID;
-            laptopAdViewModel.StateID = seller.StateID;
-            laptopAdViewModel.CityID = seller.CityID;
-
             laptopAdViewModel.Country = seller.Country;
             laptopAdViewModel.State = seller.State;
+            laptopAdViewModel.StateID = seller.StateID;
             laptopAdViewModel.City = seller.City;
+            laptopAdViewModel.CityID = seller.CityID;
+            laptopAdViewModel.Seller = seller;
+            laptopAdViewModel.SellerID = seller.ID;
 
             Currency currency = Currencies.GetAll().Where(c => c.CountryID == seller.CountryID).FirstOrDefault();
             laptopAdViewModel.Currency = currency;
@@ -175,16 +212,6 @@ namespace BuySell.WebUI.Controllers
         {
             //User has submitted the Create Form with LaptopAdViewModel details & maybe ImageFile
             //We have to get the details from LaptopAdViewModel into Ad, Laptop & Image Models
-
-            //Create Repositories for DataAccess
-            IRepositoryBase<Ad> Ads = new AdsRepository(myDataContext);
-            IRepositoryBase<Seller> Sellers = new SellersRepository(myDataContext);
-            IRepositoryBase<Image> Images = new ImagesRepository(myDataContext);
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
-            IRepositoryBase<AccessoryBrand> AccessoryBrands = new AccessoryBrandsRepository(myDataContext);
-            IRepositoryBase<Condition> Conditions = new ConditionsRepository(myDataContext);
-            IRepositoryBase<Country> Countries = new CountriesRepository(myDataContext);
-            IRepositoryBase<Currency> Currencies = new CurrenciesRepository(myDataContext);
 
             if (ModelState.IsValid)
             {
@@ -254,7 +281,7 @@ namespace BuySell.WebUI.Controllers
 
                 //If Ad is added to Database we goto LaptopAds/Index page to view all ads.
                 //we can change it to show us the page of our add too - Recomended
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "LaptopAds", new { id = laptop.ID });
             }
 
             //if ModelState is not in good & Valid we come here
@@ -276,7 +303,6 @@ namespace BuySell.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
             Laptop laptop = Laptops.GetByID(id);
             if (laptop == null)
             {
@@ -299,13 +325,6 @@ namespace BuySell.WebUI.Controllers
             laptopAdViewModel.State = laptop.Ad.State;
             laptopAdViewModel.City = laptop.Ad.City;
 
-            IRepositoryBase<AccessoryBrand> AccessoryBrands = new AccessoryBrandsRepository(myDataContext);
-            IRepositoryBase<Condition> Conditions = new ConditionsRepository(myDataContext);
-            IRepositoryBase<Country> Countries = new CountriesRepository(myDataContext);
-            IRepositoryBase<State> States = new StatesRepository(myDataContext);
-            IRepositoryBase<City> Cities = new CitiesRepository(myDataContext);
-            IRepositoryBase<Currency> Currencies = new CurrenciesRepository(myDataContext);
-
             ViewBag.AccessoryBrandID = new SelectList(AccessoryBrands.GetAll(), "ID", "Name", laptop.AccessoryBrandID);
             ViewBag.ConditionID = new SelectList(Conditions.GetAll(), "ID", "ConditionType", laptop.Ad.ConditionID);
 
@@ -326,37 +345,63 @@ namespace BuySell.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFileBase ImageFile)
         {
+            //Now user has submitted the Edit page with his new details 
             if (ModelState.IsValid)
             {
-                IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
-
+                //since this laptop already exists we will get it by the ID from LaptopAdViewModel that we got in parameter
                 Laptop laptop = Laptops.GetByID(laptopAdViewModel.ID);
-                
+
+                //now update this laptop fields from the Model
                 laptop.AccessoryBrandID = laptopAdViewModel.AccessoryBrandID;
+                laptop.AccessoryBrand = laptopAdViewModel.AccessoryBrand; // <------------------------This might give error bcz the view may send a model that may not have this AccessoryBrand
                 laptop.OperatingSystem = laptopAdViewModel.OperatingSystem;
                 laptop.Ram = laptopAdViewModel.Ram;
                 laptop.Processor = laptopAdViewModel.Processor;
                 laptop.HardDisk = laptopAdViewModel.HardDisk;
 
+                //Update this laptop in Database
                 Laptops.Update(laptop);
                 Laptops.Commit();
 
-                IRepositoryBase<Ad> Ads = new AdsRepository(myDataContext);
-
+                //Now if the user updated any Ad fields
+                //Get an Ad object from Databse since it already exists there.
                 Ad ad = Ads.GetByID(laptop.AdID);
 
+                //update this object from the Model we got
+                ad.Title = laptopAdViewModel.Title;
+                ad.ConditionID = laptopAdViewModel.ConditionID;
+                ad.Condition = laptopAdViewModel.Condition;
+                ad.Description = laptopAdViewModel.Description;
+                ad.CurrencyID = laptopAdViewModel.CurrencyID;
+                ad.Currency = laptopAdViewModel.Currency;
+                ad.Price = laptopAdViewModel.Price;
+                ad.CountryID = laptopAdViewModel.CountryID;
+                ad.Country = laptopAdViewModel.Country;
+                ad.StateID = laptopAdViewModel.StateID;
+                ad.State = laptopAdViewModel.State;
+                ad.CityID = laptopAdViewModel.CityID;
+                ad.City = laptopAdViewModel.City;
+                ad.Slug = laptopAdViewModel.Title.Replace(' ', '-');
+
+                //Now update this object in database
+                Ads.Update(ad);
+                Ads.Commit();
+
+                //Now if there is new updated image with form, 
                 if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
-                    //if the user uploaded a new image we have to do 2 things
+                    //we have to do 2 things here
                     //1- Delete the previous image record from image table & images folder
                     //2- Save the new image & its record in images table
 
-                    IRepositoryBase<Image> Images = new ImagesRepository(myDataContext);
-
                     var uploadDir = "~/images";
 
-                    if (ad.Images != null && ad.Images.Count >0)
+                    //check if the ad have any images
+                    if (ad.Images != null && ad.Images.Count > 0)
                     {
+                        //get the first image from this ad
+                        //i am not getting a list here bcz the delete method that i have do not get a list
+                        //Yes I think i can loop through the list if i get & dlete one by one --- but choro yar. esy he theek hy.
                         Image oldimage = ad.Images.First();
 
                         //1- Delete the previous record
@@ -373,35 +418,23 @@ namespace BuySell.WebUI.Controllers
                     var NewImageName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(ImageFile.FileName);
                     var ImagePath = Path.Combine(Server.MapPath(uploadDir), NewImageName);
 
+                    //Upload the image in our images diretory
                     ImageFile.SaveAs(ImagePath);
 
-
+                    //create new Image object
                     var image = new Image
                     {
                         Path = NewImageName, //I am saving NewImageName in path because we will use relative path in img tag like ~\images\Model.Images.First().Path etc 
                         AdID = ad.ID
                     };
 
+                    //add this image object in Database
                     Images.Insert(image);
                     Images.Commit();
                 }
 
-                ad.Title = laptopAdViewModel.Title;
-                ad.ConditionID = laptopAdViewModel.ConditionID;
-                ad.Description = laptopAdViewModel.Description;
-                ad.CurrencyID = laptopAdViewModel.CurrencyID;
-                ad.Price = laptopAdViewModel.Price;
-                ad.CountryID = laptopAdViewModel.CountryID;
-                ad.StateID = laptopAdViewModel.StateID;
-                ad.CityID = laptopAdViewModel.CityID;
-
-                ad.Slug = laptopAdViewModel.Title.Replace(' ', '-');
-
-                Ads.Update(ad);
-
-                Ads.Commit();
-
-                return RedirectToAction("Index");
+                //get user back to the details page of this LaptopAds
+                return RedirectToAction("Details", "LaptopAds", new { id = laptop.ID });
             }
 
             //ViewBag.AccessoryBrandID = new SelectList(db.AccessoryBrands, "ID", "Name", laptopAdViewModel.AccessoryBrandID);
@@ -430,35 +463,53 @@ namespace BuySell.WebUI.Controllers
         // GET: LaptopAds/Delete/5
         public ActionResult Delete(int? id)
         {
+            //User is trying to delete this object
+
+            //check if the ID supplied is not null
             if (id == null)
             {
+                //return bad request
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
+            //get te laptop from database by the supplied ID
             Laptop laptop = Laptops.GetByID(id);
+
+            //see if this laptop exists
             if (laptop == null)
             {
+                //if not then 404 Not Found
                 return HttpNotFound();
             }
 
+            //since the laptop exists now we populate the view model from it
             LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
 
             laptopAdViewModel.ID = laptop.ID;
             laptopAdViewModel.Title = laptop.Ad.Title;
             laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
+            laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
             laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
             laptopAdViewModel.Ram = laptop.Ram;
             laptopAdViewModel.Processor = laptop.Processor;
             laptopAdViewModel.HardDisk = laptop.HardDisk;
             laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
+            laptopAdViewModel.Condition = laptop.Ad.Condition;
             laptopAdViewModel.Description = laptop.Ad.Description;
             laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
+            laptopAdViewModel.Currency = laptop.Ad.Currency;
             laptopAdViewModel.Price = laptop.Ad.Price;
             laptopAdViewModel.CountryID = laptop.Ad.CountryID;
+            laptopAdViewModel.Country = laptop.Ad.Country;
             laptopAdViewModel.StateID = laptop.Ad.StateID;
+            laptopAdViewModel.State = laptop.Ad.State;
             laptopAdViewModel.CityID = laptop.Ad.CityID;
+            laptopAdViewModel.City = laptop.Ad.City;
             laptopAdViewModel.SellerID = laptop.Ad.SellerID;
+            laptopAdViewModel.Seller = laptop.Ad.Seller;
 
+            //send this model to User for confirmation to delete
+            //i think we should not have this view altogether. why show this whole form
+            //we should show user a jquery confirmation & then we delete on the basis of result from there.
             return View(laptopAdViewModel);
         }
 
@@ -467,16 +518,16 @@ namespace BuySell.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //LaptopAdViewModel laptopAdViewModel = db.LaptopAdViewModels.Find(id);
-            //db.LaptopAdViewModels.Remove(laptopAdViewModel);
+            //user has confirmed to delete a record. Delete it right now.
 
-            //db.SaveChanges();
-
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
+            //get the laptop by supplied ID
             Laptop laptop = Laptops.GetByID(id);
 
-            Laptops.Delete(id);
+            //delete from database
+            Laptops.Delete(laptop);
             Laptops.Commit();
+
+            //return to main LaptopAds page
             return RedirectToAction("Index");
         }
 
@@ -484,10 +535,7 @@ namespace BuySell.WebUI.Controllers
         {
             if (disposing)
             {
-                //db.Dispose();
-                IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
-
-                Laptops.Dispose();
+                myDataContext.Dispose();
             }
             base.Dispose(disposing);
         }
