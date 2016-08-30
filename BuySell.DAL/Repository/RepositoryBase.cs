@@ -46,6 +46,7 @@ namespace BuySell.DAL.Repository
                 dbSet.Attach(entity);
 
             dbSet.Remove(entity);
+            context.Entry(entity).State = EntityState.Deleted;
         }
         public virtual void Delete(object ID)
         {
