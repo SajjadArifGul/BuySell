@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BuySell.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BuySell.WebUI.Models
@@ -102,6 +103,12 @@ namespace BuySell.WebUI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        
+        public virtual ICollection<Country> Countries { get; set; }
+        public virtual ICollection<State> States { get; set; }
+        public virtual ICollection<City> City { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel
