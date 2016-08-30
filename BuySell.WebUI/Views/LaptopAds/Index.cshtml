@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Laptop Ads";
 }
-
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "TabletAds")">Tablet Ads</a>
 <h2>Laptop Ads</h2>
 <hr />
 <div class="row">
@@ -35,7 +35,7 @@
                                         {
                                         <div class="item active">
                                             <a href="@Url.Action("Details", "LaptopAds", new { id = @ModelList[i].ID })">
-                                                <img class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="">
+                                                <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
                                             </a>
                                         </div>
                                         }
@@ -43,7 +43,7 @@
                                         {
                                         <div class="item">
                                             <a href="@Url.Action("Details", "LaptopAds", new { id = @ModelList[i].ID })">
-                                                <img class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="">
+                                                <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
                                             </a>
                                         </div>
                                         }
@@ -65,17 +65,19 @@
                 {
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="thumbnail">
-                    <img src="~/images/@item.Images.First().Path" alt="">
+                    <a href="@Url.Action("Details", "LaptopAds", new { id = item.ID })">
+                        <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
+                    </a>
                     <div class="caption">
-                        <h4>
+                        <h4 title="@item.Title">
                             @Html.ActionLink(item.Title, "Details", new { id = item.ID })
                         </h4>
                         <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Ram) Ram, @Html.DisplayFor(modelItem => item.Processor) Processor, @Html.DisplayFor(modelItem => item.HardDisk) Hard Disk Size, @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
-                        <p>
-                            @Html.DisplayFor(modelItem => item.City.Name)
+                        <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
+                        <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
+                            <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
                         </p>
                     </div>
                 </div>

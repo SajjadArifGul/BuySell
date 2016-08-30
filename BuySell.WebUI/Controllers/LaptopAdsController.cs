@@ -170,32 +170,7 @@ namespace BuySell.WebUI.Controllers
                 Ads.Insert(ad);
 
                 Ads.Commit();
-
-                //if (ImageFile != null && ImageFile.ContentLength > 0)
-                //{
-                //    var uploadDir = "~/images";
-                //    var imagePath = Path.Combine(Server.MapPath(uploadDir), ImageFile.FileName);
-                //    ImageFile.SaveAs(imagePath);
-
-                //    //var image = new Image
-                //    //{
-                //    //    Path = imagePath
-                //    //    //AdID = ad.ID ////I think we dont need it
-                //    //};
-
-                //    var image = new Image();
-                //    image.Path = imagePath;
-                //    image.AdID = ad.ID;
-
-                //    IRepositoryBase<Image> Images = new ImagesRepository(new DataContext());
-
-                //    Images.Insert(image);
-                //    Images.Commit();
-
-                //    //ad.Images = new List<Image>();
-                //    //ad.Images.Add(image);
-                //}
-
+                
                 if (ImageFile != null && ImageFile.ContentLength > 0)
                 {
                     var uploadDir = "~/images";
@@ -233,13 +208,6 @@ namespace BuySell.WebUI.Controllers
                 return RedirectToAction("Index");
             }
 
-            //ViewBag.AccessoryBrandID = new SelectList(db.AccessoryBrands, "ID", "Name", laptopAdViewModel.AccessoryBrandID);
-            //ViewBag.CityID = new SelectList(db.Cities, "ID", "Name", laptopAdViewModel.CityID);
-            //ViewBag.ConditionID = new SelectList(db.Conditions, "ID", "ConditionType", laptopAdViewModel.ConditionID);
-            //ViewBag.CountryID = new SelectList(db.Countries, "ID", "Name", laptopAdViewModel.CountryID);
-            //ViewBag.CurrencyID = new SelectList(db.Currencies, "ID", "Name", laptopAdViewModel.CurrencyID);
-            //ViewBag.StateID = new SelectList(db.States, "ID", "Name", laptopAdViewModel.StateID);
-
             IRepositoryBase<AccessoryBrand> AccessoryBrands = new AccessoryBrandsRepository(new DataContext());
             IRepositoryBase<Condition> Conditions = new ConditionsRepository(new DataContext());
             IRepositoryBase<Country> Countries = new CountriesRepository(new DataContext());
@@ -268,42 +236,59 @@ namespace BuySell.WebUI.Controllers
                 return HttpNotFound();
             }
 
-            //ViewBag.AccessoryBrandID = new SelectList(db.AccessoryBrands, "ID", "Name", laptopAdViewModel.AccessoryBrandID);
-            //ViewBag.CityID = new SelectList(db.Cities, "ID", "Name", laptopAdViewModel.CityID);
-            //ViewBag.ConditionID = new SelectList(db.Conditions, "ID", "ConditionType", laptopAdViewModel.ConditionID);
-            //ViewBag.CountryID = new SelectList(db.Countries, "ID", "Name", laptopAdViewModel.CountryID);
-            //ViewBag.CurrencyID = new SelectList(db.Currencies, "ID", "Name", laptopAdViewModel.CurrencyID);
-            //ViewBag.StateID = new SelectList(db.States, "ID", "Name", laptopAdViewModel.StateID);
+            //LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
+
+            //laptopAdViewModel.ID = laptop.ID;
+            //laptopAdViewModel.Title = laptop.Ad.Title;
+            //laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
+            //laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
+            //laptopAdViewModel.Ram = laptop.Ram;
+            //laptopAdViewModel.Processor = laptop.Processor;
+            //laptopAdViewModel.HardDisk = laptop.HardDisk;
+            //laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
+            //laptopAdViewModel.Description = laptop.Ad.Description;
+            //laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
+            //laptopAdViewModel.Price = laptop.Ad.Price;
+            //laptopAdViewModel.CountryID = laptop.Ad.CountryID;
+            //laptopAdViewModel.StateID = laptop.Ad.StateID;
+            //laptopAdViewModel.CityID = laptop.Ad.CityID;
+            //laptopAdViewModel.SellerID = laptop.Ad.SellerID;
 
             LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
 
             laptopAdViewModel.ID = laptop.ID;
             laptopAdViewModel.Title = laptop.Ad.Title;
-            laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
+            laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
             laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
             laptopAdViewModel.Ram = laptop.Ram;
             laptopAdViewModel.Processor = laptop.Processor;
             laptopAdViewModel.HardDisk = laptop.HardDisk;
-            laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
+            laptopAdViewModel.Condition = laptop.Ad.Condition;
             laptopAdViewModel.Description = laptop.Ad.Description;
-            laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
+            laptopAdViewModel.Currency = laptop.Ad.Currency;
             laptopAdViewModel.Price = laptop.Ad.Price;
-            laptopAdViewModel.CountryID = laptop.Ad.CountryID;
-            laptopAdViewModel.StateID = laptop.Ad.StateID;
-            laptopAdViewModel.CityID = laptop.Ad.CityID;
-            laptopAdViewModel.SellerID = laptop.Ad.SellerID;
-
-
+            laptopAdViewModel.Country = laptop.Ad.Country;
+            laptopAdViewModel.State = laptop.Ad.State;
+            laptopAdViewModel.City = laptop.Ad.City;
+            laptopAdViewModel.Seller = laptop.Ad.Seller;
+            laptopAdViewModel.PostingTime = laptop.Ad.PostingTime;
 
             IRepositoryBase<AccessoryBrand> AccessoryBrands = new AccessoryBrandsRepository(new DataContext());
             IRepositoryBase<Condition> Conditions = new ConditionsRepository(new DataContext());
             IRepositoryBase<Country> Countries = new CountriesRepository(new DataContext());
+            IRepositoryBase<State> States = new StatesRepository(new DataContext());
+            IRepositoryBase<City> Cities = new CitiesRepository(new DataContext());
             IRepositoryBase<Currency> Currencies = new CurrenciesRepository(new DataContext());
 
             ViewBag.AccessoryBrandID = new SelectList(AccessoryBrands.GetAll(), "ID", "Name", laptop.AccessoryBrandID);
             ViewBag.ConditionID = new SelectList(Conditions.GetAll(), "ID", "ConditionType", laptop.Ad.ConditionID);
+
             ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name", laptop.Ad.CountryID);
+            ViewBag.StateID = new SelectList(States.GetAll().Where(c => c.CountryID == laptop.Ad.CountryID), "ID", "Name", laptop.Ad.StateID);
+            ViewBag.CityID = new SelectList(Cities.GetAll().Where(c => c.StateID == laptop.Ad.StateID), "ID", "Name", laptop.Ad.CityID);
+
             ViewBag.CurrencyID = new SelectList(Currencies.GetAll(), "ID", "Name", laptop.Ad.CurrencyID);
+
 
             return View(laptopAdViewModel);
         }

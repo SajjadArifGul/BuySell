@@ -4,8 +4,8 @@
     ViewBag.Title = Html.DisplayFor(model => model.Title);
 }
 
-<h2>@Html.DisplayFor(model => model.Title)</h2>
-
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "LaptopAds")">Laptop Ads</a>
+<h2>@Model.Title</h2>
 <hr />
 
 <div class="row">
@@ -14,10 +14,10 @@
     <div class="col-md-9">
 
         <div class="thumbnail">
-            <img class="img-responsive" src="~/images/@Model.Images.First().Path" alt="" />
+            <img title="@Model.Title" class="img-responsive" src="~/images/@Model.Images.First().Path" alt="@Model.Title" />
             <div class="caption-full">
-                <h4 class="pull-right">@Html.DisplayFor(model => model.Currency.ISOCode) @Html.DisplayFor(model => model.Price)</h4>
-                <h4>
+                <h4 title="@Model.Currency.Name : @Model.Price" class="pull-right">@Html.DisplayFor(model => model.Currency.ISOCode) @Html.DisplayFor(model => model.Price)</h4>
+                <h4 title="@Model.Title">
                     @Html.DisplayFor(model => model.Title)
                 </h4>
                 <p>
@@ -101,7 +101,7 @@
             <div class="ratings">
                 <p class="pull-right">3 reviews</p>
                 <p>
-                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-modal-window"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
