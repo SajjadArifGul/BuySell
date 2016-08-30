@@ -156,8 +156,6 @@ namespace BuySell.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            User.Identity.GetUserName();
-
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { Name = model.Name, UserName = model.Username, CountryID = model.CountryID, StateID = model.StateID, CityID = model.CityID, MobileNumber = model.MobileNumber, Email = model.Email };

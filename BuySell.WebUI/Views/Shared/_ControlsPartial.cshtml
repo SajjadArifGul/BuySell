@@ -1,0 +1,43 @@
+﻿@if (Request.IsAuthenticated)
+{
+    if (@Model.Seller.Username == User.Identity.GetUserName())
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Control Your Ad</h3>
+            </div>
+            <div class="panel-body">
+                <a class="btn btn-success">Leave a Review</a>
+                @using (Html.BeginForm("Delete", "LaptopAds", new { Id = @Model.ID }, FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Delete" class="btn btn-default" />
+                    </div>
+                }
+             </div>
+         </div>
+    }
+    else
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Add Your Review</h3>
+            </div>
+            <div class="panel-body">
+                Review Field Here.
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Reviews</h3>
+        </div>
+        <div class="panel-body">
+            Login to Post Reviews.
+        </div>
+    </div>
+}

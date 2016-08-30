@@ -98,10 +98,11 @@
 
                 <p>@Html.DisplayFor(model => model.Description)</p>
             </div>
+
             <div class="ratings">
                 <p class="pull-right">3 reviews</p>
                 <p>
-                    <span class="glyphicon glyphicon-modal-window"></span>
+                    <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
                     <span class="glyphicon glyphicon-star"></span>
@@ -111,14 +112,9 @@
             </div>
         </div>
 
+        @Html.Partial("_ControlsPartial")
+
         <div class="well">
-
-            <div class="text-right">
-                <a class="btn btn-success">Leave a Review</a>
-            </div>
-
-            <hr>
-
             <div class="row">
                 <div class="col-md-12">
                     <span class="glyphicon glyphicon-star"></span>
