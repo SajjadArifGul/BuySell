@@ -74,6 +74,7 @@ namespace BuySell.WebUI.Controllers
         {
             if (!ModelState.IsValid)
             {
+                ViewBag.ReturnUrl = returnUrl;
                 return View(model);
             }
 
@@ -91,6 +92,7 @@ namespace BuySell.WebUI.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
+                    ViewBag.ReturnUrl = returnUrl;
                     return View(model);
             }
         }

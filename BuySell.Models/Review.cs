@@ -15,8 +15,21 @@ namespace BuySell.Models
         [Required]
         [Display(Name = "Review is Required.")]
         public string Content { get; set; }
+
+        [Required]
+        public DateTime PostingTime { get; set; }
+
+        [Display(Name = "Review Stars.")]
+        public int ReviewStars { get; set; }
+
+        [Display(Name = "Ad Details are Required.")]
         public int AdID { get; set; }
 
+        [Display(Name = "Reviewer is Required.")]
+        public int SellerID { get; set; }
+        //I know it should be UserID but on our website whoever is registered is a Seller
+
         public virtual Ad Ad { get; set; }
+        public virtual Seller Seller { get; set; }
     }
 }

@@ -70,6 +70,8 @@ namespace BuySell.WebUI.Models
         [Display(Name = "Posting Time")]
         public System.DateTime PostingTime { get; set; }
 
+        [Display(Name = "Review")]
+        public string Review { get; set; }
 
         public virtual AccessoryBrand AccessoryBrand { get; set; }
         public virtual Currency Currency { get; set; }

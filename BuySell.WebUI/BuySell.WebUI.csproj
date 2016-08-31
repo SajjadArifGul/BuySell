@@ -255,6 +255,7 @@
     <Content Include="Views\LaptopAds\Index.cshtml" />
     <Content Include="Views\PostAd\Index.cshtml" />
     <Content Include="Views\Shared\_ControlsPartial.cshtml" />
+    <Content Include="Views\Shared\_ReviewsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

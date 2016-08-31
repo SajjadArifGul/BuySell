@@ -543,8 +543,31 @@ namespace BuySell.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddReview(int? id, string ReviewContent)
+        [Authorize]
+        public ActionResult AddReview(int? id, string Review)
         {
+            //Get the Ad Object from the ID by Laptop Object
+            Laptop laptop = Laptops.GetByID(id);
+
+            //Get Current User Details to be send as Seller Details in Review Object
+            string CurrentUserName = User.Identity.GetUserName();
+
+            Review newReview = new Review();
+
+            newReview.Content = Review;
+            newReview.AdID = laptop.AdID;
+            newReview.Ad = laptop.Ad;
+            newReview.PostingTime = DateTime.Now;
+
+            Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
+
+            newReview.SellerID = seller.ID;
+            newReview.Seller = seller;
+
+            newReview.ReviewStars = 5; //for now I dont want to implement this functionality but its good to keep for later.
+
+            Reviews.Insert(newReview);
+            Reviews.Commit();
 
             //Now return the user back to the details of this ad
             return RedirectToAction("Details", "LaptopAds", new { id = id });

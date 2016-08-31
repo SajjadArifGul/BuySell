@@ -8,15 +8,14 @@
             </div>
             <div class="panel-body">
                 <div class="form-actions no-color">
-                    <div>
+                    <div class="col-md-4">
                         @using (Html.BeginForm("Edit", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
                         {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" name="action" value="Edit" class="col-md-12 btn btn-warning" />
+                            @Html.AntiForgeryToken()
+                            <input type="submit" name="action" value="Edit" class="col-md-12 btn btn-warning" />
                         }
                     </div>
-
-                    <div>
+                    <div class="col-md-4">
                         @using (Html.BeginForm("Delete", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
                         {
                             @Html.AntiForgeryToken()
@@ -27,19 +26,40 @@
             </div>
         </div>
     }
-    <div class="panel panel-default">
+}
+
+<div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Add Review</h3>
         </div>
         <div class="panel-body">
-            @using (Html.BeginForm("AddReview", "LaptopAds", new { Id = @Model.ID }, FormMethod.Post))
+            @if (Request.IsAuthenticated)
             {
+                using (Html.BeginForm("AddReview", "LaptopAds", new { Id = @Model.ID }, FormMethod.Post))
+                {
                 @Html.AntiForgeryToken()
-                <div>
-                    <input class="col-md-10 form-control text-box single-line" name="ReviewContent" data-val="true" data-val-required="Must Add Review." id="Title" type="text" value="Add Your Review." />
-                    <input type="submit" value="Post Review" class="col-md-2 btn btn-warning" />
+                <div class="col-md-12 form-group">
+                    <div>
+                        <textarea class="form-control" cols="20" id="Review" name="Review" rows="2"></textarea>
+                    </div>
                 </div>
+                <div class="col-md-4 form-group">
+                    <div>
+                        <input type="submit" value="Add Your Review" class="col-md-12 btn btn-success" />
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                using (Html.BeginForm("Login", "Account", new { returnUrl = Url.Encode(Request.RawUrl) }, FormMethod.Get))
+                {
+                    <div class="col-md-4 form-group">
+                        <div>
+                            <input type="submit" value="Login to Leave Review." class="col-md-12 btn btn-success" />
+                        </div>
+                    </div>
+                }
             }
         </div>
     </div>
-}
