@@ -8,26 +8,28 @@
             </div>
             <div class="panel-body">
                 <div class="form-actions no-color">
-                    @using (Html.BeginForm("Edit", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" name="action" value="Edit" class="btn btn-warning" />
-                    }
-                    @using (Html.BeginForm("Delete", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
-                    {
-                        @Html.AntiForgeryToken()
-                        <input type="submit" name="action" value="Delete" class="btn btn-danger" />
-                    }
-                </div>
+                    <div>
+                        @using (Html.BeginForm("Edit", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" name="action" value="Edit" class="col-md-12 btn btn-warning" />
+                        }
+                    </div>
+
+                    <div>
+                        @using (Html.BeginForm("Delete", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="submit" name="action" value="Delete" class="col-md-12 btn btn-danger" />
+                        }
+                    </div>
+                  </div>
              </div>
          </div>
     }
-}
-@if (Request.IsAuthenticated)
-{
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Add Your Review</h3>
+            <h3 class="panel-title">Add Review</h3>
         </div>
         <div class="panel-body">
             <input class="form-control text-box single-line" data-val="true" data-val-required="Enter an eye catching Title for your Ad." id="Title" name="Title" type="text" value="" />
