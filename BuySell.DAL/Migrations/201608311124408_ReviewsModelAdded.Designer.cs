@@ -7,13 +7,13 @@ namespace BuySell.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class NotationsAddedToAllModelClasses1 : IMigrationMetadata
+    public sealed partial class ReviewsModelAdded : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(NotationsAddedToAllModelClasses1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ReviewsModelAdded));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608271010554_NotationsAddedToAllModelClasses1"; }
+            get { return "201608311124408_ReviewsModelAdded"; }
         }
         
         string IMigrationMetadata.Source

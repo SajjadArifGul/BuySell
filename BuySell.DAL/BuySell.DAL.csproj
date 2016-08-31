@@ -50,29 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataContext.cs" />
-    <Compile Include="Migrations\201608261858509_Initial.cs" />
-    <Compile Include="Migrations\201608261858509_Initial.Designer.cs">
-      <DependentUpon>201608261858509_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608270851152_NotationsAdded.cs" />
-    <Compile Include="Migrations\201608270851152_NotationsAdded.Designer.cs">
-      <DependentUpon>201608270851152_NotationsAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608270941231_NotationsAddedToAllModelClasses.cs" />
-    <Compile Include="Migrations\201608270941231_NotationsAddedToAllModelClasses.Designer.cs">
-      <DependentUpon>201608270941231_NotationsAddedToAllModelClasses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608271010554_NotationsAddedToAllModelClasses1.cs" />
-    <Compile Include="Migrations\201608271010554_NotationsAddedToAllModelClasses1.Designer.cs">
-      <DependentUpon>201608271010554_NotationsAddedToAllModelClasses1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608281736075_NewModelClasses.cs" />
-    <Compile Include="Migrations\201608281736075_NewModelClasses.Designer.cs">
-      <DependentUpon>201608281736075_NewModelClasses.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608281840276_RegisterSellerAppDBMigration.cs" />
-    <Compile Include="Migrations\201608281840276_RegisterSellerAppDBMigration.Designer.cs">
-      <DependentUpon>201608281840276_RegisterSellerAppDBMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201608311124408_ReviewsModelAdded.cs" />
+    <Compile Include="Migrations\201608311124408_ReviewsModelAdded.Designer.cs">
+      <DependentUpon>201608311124408_ReviewsModelAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +66,7 @@
     <Compile Include="Repository\ImagesRepository.cs" />
     <Compile Include="Repository\LaptopsRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\ReviewsRepository.cs" />
     <Compile Include="Repository\SellersRepository.cs" />
     <Compile Include="Repository\StatesRepository.cs" />
     <Compile Include="Repository\VehicleBrandsRepository.cs" />
@@ -107,23 +88,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608261858509_Initial.resx">
-      <DependentUpon>201608261858509_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608270851152_NotationsAdded.resx">
-      <DependentUpon>201608270851152_NotationsAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608270941231_NotationsAddedToAllModelClasses.resx">
-      <DependentUpon>201608270941231_NotationsAddedToAllModelClasses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608271010554_NotationsAddedToAllModelClasses1.resx">
-      <DependentUpon>201608271010554_NotationsAddedToAllModelClasses1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608281736075_NewModelClasses.resx">
-      <DependentUpon>201608281736075_NewModelClasses.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608281840276_RegisterSellerAppDBMigration.resx">
-      <DependentUpon>201608281840276_RegisterSellerAppDBMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201608311124408_ReviewsModelAdded.resx">
+      <DependentUpon>201608311124408_ReviewsModelAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

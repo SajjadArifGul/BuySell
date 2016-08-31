@@ -2,3 +2,4 @@ C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\bin\Debug\BuySell.Models.
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\bin\Debug\BuySell.Models.pdb
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\obj\Debug\BuySell.Models.dll
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\obj\Debug\BuySell.Models.pdb
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.Models\obj\Debug\BuySell.Models.csprojResolveAssemblyReference.cache
