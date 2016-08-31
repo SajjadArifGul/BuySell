@@ -32,6 +32,7 @@ namespace BuySell.WebUI.Controllers
         IRepositoryBase<State> States;
         IRepositoryBase<City> Cities;
         IRepositoryBase<Image> Images;
+        IRepositoryBase<Review> Reviews;
 
         public LaptopAdsController()
         {
@@ -46,6 +47,7 @@ namespace BuySell.WebUI.Controllers
             Countries = new CountriesRepository(myDataContext);
             States = new StatesRepository(myDataContext);
             Cities = new CitiesRepository(myDataContext);
+            Reviews = new ReviewsRepository(myDataContext);
         }
 
         // GET: LaptopAds
@@ -54,17 +56,14 @@ namespace BuySell.WebUI.Controllers
             //This is the main page for Laptop Ads.
             //we will get records from Database into this page.
 
-            //Create repository of Laptop to get Laptop Ads.
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
-
             //Get All Laptops as List
-            List<Laptop> LaptopList = Laptops.GetAll().ToList();
+            List<Laptop> LaptopsList = Laptops.GetAll().ToList();
 
             //There will be many Laptop Ads so we created a whole List of LaptopAdViewModel
             List<LaptopAdViewModel> laptopAdViewModels = new List<LaptopAdViewModel>();
 
             //Now Iterate over this List of laptops to populate LaptopAdVieqModels List
-            foreach (Laptop laptop in LaptopList)
+            foreach (Laptop laptop in LaptopsList)
             {
                 //New LaptopAdViewModel Object
                 LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
@@ -97,6 +96,9 @@ namespace BuySell.WebUI.Controllers
                 //then we will send this Images List to laptopAdViewMode.Images
                 //-JUST LEAVE IT- bcz i think this will increase load times. 
                 laptopAdViewModel.Images = laptop.Ad.Images;
+
+                //Get the reviews from Laptops Ads Review relation
+                laptopAdViewModel.Reviews = laptop.Ad.Reviews;
 
                 //now add this viewmodel in List
                 laptopAdViewModels.Add(laptopAdViewModel);
@@ -160,7 +162,10 @@ namespace BuySell.WebUI.Controllers
 
             //now for Image we will go back to Images Repository & match AdID there.
             laptopAdViewModel.Images = Images.GetAll().Where(i=>i.AdID==laptop.AdID).ToList();
-            
+
+            //now for Reviews
+            laptopAdViewModel.Reviews = Reviews.GetAll().Where(i => i.AdID == laptop.AdID).ToList();
+
             return View(laptopAdViewModel);
         }
 
@@ -534,6 +539,15 @@ namespace BuySell.WebUI.Controllers
 
             //return to main LaptopAds page
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddReview(int? id, string ReviewContent)
+        {
+
+            //Now return the user back to the details of this ad
+            return RedirectToAction("Details", "LaptopAds", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

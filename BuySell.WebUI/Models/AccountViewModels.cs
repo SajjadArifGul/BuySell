@@ -104,10 +104,7 @@ namespace BuySell.WebUI.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         
-        public virtual ICollection<Country> Countries { get; set; }
-        public virtual ICollection<State> States { get; set; }
-        public virtual ICollection<City> City { get; set; }
-
+        public virtual IEnumerable<Country> CountriesList { get; set; }
 
     }
 

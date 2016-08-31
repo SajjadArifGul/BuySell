@@ -144,23 +144,15 @@ namespace BuySell.WebUI.Controllers
         public ActionResult Register()
         {
             IRepositoryBase<Country> Countries = new CountriesRepository(new DataContext());
-            Country country = Countries.GetAll().Where(c => c.Name == "Pakistan").FirstOrDefault();
-
             IRepositoryBase<State> States = new StatesRepository(new DataContext());
-            State state = States.GetAll().Where(c => c.Name == "Sind").FirstOrDefault();
-
             IRepositoryBase<City> Cities = new CitiesRepository(new DataContext());
-            City city = Cities.GetAll().Where(c => c.StateID == state.ID).FirstOrDefault();
 
-            ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name" , country.ID);
+            Country country = Countries.GetAll().Where(c => c.Name == "Pakistan").FirstOrDefault();
+            
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+            registerViewModel.CountriesList = Countries.GetAll();
 
-            //ViewBag.StateID = new SelectList(States.GetAll(), "ID", "Name", state.ID);
-            //ViewBag.CityID = new SelectList(Cities.GetAll(), "ID", "Name", city.ID);
-
-            //RegisterViewModel registerViewModel = new RegisterViewModel();
-            //registerViewModel.Countries = Countries.GetAll().ToList();
-
-            return View(new RegisterViewModel());
+            return View(registerViewModel);
         }
 
         //

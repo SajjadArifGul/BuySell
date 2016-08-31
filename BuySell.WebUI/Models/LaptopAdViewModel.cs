@@ -78,6 +78,8 @@ namespace BuySell.WebUI.Models
         public virtual State State { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+
         public virtual Seller Seller { get; set; }
 
         //Lists for DropDowns

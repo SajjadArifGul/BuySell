@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Laptop Ads";
 }
-<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "TabletAds")">Tablet Ads</a>
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Create", "LaptopAds")">Post Laptop Ad</a>
 <h2>Laptop Ads</h2>
 <hr />
 <div class="row">
@@ -11,41 +11,42 @@
     <div class="col-md-9">
 
         <div class="row">
-            @if (!Model.Any())
-            {
-                <p>No Laptop Ads found. We are sorry.</p>
-            }
-            else
-            {
-                <div class="row carousel-holder">
+            @{
+                var ModelList = Model.Take(3).ToList();
 
-                    <div class="col-md-12">
-                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
+                if (ModelList.Count == 0)
+                {
+                    <p>No Laptop Ads found. We are sorry.</p>
+                }
+                else if (ModelList.Count == 3)
+                {
+                    <div class="row carousel-holder">
+                        <div class="col-md-12">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
+                                </ol>
+                                <div class="carousel-inner">
                                 @{
-                                    var ModelList = Model.Take(3).ToList();
                                     for (int i = 0; i < 3; i++)
                                     {
                                         if (i == 0)
                                         {
-                                        <div class="item active">
-                                            <a href="@Url.Action("Details", "LaptopAds", new { id = @ModelList[i].ID })">
-                                                <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
-                                            </a>
-                                        </div>
+                                            <div class="item active">
+                                                <a href="@Url.Action("Details", "LaptopAds", new { id = @ModelList[i].ID })">
+                                                    <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
+                                                </a>
+                                            </div>
                                         }
                                         else
                                         {
-                                        <div class="item">
-                                            <a href="@Url.Action("Details", "LaptopAds", new { id = @ModelList[i].ID })">
-                                                <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
-                                            </a>
-                                        </div>
+                                            <div class="item">
+                                                <a href="@Url.Action("Details", "LaptopAds", new { id = @ModelList[i].ID })">
+                                                    <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
+                                                </a>
+                                            </div>
                                         }
                                     }
                                  }
@@ -57,13 +58,13 @@
                                 <span class="glyphicon glyphicon-chevron-right"></span>
                             </a>
                         </div>
+                        </div>
                     </div>
-
-                </div>
-
-                foreach (var item in Model)
-                {
-            <div class="col-sm-4 col-lg-4 col-md-4">
+                }
+            }
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="thumbnail">
                     <a href="@Url.Action("Details", "LaptopAds", new { id = item.ID })">
                         <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
@@ -82,7 +83,6 @@
                     </div>
                 </div>
             </div>
-                }
             }
         </div>
 
