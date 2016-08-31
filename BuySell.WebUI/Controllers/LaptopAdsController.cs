@@ -112,11 +112,6 @@ namespace BuySell.WebUI.Controllers
         {
             //on this page user will be looking for details of a Laptop by sending an ID
 
-            //Now create a Repository for Database Access
-            IRepositoryBase<Laptop> Laptops = new LaptopsRepository(myDataContext);
-            IRepositoryBase<Image> Images = new ImagesRepository(myDataContext);
-
-
             //first check if there is any ID given with this page 
             if (id == null)
             {
@@ -191,14 +186,20 @@ namespace BuySell.WebUI.Controllers
             laptopAdViewModel.SellerID = seller.ID;
 
             Currency currency = Currencies.GetAll().Where(c => c.CountryID == seller.CountryID).FirstOrDefault();
-            laptopAdViewModel.Currency = currency;
 
-            ViewBag.AccessoryBrandID = new SelectList(AccessoryBrands.GetAll(), "ID", "Name");
-            ViewBag.ConditionID = new SelectList(Conditions.GetAll(), "ID", "ConditionType");
-            ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name");
-            ViewBag.StateID = new SelectList(States.GetAll().Where(c=>c.CountryID == seller.CountryID), "ID", "Name");
-            ViewBag.CityID = new SelectList(Cities.GetAll().Where(c=>c.StateID == seller.StateID), "ID", "Name");
-            ViewBag.CurrencyID = new SelectList(Currencies.GetAll(), "ID", "Name", currency.ID);
+            if (currency != null)
+            {
+                laptopAdViewModel.CurrencyID = currency.ID;
+                laptopAdViewModel.Currency = currency;
+            }
+
+            //Populate Lists in ViewModel to be shown on View
+            laptopAdViewModel.AccessoryBrandsList = AccessoryBrands.GetAll();
+            laptopAdViewModel.ConditionsList = Conditions.GetAll();
+            laptopAdViewModel.CurrenciesList = Currencies.GetAll();
+            laptopAdViewModel.CountriesList = Countries.GetAll();
+            laptopAdViewModel.StatesList = States.GetAll().Where(c => c.CountryID == seller.CountryID);
+            laptopAdViewModel.CitiesList = Cities.GetAll().Where(c => c.StateID == seller.StateID);
 
             return View(laptopAdViewModel);
         }
@@ -313,28 +314,32 @@ namespace BuySell.WebUI.Controllers
             laptopAdViewModel.ID = laptop.ID;
             laptopAdViewModel.Title = laptop.Ad.Title;
             laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
+            laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
             laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
             laptopAdViewModel.Ram = laptop.Ram;
             laptopAdViewModel.Processor = laptop.Processor;
             laptopAdViewModel.HardDisk = laptop.HardDisk;
             laptopAdViewModel.Condition = laptop.Ad.Condition;
+            laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
             laptopAdViewModel.Description = laptop.Ad.Description;
             laptopAdViewModel.Currency = laptop.Ad.Currency;
+            laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
             laptopAdViewModel.Price = laptop.Ad.Price;
             laptopAdViewModel.Country = laptop.Ad.Country;
+            laptopAdViewModel.CountryID = laptop.Ad.CountryID;
             laptopAdViewModel.State = laptop.Ad.State;
+            laptopAdViewModel.StateID = laptop.Ad.StateID;
             laptopAdViewModel.City = laptop.Ad.City;
+            laptopAdViewModel.CityID = laptop.Ad.CityID;
 
-            ViewBag.AccessoryBrandID = new SelectList(AccessoryBrands.GetAll(), "ID", "Name", laptop.AccessoryBrandID);
-            ViewBag.ConditionID = new SelectList(Conditions.GetAll(), "ID", "ConditionType", laptop.Ad.ConditionID);
-
-            ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name", laptop.Ad.CountryID);
-            ViewBag.StateID = new SelectList(States.GetAll().Where(c => c.CountryID == laptop.Ad.CountryID), "ID", "Name", laptop.Ad.StateID);
-            ViewBag.CityID = new SelectList(Cities.GetAll().Where(c => c.StateID == laptop.Ad.StateID), "ID", "Name", laptop.Ad.CityID);
-
-            ViewBag.CurrencyID = new SelectList(Currencies.GetAll(), "ID", "Name", laptop.Ad.CurrencyID);
-
-
+            //Populate Lists in ViewModel to be shown on View
+            laptopAdViewModel.AccessoryBrandsList = AccessoryBrands.GetAll();
+            laptopAdViewModel.ConditionsList = Conditions.GetAll();
+            laptopAdViewModel.CurrenciesList = Currencies.GetAll();
+            laptopAdViewModel.CountriesList = Countries.GetAll();
+            laptopAdViewModel.StatesList = States.GetAll().Where(c => c.CountryID == laptop.Ad.CountryID);
+            laptopAdViewModel.CitiesList = Cities.GetAll().Where(c => c.StateID == laptop.Ad.StateID);
+            
             return View(laptopAdViewModel);
         }
 

@@ -80,5 +80,15 @@ namespace BuySell.WebUI.Models
         public virtual ICollection<Image> Images { get; set; }
         public virtual Seller Seller { get; set; }
 
+        //Lists for DropDowns
+        public virtual IEnumerable<AccessoryBrand> AccessoryBrandsList { get; set; }
+        public virtual IEnumerable<Condition> ConditionsList { get; set; }
+        public virtual IEnumerable<Currency> CurrenciesList { get; set; }
+        public virtual IEnumerable<Country> CountriesList { get; set; }
+        public virtual IEnumerable<State> StatesList { get; set; }
+        public virtual IEnumerable<City> CitiesList { get; set; }
+
+
+
     }
 }
