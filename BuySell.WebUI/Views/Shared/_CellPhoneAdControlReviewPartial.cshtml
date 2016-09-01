@@ -1,4 +1,6 @@
-﻿@model BuySell.WebUI.Models.LaptopAdViewModel
+﻿
+
+@model BuySell.WebUI.Models.CellPhoneAdViewModel
 
 @if (Request.IsAuthenticated)
 {
@@ -11,16 +13,14 @@
             <div class="panel-body">
                 <div class="form-actions no-color">
                     <div class="col-md-4">
-                        @using (Html.BeginForm("Edit", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
+                        @using (Html.BeginForm("Edit", "CellPhoneAds", new { Id = @Model.ID }, FormMethod.Get))
                         {
-                            @Html.AntiForgeryToken()
                             <input type="submit" name="action" value="Edit" class="col-md-12 btn btn-warning" />
                         }
                     </div>
                     <div class="col-md-4">
-                        @using (Html.BeginForm("Delete", "LaptopAds", new { Id = @Model.ID }, FormMethod.Get))
+                        @using (Html.BeginForm("Delete", "CellPhoneAds", new { Id = @Model.ID }, FormMethod.Get))
                         {
-                            @Html.AntiForgeryToken()
                             <input type="submit" name="action" value="Delete" class="col-md-12 btn btn-danger" />
                         }
                     </div>
@@ -31,19 +31,19 @@
 }
 
 <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Add Review</h3>
-        </div>
-        <div class="panel-body">
-            @if (Request.IsAuthenticated)
+    <div class="panel-heading">
+        <h3 class="panel-title">Add Review</h3>
+    </div>
+    <div class="panel-body">
+        @if (Request.IsAuthenticated)
             {
-                using (Html.BeginForm("AddReview", "LaptopAds", new { Id = @Model.ID }, FormMethod.Post))
+                using (Html.BeginForm("AddReview", "CellPhoneAds", new { Id = @Model.ID }, FormMethod.Post))
                 {
                 @Html.AntiForgeryToken()
                 <div class="col-md-12 form-group">
                     <div class="form-group">
-                            @Html.TextAreaFor(model => model.Review, htmlAttributes: new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+                        @Html.TextAreaFor(model => model.Review, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-4 form-group">
@@ -51,18 +51,18 @@
                         <input type="submit" value="Add Your Review" class="col-md-12 btn btn-success" />
                     </div>
                 </div>
-                }
             }
-            else
+        }
+        else
+        {
+            using (Html.BeginForm("Login", "Account", new { returnUrl = Url.Encode(Request.RawUrl) }, FormMethod.Get))
             {
-                using (Html.BeginForm("Login", "Account", new { returnUrl = Url.Encode(Request.RawUrl) }, FormMethod.Get))
-                {
-                    <div class="col-md-4 form-group">
-                        <div>
-                            <input type="submit" value="Login to Leave Review." class="col-md-12 btn btn-success" />
-                        </div>
+                <div class="col-md-4 form-group">
+                    <div>
+                        <input type="submit" value="Login to Leave Review." class="col-md-12 btn btn-success" />
                     </div>
-                }
+                </div>
             }
-        </div>
+        }
     </div>
+</div>

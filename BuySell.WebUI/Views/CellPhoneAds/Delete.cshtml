@@ -1,0 +1,26 @@
+﻿@model BuySell.WebUI.Models.CellPhoneAdViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="jumbotron">
+    <h1>Are you sure you want to delete this?</h1>
+
+    <h3>Ad: @Html.DisplayFor(model => model.Title)</h3>
+
+
+    <div class="alert alert-danger" role="alert">Remember, You will not be able to reverse this decision !.</div>
+
+    <p>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-danger btn-lg" /> |
+                @Html.ActionLink("Cancel", "Details", "CellPhoneAds", new { id = @Model.ID }, htmlAttributes: new { @class = "btn btn-success btn-lg" })
+            </div>
+        }
+    </p>
+</div>

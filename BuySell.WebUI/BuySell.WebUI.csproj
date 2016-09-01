@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AJAXController.cs" />
+    <Compile Include="Controllers\CellPhoneAdsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaptopAdsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -189,6 +190,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CellPhoneAdViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaptopAdViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -258,8 +260,14 @@
     <Content Include="Views\LaptopAds\Edit.cshtml" />
     <Content Include="Views\LaptopAds\Index.cshtml" />
     <Content Include="Views\PostAd\Index.cshtml" />
-    <Content Include="Views\Shared\_ControlsPartial.cshtml" />
     <Content Include="Views\Shared\_ReviewsPartial.cshtml" />
+    <Content Include="Views\Shared\_LaptopAdControlReviewPartial.cshtml" />
+    <Content Include="Views\CellPhoneAds\Create.cshtml" />
+    <Content Include="Views\CellPhoneAds\Delete.cshtml" />
+    <Content Include="Views\CellPhoneAds\Details.cshtml" />
+    <Content Include="Views\CellPhoneAds\Edit.cshtml" />
+    <Content Include="Views\CellPhoneAds\Index.cshtml" />
+    <Content Include="Views\Shared\_CellPhoneAdControlReviewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

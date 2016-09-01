@@ -1,23 +1,27 @@
-﻿@model BuySell.WebUI.Models.LaptopAdViewModel
+﻿@model BuySell.WebUI.Models.CellPhoneAdViewModel
 
 @{
-    ViewBag.Title = "Create New Laptop Ad";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create New Laptop Ad</h2>
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "CellPhoneAds")">Laptop Ads</a>
+<h2>Edit - @Model.Title</h2>
 <hr />
 
-@using (Html.BeginForm("Create", "LaptopAds", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+@using (Html.BeginForm("Edit", "CellPhoneAds", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+        @Html.HiddenFor(model => model.ID)
+
         <div class="form-group">
-            @Html.Label("Laptop Photo", new { @class = "control-label col-md-2" })
+            @Html.Label("Cell Phone Photo", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="btn btn-default col-md-12" type="file" id="Photo" name="ImageFile" />
+                <input class="btn btn-default col-md-12" type="file" id="Photo" name="ImageFile" value="Select a New Image!" />
             </div>
         </div>
 
@@ -43,27 +47,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Ram, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Ram, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ram, "", new { @class = "text-danger" })
-            </div>
-            @Html.LabelFor(model => model.Processor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.Processor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Processor, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.HardDisk, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EditorFor(model => model.HardDisk, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HardDisk, "", new { @class = "text-danger" })
-            </div>
             @Html.Label("Condition", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.DropDownListFor(model => model.ConditionID, new SelectList(Model.ConditionsList, "ID","ConditionType"), htmlAttributes: new { @class = "form-control" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ConditionID, new SelectList(Model.ConditionsList, "ID", "ConditionType"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ConditionID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -92,12 +78,12 @@
         <div class="form-group">
             @Html.Label("Country", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-2">
-                @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.CountriesList, "ID", "Name"), htmlAttributes: new { @class = "form-control", @onchange = "FillStates()" })
+                @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.CountriesList, "ID", "Name"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
             </div>
             @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-2">
-                @Html.DropDownListFor(model => model.StateID, new SelectList(Model.StatesList, "ID", "Name"), htmlAttributes: new { @class = "form-control", @onchange = "FillCities()" })
+                @Html.DropDownListFor(model => model.StateID, new SelectList(Model.StatesList, "ID", "Name"), htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
             </div>
             @Html.Label("City", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -109,16 +95,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create Laptop Ad" class="btn btn-success" />
+                <input type="submit" value="Save Cell Phone Ad" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/mylocfiller")

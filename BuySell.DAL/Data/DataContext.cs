@@ -29,7 +29,7 @@ namespace BuySell.DAL.Data
         public DbSet<VehicleBrand> VehicleBrands { get; set; }
         public DbSet<Year> Years { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<CellPhone> CellPhones { get; set; }
 
-        //public System.Data.Entity.DbSet<BuySell.WebUI.Models.LaptopAdViewModel> LaptopAdViewModels { get; set; }
     }
 }

@@ -291,13 +291,15 @@ namespace BuySell.WebUI.Controllers
             }
 
             //if ModelState is not in good & Valid we come here
-            
-            //We will again populate our ViewBag to be send back to user so he dont have to write everything again 
-            ViewBag.AccessoryBrandID = new SelectList(AccessoryBrands.GetAll(), "ID", "Name");
-            ViewBag.ConditionID = new SelectList(Conditions.GetAll(), "ID", "ConditionType");
-            ViewBag.CountryID = new SelectList(Countries.GetAll(), "ID", "Name");
-            ViewBag.CurrencyID = new SelectList(Currencies.GetAll(), "ID", "Name");
-            
+
+            //Populate Lists in ViewModel to be shown on View
+            laptopAdViewModel.AccessoryBrandsList = AccessoryBrands.GetAll();
+            laptopAdViewModel.ConditionsList = Conditions.GetAll();
+            laptopAdViewModel.CurrenciesList = Currencies.GetAll();
+            laptopAdViewModel.CountriesList = Countries.GetAll();
+            laptopAdViewModel.StatesList = States.GetAll().Where(c => c.CountryID == laptopAdViewModel.CountryID);
+            laptopAdViewModel.CitiesList = Cities.GetAll().Where(c => c.StateID == laptopAdViewModel.StateID);
+
             //return the same LaptopAdViewModel back
             return View(laptopAdViewModel);
         }

@@ -1,10 +1,10 @@
-﻿@model BuySell.WebUI.Models.LaptopAdViewModel
+﻿@model BuySell.WebUI.Models.CellPhoneAdViewModel
 
 @{
     ViewBag.Title = Html.DisplayFor(model => model.Title);
 }
 
-<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "LaptopAds")">Laptop Ads</a>
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "CellPhoneAds")">Cell Phone Ads</a>
 <h2>@Model.Title</h2>
 <hr />
 
@@ -23,7 +23,7 @@
                 <p>
                     <dl class="dl-horizontal">
                         <dt>
-                            @Html.Label("Laptop Brand")
+                            @Html.Label("Brand")
                         </dt>
 
                         <dd>
@@ -36,30 +36,6 @@
 
                         <dd>
                             @Html.DisplayFor(model => model.OperatingSystem)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Ram)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Ram)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Processor)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.Processor)
-                        </dd>
-
-                        <dt>
-                            @Html.DisplayNameFor(model => model.HardDisk)
-                        </dt>
-
-                        <dd>
-                            @Html.DisplayFor(model => model.HardDisk)
                         </dd>
 
                         <dt>
@@ -104,7 +80,7 @@
             </div>
         </div>
 
-        @Html.Partial("_LaptopAdControlReviewPartial")
+        @Html.Partial("_CellPhoneAdControlReviewPartial")
 
         @Html.Partial("_ReviewsPartial")
 
