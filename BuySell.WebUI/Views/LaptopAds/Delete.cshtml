@@ -4,125 +4,23 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<div class="jumbotron">
+    <h1>Are you sure you want to delete this?</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>LaptopAdViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessoryBrand.Name)
-        </dt>
+    <h3>Ad: @Html.DisplayFor(model => model.Title)</h3>
 
-        <dd>
-            @Html.DisplayFor(model => model.AccessoryBrand.Name)
-        </dd>
+    
+    <div class="alert alert-danger" role="alert">Remember, You will not be able to reverse this decision !.</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition.ConditionType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Condition.ConditionType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Currency.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OperatingSystem)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OperatingSystem)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ram)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ram)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Processor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Processor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HardDisk)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HardDisk)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
+    <p>
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Delete" class="btn btn-danger btn-lg" /> |
+            @Html.ActionLink("Cancel", "Details", "LaptopAds", new { id = @Model.ID }, htmlAttributes: new { @class = "btn btn-success btn-lg" })
         </div>
     }
+    </p>
 </div>

@@ -11,9 +11,10 @@ namespace BuySell.Models
     {
         public int ID { get; set; }
 
-        [MinLength(100)]
+        [MinLength(50)]
+        [RegularExpression(@"^[\s\S]{50,}$", ErrorMessage ="Minimum 50 Characters required for the review.")]
         [Required]
-        [Display(Name = "Review is Required.")]
+        [Display(Name = "Review.")]
         public string Content { get; set; }
 
         [Required]

@@ -70,7 +70,7 @@ namespace BuySell.WebUI.Models
         [Display(Name = "Posting Time")]
         public System.DateTime PostingTime { get; set; }
 
-        [Display(Name = "Review")]
+        [StringLength(500, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 50)]
         public string Review { get; set; }
 
         public virtual AccessoryBrand AccessoryBrand { get; set; }
@@ -91,8 +91,5 @@ namespace BuySell.WebUI.Models
         public virtual IEnumerable<Country> CountriesList { get; set; }
         public virtual IEnumerable<State> StatesList { get; set; }
         public virtual IEnumerable<City> CitiesList { get; set; }
-
-
-
     }
 }

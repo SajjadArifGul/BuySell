@@ -1,4 +1,6 @@
-﻿@if (Request.IsAuthenticated)
+﻿@model BuySell.WebUI.Models.LaptopAdViewModel
+
+@if (Request.IsAuthenticated)
 {
     if (@Model.Seller.Username == User.Identity.GetUserName())
     {
@@ -39,8 +41,9 @@
                 {
                 @Html.AntiForgeryToken()
                 <div class="col-md-12 form-group">
-                    <div>
-                        <textarea class="form-control" cols="20" id="Review" name="Review" rows="2"></textarea>
+                    <div class="form-group">
+                            @Html.TextAreaFor(model => model.Review, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="col-md-4 form-group">

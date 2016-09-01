@@ -544,33 +544,38 @@ namespace BuySell.WebUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult AddReview(int? id, string Review)
+        public ActionResult AddReview(LaptopAdViewModel laptopAdViewModel, int? id, string Review)
         {
-            //Get the Ad Object from the ID by Laptop Object
-            Laptop laptop = Laptops.GetByID(id);
+                //Get the Ad Object from the ID by Laptop Object
+                Laptop laptop = Laptops.GetByID(id);
 
-            //Get Current User Details to be send as Seller Details in Review Object
-            string CurrentUserName = User.Identity.GetUserName();
+            if (laptop == null)
+            {
+                return HttpNotFound();
+            }
 
-            Review newReview = new Review();
+                //Get Current User Details to be send as Seller Details in Review Object
+                string CurrentUserName = User.Identity.GetUserName();
 
-            newReview.Content = Review;
-            newReview.AdID = laptop.AdID;
-            newReview.Ad = laptop.Ad;
-            newReview.PostingTime = DateTime.Now;
+                Review newReview = new Review();
 
-            Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
+                newReview.Content = Review;
+                newReview.AdID = laptop.AdID;
+                newReview.Ad = laptop.Ad;
+                newReview.PostingTime = DateTime.Now;
 
-            newReview.SellerID = seller.ID;
-            newReview.Seller = seller;
+                Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
 
-            newReview.ReviewStars = 5; //for now I dont want to implement this functionality but its good to keep for later.
+                newReview.SellerID = seller.ID;
+                newReview.Seller = seller;
 
-            Reviews.Insert(newReview);
-            Reviews.Commit();
+                newReview.ReviewStars = 5; //for now I dont want to implement this functionality but its good to keep for later.
 
-            //Now return the user back to the details of this ad
-            return RedirectToAction("Details", "LaptopAds", new { id = id });
+                Reviews.Insert(newReview);
+                Reviews.Commit();
+
+                //Now return the user back to the details of this ad
+                return RedirectToAction("Details", "LaptopAds", new { id = id });
         }
 
         protected override void Dispose(bool disposing)
