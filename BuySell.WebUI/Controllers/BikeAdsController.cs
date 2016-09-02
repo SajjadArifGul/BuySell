@@ -57,7 +57,7 @@ namespace BuySell.WebUI.Controllers
         // GET: BikeAds
         public ActionResult Index()
         {
-            List<Bike> BikesList = Bikes.GetAll().ToList();
+            List<Bike> BikesList = Bikes.GetAll().Take(12).OrderByDescending(b => b.Ad.PostingTime).ToList();
 
             List<BikeAdViewModel> bikeAdViewModels = new List<BikeAdViewModel>();
 
@@ -150,6 +150,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: BikeAds/Create
+        [Authorize]
         public ActionResult Create()
         {
             string CurrentUserName = User.Identity.GetUserName();
@@ -191,6 +192,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Title,VehicleBrandID,YearID,DrivenKilometers,ColorID,Insurance,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] BikeAdViewModel bikeAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
@@ -261,6 +263,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: BikeAds/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -314,6 +317,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Title,VehicleBrandID,YearID,DrivenKilometers,ColorID,Insurance,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] BikeAdViewModel bikeAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
@@ -387,6 +391,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: BikeAds/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -434,6 +439,7 @@ namespace BuySell.WebUI.Controllers
         // POST: BikeAds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Bike bike = Bikes.GetByID(id);

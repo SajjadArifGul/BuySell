@@ -34,109 +34,110 @@ namespace BuySell.WebUI.Controllers
             List<LaptopAdViewModel> laptopAdViewModels = new List<LaptopAdViewModel>();
             List<CellPhoneAdViewModel> cellPhoneAdViewModels = new List<CellPhoneAdViewModel>();
 
-            //Get Bikes from DB
-            List<Bike> BikesList = Bikes.GetAll().ToList();
-            List<CellPhone> CellPhonesList = CellPhones.GetAll().ToList();
-            List<Laptop> LaptopsList = Laptops.GetAll().ToList();
+            //Get from DB - only send 3 items from all catgories to Homepage
+            List<Bike> BikesList = Bikes.GetAll().Take(3).OrderByDescending(b =>b.Ad.PostingTime).ToList();
+            List<CellPhone> CellPhonesList = CellPhones.GetAll().Take(3).OrderByDescending(b => b.Ad.PostingTime).ToList();
+            List<Laptop> LaptopsList = Laptops.GetAll().Take(3).OrderByDescending(b => b.Ad.PostingTime).ToList();
 
-            //only send 3 Bikes to Homepage
-            for (int i = 0; i < 3; i++)
+            foreach (Bike bike in BikesList)
             {
                 BikeAdViewModel bikeAdViewModel = new BikeAdViewModel();
 
-                bikeAdViewModel.ID = BikesList[i].ID;
-                bikeAdViewModel.Title = BikesList[i].Ad.Title;
-                bikeAdViewModel.VehicleBrandID = BikesList[i].VehicleBrandID;
-                bikeAdViewModel.VehicleBrand = BikesList[i].VehicleBrand;
-                bikeAdViewModel.YearID = BikesList[i].YearID;
-                bikeAdViewModel.Year = BikesList[i].Year;
-                bikeAdViewModel.DrivenKilometers = BikesList[i].DrivenKilometers;
-                bikeAdViewModel.ColorID = BikesList[i].ColorID;
-                bikeAdViewModel.Color = BikesList[i].Color;
-                bikeAdViewModel.Insurance = BikesList[i].Insurance;
-                bikeAdViewModel.Condition = BikesList[i].Ad.Condition;
-                bikeAdViewModel.ConditionID = BikesList[i].Ad.ConditionID;
-                bikeAdViewModel.Description = BikesList[i].Ad.Description;
-                bikeAdViewModel.Currency = BikesList[i].Ad.Currency;
-                bikeAdViewModel.CurrencyID = BikesList[i].Ad.CurrencyID;
-                bikeAdViewModel.Price = BikesList[i].Ad.Price;
-                bikeAdViewModel.Country = BikesList[i].Ad.Country;
-                bikeAdViewModel.CountryID = BikesList[i].Ad.CountryID;
-                bikeAdViewModel.StateID = BikesList[i].Ad.StateID;
-                bikeAdViewModel.State = BikesList[i].Ad.State;
-                bikeAdViewModel.CityID = BikesList[i].Ad.CityID;
-                bikeAdViewModel.City = BikesList[i].Ad.City;
-                bikeAdViewModel.SellerID = BikesList[i].Ad.SellerID;
-                bikeAdViewModel.Seller = BikesList[i].Ad.Seller;
+                bikeAdViewModel.ID = bike.ID;
+                bikeAdViewModel.Title = bike.Ad.Title;
+                bikeAdViewModel.VehicleBrandID = bike.VehicleBrandID;
+                bikeAdViewModel.VehicleBrand = bike.VehicleBrand;
+                bikeAdViewModel.YearID = bike.YearID;
+                bikeAdViewModel.Year = bike.Year;
+                bikeAdViewModel.DrivenKilometers = bike.DrivenKilometers;
+                bikeAdViewModel.ColorID = bike.ColorID;
+                bikeAdViewModel.Color = bike.Color;
+                bikeAdViewModel.Insurance = bike.Insurance;
+                bikeAdViewModel.Condition = bike.Ad.Condition;
+                bikeAdViewModel.ConditionID = bike.Ad.ConditionID;
+                bikeAdViewModel.Description = bike.Ad.Description;
+                bikeAdViewModel.Currency = bike.Ad.Currency;
+                bikeAdViewModel.CurrencyID = bike.Ad.CurrencyID;
+                bikeAdViewModel.Price = bike.Ad.Price;
+                bikeAdViewModel.Country = bike.Ad.Country;
+                bikeAdViewModel.CountryID = bike.Ad.CountryID;
+                bikeAdViewModel.StateID = bike.Ad.StateID;
+                bikeAdViewModel.State = bike.Ad.State;
+                bikeAdViewModel.CityID = bike.Ad.CityID;
+                bikeAdViewModel.City = bike.Ad.City;
+                bikeAdViewModel.SellerID = bike.Ad.SellerID;
+                bikeAdViewModel.Seller = bike.Ad.Seller;
 
-                bikeAdViewModel.Images = BikesList[i].Ad.Images;
+                bikeAdViewModel.Images = bike.Ad.Images;
 
-                bikeAdViewModel.Reviews = BikesList[i].Ad.Reviews;
+                bikeAdViewModel.Reviews = bike.Ad.Reviews;
 
                 bikeAdViewModels.Add(bikeAdViewModel);
             }
 
-            for (int i = 0; i < 3; i++)
+            foreach (CellPhone cellPhone in CellPhonesList)
             {
                 CellPhoneAdViewModel cellPhoneAdViewModel = new CellPhoneAdViewModel();
 
-                cellPhoneAdViewModel.ID = CellPhonesList[i].ID;
-                cellPhoneAdViewModel.Title = CellPhonesList[i].Ad.Title;
-                cellPhoneAdViewModel.AccessoryBrandID = CellPhonesList[i].AccessoryBrandID;
-                cellPhoneAdViewModel.AccessoryBrand = CellPhonesList[i].AccessoryBrand;
-                cellPhoneAdViewModel.OperatingSystem = CellPhonesList[i].OperatingSystem;
-                cellPhoneAdViewModel.Condition = CellPhonesList[i].Ad.Condition;
-                cellPhoneAdViewModel.ConditionID = CellPhonesList[i].Ad.ConditionID;
-                cellPhoneAdViewModel.Description = CellPhonesList[i].Ad.Description;
-                cellPhoneAdViewModel.Currency = CellPhonesList[i].Ad.Currency;
-                cellPhoneAdViewModel.CurrencyID = CellPhonesList[i].Ad.CurrencyID;
-                cellPhoneAdViewModel.Price = CellPhonesList[i].Ad.Price;
-                cellPhoneAdViewModel.Country = CellPhonesList[i].Ad.Country;
-                cellPhoneAdViewModel.CountryID = CellPhonesList[i].Ad.CountryID;
-                cellPhoneAdViewModel.StateID = CellPhonesList[i].Ad.StateID;
-                cellPhoneAdViewModel.State = CellPhonesList[i].Ad.State;
-                cellPhoneAdViewModel.CityID = CellPhonesList[i].Ad.CityID;
-                cellPhoneAdViewModel.City = CellPhonesList[i].Ad.City;
-                cellPhoneAdViewModel.SellerID = CellPhonesList[i].Ad.SellerID;
-                cellPhoneAdViewModel.Seller = CellPhonesList[i].Ad.Seller;
+                cellPhoneAdViewModel.ID = cellPhone.ID;
+                cellPhoneAdViewModel.Title = cellPhone.Ad.Title;
+                cellPhoneAdViewModel.AccessoryBrandID = cellPhone.AccessoryBrandID;
+                cellPhoneAdViewModel.AccessoryBrand = cellPhone.AccessoryBrand;
+                cellPhoneAdViewModel.OperatingSystem = cellPhone.OperatingSystem;
+                cellPhoneAdViewModel.Condition = cellPhone.Ad.Condition;
+                cellPhoneAdViewModel.ConditionID = cellPhone.Ad.ConditionID;
+                cellPhoneAdViewModel.Description = cellPhone.Ad.Description;
+                cellPhoneAdViewModel.Currency = cellPhone.Ad.Currency;
+                cellPhoneAdViewModel.CurrencyID = cellPhone.Ad.CurrencyID;
+                cellPhoneAdViewModel.Price = cellPhone.Ad.Price;
+                cellPhoneAdViewModel.Country = cellPhone.Ad.Country;
+                cellPhoneAdViewModel.CountryID = cellPhone.Ad.CountryID;
+                cellPhoneAdViewModel.StateID = cellPhone.Ad.StateID;
+                cellPhoneAdViewModel.State = cellPhone.Ad.State;
+                cellPhoneAdViewModel.CityID = cellPhone.Ad.CityID;
+                cellPhoneAdViewModel.City = cellPhone.Ad.City;
+                cellPhoneAdViewModel.SellerID = cellPhone.Ad.SellerID;
+                cellPhoneAdViewModel.Seller = cellPhone.Ad.Seller;
 
-                cellPhoneAdViewModel.Images = CellPhonesList[i].Ad.Images;
+                cellPhoneAdViewModel.Images = cellPhone.Ad.Images;
 
-                cellPhoneAdViewModel.Reviews = CellPhonesList[i].Ad.Reviews;
+                cellPhoneAdViewModel.Reviews = cellPhone.Ad.Reviews;
 
                 cellPhoneAdViewModels.Add(cellPhoneAdViewModel);
             }
 
-            for (int i = 0; i < 3; i++)
+            foreach (Laptop laptop in LaptopsList)
             {
+                //New LaptopAdViewModel Object
                 LaptopAdViewModel laptopAdViewModel = new LaptopAdViewModel();
 
-                laptopAdViewModel.ID = LaptopsList[i].ID;
-                laptopAdViewModel.Title = LaptopsList[i].Ad.Title;
-                laptopAdViewModel.AccessoryBrandID = LaptopsList[i].AccessoryBrandID;
-                laptopAdViewModel.AccessoryBrand = LaptopsList[i].AccessoryBrand;
-                laptopAdViewModel.OperatingSystem = LaptopsList[i].OperatingSystem;
-                laptopAdViewModel.Ram = LaptopsList[i].Ram;
-                laptopAdViewModel.Processor = LaptopsList[i].Processor;
-                laptopAdViewModel.HardDisk = LaptopsList[i].HardDisk;
-                laptopAdViewModel.Condition = LaptopsList[i].Ad.Condition;
-                laptopAdViewModel.ConditionID = LaptopsList[i].Ad.ConditionID;
-                laptopAdViewModel.Description = LaptopsList[i].Ad.Description;
-                laptopAdViewModel.Currency = LaptopsList[i].Ad.Currency;
-                laptopAdViewModel.CurrencyID = LaptopsList[i].Ad.CurrencyID;
-                laptopAdViewModel.Price = LaptopsList[i].Ad.Price;
-                laptopAdViewModel.Country = LaptopsList[i].Ad.Country;
-                laptopAdViewModel.CountryID = LaptopsList[i].Ad.CountryID;
-                laptopAdViewModel.StateID = LaptopsList[i].Ad.StateID;
-                laptopAdViewModel.State = LaptopsList[i].Ad.State;
-                laptopAdViewModel.CityID = LaptopsList[i].Ad.CityID;
-                laptopAdViewModel.City = LaptopsList[i].Ad.City;
-                laptopAdViewModel.SellerID = LaptopsList[i].Ad.SellerID;
-                laptopAdViewModel.Seller = LaptopsList[i].Ad.Seller;
+                //populate this object from 
+                laptopAdViewModel.ID = laptop.ID;
+                laptopAdViewModel.Title = laptop.Ad.Title;
+                laptopAdViewModel.AccessoryBrandID = laptop.AccessoryBrandID;
+                laptopAdViewModel.AccessoryBrand = laptop.AccessoryBrand;
+                laptopAdViewModel.OperatingSystem = laptop.OperatingSystem;
+                laptopAdViewModel.Ram = laptop.Ram;
+                laptopAdViewModel.Processor = laptop.Processor;
+                laptopAdViewModel.HardDisk = laptop.HardDisk;
+                laptopAdViewModel.Condition = laptop.Ad.Condition;
+                laptopAdViewModel.ConditionID = laptop.Ad.ConditionID;
+                laptopAdViewModel.Description = laptop.Ad.Description;
+                laptopAdViewModel.Currency = laptop.Ad.Currency;
+                laptopAdViewModel.CurrencyID = laptop.Ad.CurrencyID;
+                laptopAdViewModel.Price = laptop.Ad.Price;
+                laptopAdViewModel.Country = laptop.Ad.Country;
+                laptopAdViewModel.CountryID = laptop.Ad.CountryID;
+                laptopAdViewModel.StateID = laptop.Ad.StateID;
+                laptopAdViewModel.State = laptop.Ad.State;
+                laptopAdViewModel.CityID = laptop.Ad.CityID;
+                laptopAdViewModel.City = laptop.Ad.City;
+                laptopAdViewModel.SellerID = laptop.Ad.SellerID;
+                laptopAdViewModel.Seller = laptop.Ad.Seller;
 
-                laptopAdViewModel.Images = LaptopsList[i].Ad.Images;
+                laptopAdViewModel.Images = laptop.Ad.Images;
 
-                laptopAdViewModel.Reviews = LaptopsList[i].Ad.Reviews;
+                laptopAdViewModel.Reviews = laptop.Ad.Reviews;
 
                 laptopAdViewModels.Add(laptopAdViewModel);
             }

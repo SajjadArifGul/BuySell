@@ -52,7 +52,7 @@ namespace BuySell.WebUI.Controllers
         // GET: CellPhonesAds
         public ActionResult Index()
         {
-            List<CellPhone> CellPhonesList = CellPhones.GetAll().ToList();
+            List<CellPhone> CellPhonesList = CellPhones.GetAll().Take(12).OrderByDescending(b => b.Ad.PostingTime).ToList();
 
             List<CellPhoneAdViewModel> cellPhoneAdViewModels = new List<CellPhoneAdViewModel>();
 
@@ -137,6 +137,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: CellPhonesAds/Create
+        [Authorize]
         public ActionResult Create()
         {
             string CurrentUserName = User.Identity.GetUserName();
@@ -177,6 +178,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] CellPhoneAdViewModel cellPhoneAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
@@ -243,6 +245,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: CellPhonesAds/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -289,6 +292,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime,Review")] CellPhoneAdViewModel cellPhoneAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
@@ -360,6 +364,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: CellPhonesAds/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -402,6 +407,7 @@ namespace BuySell.WebUI.Controllers
         // POST: CellPhonesAds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             CellPhone cellPhone = CellPhones.GetByID(id);

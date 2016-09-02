@@ -57,7 +57,8 @@ namespace BuySell.WebUI.Controllers
             //we will get records from Database into this page.
 
             //Get All Laptops as List
-            List<Laptop> LaptopsList = Laptops.GetAll().ToList();
+            //Aditionally I only want to get last 12 Laptop Ads in Descending Order so as not to bombard the Index Page
+            List<Laptop> LaptopsList = Laptops.GetAll().Take(12).OrderByDescending(b => b.Ad.PostingTime).ToList();
 
             //There will be many Laptop Ads so we created a whole List of LaptopAdViewModel
             List<LaptopAdViewModel> laptopAdViewModels = new List<LaptopAdViewModel>();
@@ -170,6 +171,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: LaptopAds/Create
+        [Authorize]
         public ActionResult Create()
         {
             //Displaying the form for user to create Laptop Ad
@@ -214,6 +216,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFileBase ImageFile)
         {
             //User has submitted the Create Form with LaptopAdViewModel details & maybe ImageFile
@@ -305,6 +308,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: LaptopAds/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -355,6 +359,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,Ram,Processor,HardDisk,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID")] LaptopAdViewModel laptopAdViewModel, HttpPostedFileBase ImageFile)
         {
             //Now user has submitted the Edit page with his new details 
@@ -473,6 +478,7 @@ namespace BuySell.WebUI.Controllers
         }
 
         // GET: LaptopAds/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             //User is trying to delete this object
@@ -528,6 +534,7 @@ namespace BuySell.WebUI.Controllers
         // POST: LaptopAds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             //user has confirmed to delete a record. Delete it right now.

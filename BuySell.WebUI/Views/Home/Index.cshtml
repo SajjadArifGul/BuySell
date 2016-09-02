@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BuySell.WebUI.Models.HomeViewModel>
+﻿@model BuySell.WebUI.Models.HomeViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -17,7 +17,7 @@
                         </a>
                         <div class="caption">
                             <h4 title="@item.Title">
-                                @Html.ActionLink(item.Title, "Details", new { id = item.ID })
+                                @Html.ActionLink(item.Title, "Details", "LaptopAds", new { id = item.ID }, null)
                             </h4>
                             <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Ram) Ram, @Html.DisplayFor(modelItem => item.Processor) Processor, @Html.DisplayFor(modelItem => item.HardDisk) Hard Disk Size, @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
                         </div>
@@ -41,7 +41,7 @@
                         </a>
                         <div class="caption">
                             <h4 title="@item.Title">
-                                @Html.ActionLink(item.Title, "Details", new { id = item.ID })
+                                @Html.ActionLink(item.Title, "Details", "CellPhoneAds", new { id = item.ID }, null)
                             </h4>
                             <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
                         </div>
@@ -65,7 +65,7 @@
                         </a>
                         <div class="caption">
                             <h4 title="@item.Title">
-                                @Html.ActionLink(item.Title, "Details", new { id = item.ID })
+                                @Html.ActionLink(item.Title, "Details", "BikeAds", new { id = item.ID }, null)
                             </h4>
                             <p>@Html.DisplayFor(modelItem => item.VehicleBrand.Name), @Html.DisplayFor(modelItem => item.Year.YearNo), @Html.DisplayFor(modelItem => item.DrivenKilometers) KMs Driven, @Html.DisplayFor(modelItem => item.Color.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
                         </div>
