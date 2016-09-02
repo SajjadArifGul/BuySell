@@ -177,7 +177,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime,Review")] CellPhoneAdViewModel cellPhoneAdViewModel, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "ID,Title,AccessoryBrandID,OperatingSystem,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] CellPhoneAdViewModel cellPhoneAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {

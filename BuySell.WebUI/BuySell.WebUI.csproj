@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AJAXController.cs" />
+    <Compile Include="Controllers\BikeAdsController.cs" />
     <Compile Include="Controllers\CellPhoneAdsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LaptopAdsController.cs" />
@@ -190,6 +191,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BikeAdViewModel.cs" />
     <Compile Include="Models\CellPhoneAdViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaptopAdViewModel.cs" />
@@ -268,6 +270,11 @@
     <Content Include="Views\CellPhoneAds\Edit.cshtml" />
     <Content Include="Views\CellPhoneAds\Index.cshtml" />
     <Content Include="Views\Shared\_CellPhoneAdControlReviewPartial.cshtml" />
+    <Content Include="Views\BikeAds\Create.cshtml" />
+    <Content Include="Views\BikeAds\Delete.cshtml" />
+    <Content Include="Views\BikeAds\Details.cshtml" />
+    <Content Include="Views\BikeAds\Edit.cshtml" />
+    <Content Include="Views\BikeAds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

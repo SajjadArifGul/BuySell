@@ -30,6 +30,8 @@ namespace BuySell.DAL.Data
         public DbSet<Year> Years { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<CellPhone> CellPhones { get; set; }
+        public DbSet<Bike> Bikes { get; set; }
 
+        public System.Data.Entity.DbSet<BuySell.WebUI.Models.BikeAdViewModel> BikeAdViewModels { get; set; }
     }
 }
