@@ -32,6 +32,5 @@ namespace BuySell.DAL.Data
         public DbSet<CellPhone> CellPhones { get; set; }
         public DbSet<Bike> Bikes { get; set; }
 
-        public System.Data.Entity.DbSet<BuySell.WebUI.Models.BikeAdViewModel> BikeAdViewModels { get; set; }
     }
 }

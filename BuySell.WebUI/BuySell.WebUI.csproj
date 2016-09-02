@@ -275,6 +275,7 @@
     <Content Include="Views\BikeAds\Details.cshtml" />
     <Content Include="Views\BikeAds\Edit.cshtml" />
     <Content Include="Views\BikeAds\Index.cshtml" />
+    <Content Include="Views\Shared\_BikeAdControlReviewPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

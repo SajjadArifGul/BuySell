@@ -1,138 +1,118 @@
 ﻿@model BuySell.WebUI.Models.BikeAdViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Model.Title;
 }
 
-<h2>Details</h2>
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Index", "BikeAds")">Bike Ads</a>
+<h2>@Model.Title</h2>
+<hr />
 
-<div>
-    <h4>BikeAdViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </dt>
+<div class="row">
+    @Html.Partial("_CategoriesPartial")
 
-        <dd>
-            @Html.DisplayFor(model => model.City.Name)
-        </dd>
+    <div class="col-md-9">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Color.Name)
-        </dt>
+        <div class="thumbnail">
+            <img title="@Model.Title" class="img-responsive" src="~/images/@Model.Images.First().Path" alt="@Model.Title" />
+            <div class="caption-full">
+                <h4 title="@Model.Currency.Name : @Model.Price" class="pull-right">@Html.DisplayFor(model => model.Currency.ISOCode) @Html.DisplayFor(model => model.Price)</h4>
+                <h4 title="@Model.Title">
+                    @Html.DisplayFor(model => model.Title)
+                </h4>
+                <p>
+                    <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Color.Name)
-        </dd>
+                        <dt>
+                            @Html.Label("Brand")
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition.ConditionType)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.VehicleBrand.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Year.YearNo)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Condition.ConditionType)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Year.YearNo)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DrivenKilometers)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.DrivenKilometers)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency.Name)
-        </dt>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Insurance)
+                        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Currency.Name)
-        </dd>
+                        <dd>
+                            @Html.DisplayFor(model => model.Insurance)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Color.Name)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Seller.Email)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Color.Name)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Seller.Email)
-        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Condition.ConditionType)
+                        </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Condition.ConditionType)
+                        </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.State.Name)
-        </dd>
+                        <dt>
+                            @Html.Label("Seller")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Seller.Name)
+                        </dd>
+                        <dt>
+                            @Html.Label("Location")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.City.Name), @Html.DisplayFor(model => model.State.Name), @Html.DisplayFor(model => model.Country.Name)
+                        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.VehicleBrand.Name)
-        </dt>
+                        <dt>
+                            @Html.Label("Contact")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Seller.MobileNumber)
+                        </dd>
+                        <dt>
+                            @Html.Label("Posted On")
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.PostingTime)
+                        </dd>
+                    </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.VehicleBrand.Name)
-        </dd>
+                </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Year.YearNo)
-        </dt>
+                <p>@Html.DisplayFor(model => model.Description)</p>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Year.YearNo)
-        </dd>
+            <div class="ratings">
+                <p>@Model.Reviews.Count Reviews</p>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DrivenKilometers)
-        </dt>
+        @Html.Partial("_BikeAdControlReviewPartial")
 
-        <dd>
-            @Html.DisplayFor(model => model.DrivenKilometers)
-        </dd>
+        @Html.Partial("_ReviewsPartial")
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Insurance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Insurance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PostingTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostingTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Review)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Review)
-        </dd>
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

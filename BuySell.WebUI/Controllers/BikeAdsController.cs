@@ -191,7 +191,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,VehicleBrandID,YearID,DrivenKilometers,ColorID,Insurance,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] BikeAdViewModel bikeAdViewModel, HttpPostedFileBase ImageFile)
+        public ActionResult Create([Bind(Include = "ID,Title,VehicleBrandID,YearID,DrivenKilometers,ColorID,Insurance,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] BikeAdViewModel bikeAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {
@@ -314,7 +314,7 @@ namespace BuySell.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,VehicleBrandID,YearID,DrivenKilometers,ColorID,Insurance,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] BikeAdViewModel bikeAdViewModel, HttpPostedFileBase ImageFile)
+        public ActionResult Edit([Bind(Include = "ID,Title,VehicleBrandID,YearID,DrivenKilometers,ColorID,Insurance,ConditionID,Description,CurrencyID,Price,CountryID,StateID,CityID,SellerID,PostingTime")] BikeAdViewModel bikeAdViewModel, HttpPostedFileBase ImageFile)
         {
             if (ModelState.IsValid)
             {

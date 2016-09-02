@@ -1,0 +1,66 @@
+﻿@model BuySell.WebUI.Models.BikeAdViewModel
+
+@if (Request.IsAuthenticated)
+{
+    if (@Model.Seller.Username == User.Identity.GetUserName())
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Control Your Ad</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-actions no-color">
+                    <div class="col-md-4">
+                        @using (Html.BeginForm("Edit", "BikeAds", new { Id = @Model.ID }, FormMethod.Get))
+                        {
+                            <input type="submit" name="action" value="Edit" class="col-md-12 btn btn-warning" />
+                        }
+                    </div>
+                    <div class="col-md-4">
+                        @using (Html.BeginForm("Delete", "BikeAds", new { Id = @Model.ID }, FormMethod.Get))
+                        {
+                            <input type="submit" name="action" value="Delete" class="col-md-12 btn btn-danger" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Add Review</h3>
+    </div>
+    <div class="panel-body">
+        @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("AddReview", "BikeAds", new { Id = @Model.ID }, FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+                <div class="col-md-12 form-group">
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.Review, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Review, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-4 form-group">
+                    <div>
+                        <input type="submit" value="Add Your Review" class="col-md-12 btn btn-success" />
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("Login", "Account", new { returnUrl = Url.Encode(Request.RawUrl) }, FormMethod.Get))
+            {
+                <div class="col-md-4 form-group">
+                    <div>
+                        <input type="submit" value="Login to Leave Review." class="col-md-12 btn btn-success" />
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.Label("Cell Phone Photo", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="btn btn-default col-md-12" type="file" id="Photo" name="ImageFile" />
+                <input class="btn btn-default col-md-12" type="file" id="Photo" name="ImageFile" required data-val-required="Upload an image for your Ad."/>
             </div>
         </div>
 

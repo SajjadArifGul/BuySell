@@ -1,117 +1,90 @@
 ﻿@model IEnumerable<BuySell.WebUI.Models.BikeAdViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Bike Ads";
 }
+<a type="button" class="btn btn-default btn-lg pull-right" href="@Url.Action("Create", "BikeAds")">Post Bike Ad</a>
+<h2>Bike Ads</h2>
+<hr />
+<div class="row">
+    @Html.Partial("_CategoriesPartial")
+    <div class="col-md-9">
 
-<h2>Index</h2>
+        <div class="row">
+            @{
+                var ModelList = Model.Take(3).ToList();
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Color.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Condition.ConditionType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seller.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VehicleBrand.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Year.YearNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DrivenKilometers)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Insurance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostingTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Review)
-        </th>
-        <th></th>
-    </tr>
+                if (ModelList.Count == 0)
+                {
+                    <p>No Bike Ads found. We are sorry.</p>
+                }
+                else if (ModelList.Count == 3)
+                {
+                    <div class="row carousel-holder">
+                        <div class="col-md-12">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    @{
+                                        for (int i = 0; i < 3; i++)
+                                        {
+                                            if (i == 0)
+                                            {
+                                                <div class="item active">
+                                                    <a href="@Url.Action("Details", "BikeAds", new { id = @ModelList[i].ID })">
+                                                        <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
+                                                    </a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="item">
+                                                    <a href="@Url.Action("Details", "BikeAds", new { id = @ModelList[i].ID })">
+                                                        <img title="@ModelList[i].Title" class="slide-image" src="~/images/@ModelList[i].Images.First().Path" alt="@ModelList[i].Title">
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                                        }
+            }
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <a href="@Url.Action("Details", "BikeAds", new { id = item.ID })">
+                            <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
+                        </a>
+                        <div class="caption">
+                            <h4 title="@item.Title">
+                                @Html.ActionLink(item.Title, "Details", new { id = item.ID })
+                            </h4>
+                            <p>@Html.DisplayFor(modelItem => item.VehicleBrand.Name), @Html.DisplayFor(modelItem => item.Year.YearNo), @Html.DisplayFor(modelItem => item.DrivenKilometers) KMs Driven, @Html.DisplayFor(modelItem => item.Color.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
+                        </div>
+                        <div class="ratings">
+                            <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
+                            <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
+                                <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Color.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Condition.ConditionType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seller.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VehicleBrand.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Year.YearNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DrivenKilometers)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Insurance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostingTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Review)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+    </div>
+</div>
