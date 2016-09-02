@@ -175,7 +175,6 @@
     <Compile Include="Controllers\LaptopAdsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PostAdController.cs" />
-    <Compile Include="Controllers\VehicleAdController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +192,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BikeAdViewModel.cs" />
     <Compile Include="Models\CellPhoneAdViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaptopAdViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -255,7 +255,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_CategoriesPartial.cshtml" />
-    <Content Include="Views\VehicleAd\Post.cshtml" />
     <Content Include="Views\LaptopAds\Create.cshtml" />
     <Content Include="Views\LaptopAds\Delete.cshtml" />
     <Content Include="Views\LaptopAds\Details.cshtml" />
