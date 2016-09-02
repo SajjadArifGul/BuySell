@@ -31,6 +31,5 @@ namespace BuySell.DAL.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<CellPhone> CellPhones { get; set; }
         public DbSet<Bike> Bikes { get; set; }
-
     }
 }

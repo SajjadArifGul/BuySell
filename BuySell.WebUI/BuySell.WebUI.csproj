@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\BikeAdViewModel.cs" />
     <Compile Include="Models\CellPhoneAdViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -276,11 +277,13 @@
     <Content Include="Views\BikeAds\Edit.cshtml" />
     <Content Include="Views\BikeAds\Index.cshtml" />
     <Content Include="Views\Shared\_BikeAdControlReviewPartial.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminSideBarPartial.cshtml" />
+    <Content Include="Views\Admin\LaptopAds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\" />
-    <Folder Include="Views\Admin\" />
     <Folder Include="Views\AJAX\" />
   </ItemGroup>
   <ItemGroup>
