@@ -17,7 +17,8 @@ namespace BuySell.WebUI.Areas.Dashboard
             context.MapRoute(
                 "Dashboard_default",
                 "Dashboard/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller="Home", action = "Index", id = UrlParameter.Optional },
+                new[] { "BuySell.WebUI.Areas.Dashboard.Controllers" }
             );
         }
     }
