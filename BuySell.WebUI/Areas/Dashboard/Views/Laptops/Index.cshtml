@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BuySell.Models.Laptop>
+
+@{
+    ViewBag.Title = "Recent Laptop Ads";
+}
+
+<h2>Recent Laptop Ads</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Seller Name")
+        </th>
+        <th>
+            @Html.Label("Ad Title")
+        </th>
+        <th>
+            @Html.Label("Price")
+        </th>
+        <th>
+            @Html.Label("Posting Time")
+        </th>
+        <th>
+            @Html.Label("Location")
+        </th>
+        <th>
+            @Html.Label("Reviews")
+        </th>
+        <th>
+            @Html.Label("Control")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad.Seller.Name)
+        </td>
+        <td>
+            @Html.ActionLink(item.Ad.Title, "Details", "LaptopAds", new { area = "", id = item.ID }, new { target = "_blank" })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad.Price) @Html.DisplayFor(modelItem => item.Ad.Currency.ISOCode) 
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad.PostingTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad.City.Name), @Html.DisplayFor(modelItem => item.Ad.State.Name), @Html.DisplayFor(modelItem => item.Ad.Country.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad.Reviews.Count)
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
