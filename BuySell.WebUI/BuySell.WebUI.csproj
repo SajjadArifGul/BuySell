@@ -220,11 +220,9 @@
     <Content Include="Areas\Dashboard\Views\Laptops\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\CellPhones\Delete.cshtml" />
     <Content Include="Areas\Dashboard\Views\CellPhones\Index.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Bikes\Create.cshtml" />
     <Content Include="Areas\Dashboard\Views\Bikes\Delete.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Bikes\Details.cshtml" />
-    <Content Include="Areas\Dashboard\Views\Bikes\Edit.cshtml" />
     <Content Include="Areas\Dashboard\Views\Bikes\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Shared\_AdminSideBarPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

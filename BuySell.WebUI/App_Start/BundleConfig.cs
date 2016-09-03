@@ -30,6 +30,13 @@ namespace BuySell.WebUI
             bundles.Add(new ScriptBundle("~/bundles/mylocfiller").Include(
                         "~/Scripts/mylocations.filler.js"));
 
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
+                "~/Content/bootstrap-admin.min.css",
+                "~/Content/sidebar-admin.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/adminjs").Include(
+                        "~/Scripts/mylocations.filler.js"));
         }
     }
 }
