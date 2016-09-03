@@ -2,30 +2,22 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <a href="#">
-                Start Bootstrap
-            </a>
+            @Html.ActionLink("BuySell - Admin", "Index", "Home", new { area = "Dashboard" }, new { @class = "navbar-brand" })
         </li>
         <li>
-            <a href="#">Dashboard</a>
+            @Html.ActionLink("Laptop Ads", "Index", "Laptops")
         </li>
         <li>
-            <a href="#">Shortcuts</a>
+            @Html.ActionLink("Cell Phone Ads", "Index", "CellPhones")
         </li>
         <li>
-            <a href="#">Overview</a>
+            @Html.ActionLink("Bike Ads", "Index", "Bikes")
         </li>
         <li>
-            <a href="#">Events</a>
+            @Html.ActionLink("Sellers", "Index", "Sellers")
         </li>
         <li>
-            <a href="#">About</a>
-        </li>
-        <li>
-            <a href="#">Services</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
+            @Html.ActionLink("Reviews", "Index", "Reviews")
         </li>
     </ul>
 </div>

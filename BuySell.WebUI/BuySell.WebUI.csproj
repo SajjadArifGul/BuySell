@@ -169,7 +169,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Dashboard\Controllers\BikesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\CellPhonesController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\HomeController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LaptopsController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\ReviewsController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\SellersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AJAXController.cs" />
@@ -223,6 +226,14 @@
     <Content Include="Areas\Dashboard\Views\Bikes\Delete.cshtml" />
     <Content Include="Areas\Dashboard\Views\Bikes\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Shared\_AdminSideBarPartial.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Reviews\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Reviews\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Sellers\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Sellers\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Sellers\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Sellers\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Sellers\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
