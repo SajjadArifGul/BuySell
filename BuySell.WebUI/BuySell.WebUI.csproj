@@ -167,10 +167,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\BikesController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\CellPhonesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LaptopsController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AJAXController.cs" />
     <Compile Include="Controllers\BikeAdsController.cs" />
     <Compile Include="Controllers\CellPhoneAdsController.cs" />
@@ -217,6 +218,13 @@
     <Content Include="Areas\Dashboard\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Dashboard\Views\Laptops\Delete.cshtml" />
     <Content Include="Areas\Dashboard\Views\Laptops\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\CellPhones\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\CellPhones\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Bikes\Create.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Bikes\Delete.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Bikes\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Bikes\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Bikes\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -284,9 +292,6 @@
     <Content Include="Views\BikeAds\Edit.cshtml" />
     <Content Include="Views\BikeAds\Index.cshtml" />
     <Content Include="Views\Shared\_BikeAdControlReviewPartial.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Shared\_AdminSideBarPartial.cshtml" />
-    <Content Include="Views\Admin\LaptopAds.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
