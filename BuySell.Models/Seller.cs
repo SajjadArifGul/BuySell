@@ -47,5 +47,7 @@ namespace BuySell.Models
         public virtual Country Country { get; set; }
         public virtual State State { get; set; }
         public virtual City City { get; set; }
+        public virtual ICollection<Ad> Ads { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

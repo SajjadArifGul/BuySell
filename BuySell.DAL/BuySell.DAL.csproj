@@ -70,6 +70,10 @@
     <Compile Include="Migrations\201609020726456_AddedBikeModel.Designer.cs">
       <DependentUpon>201609020726456_AddedBikeModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609031540327_AddedAdsInSeller.cs" />
+    <Compile Include="Migrations\201609031540327_AddedAdsInSeller.Designer.cs">
+      <DependentUpon>201609031540327_AddedAdsInSeller.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccessoryBrandsRepository.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609020726456_AddedBikeModel.resx">
       <DependentUpon>201609020726456_AddedBikeModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609031540327_AddedAdsInSeller.resx">
+      <DependentUpon>201609031540327_AddedAdsInSeller.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

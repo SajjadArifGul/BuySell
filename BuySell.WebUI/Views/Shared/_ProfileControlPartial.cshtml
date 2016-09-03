@@ -1,0 +1,22 @@
+﻿@model BuySell.Models.Seller
+
+@if (Request.IsAuthenticated)
+{
+    if (@Model.Username == User.Identity.GetUserName())
+    {
+        <div class="col-md-8">
+            <div class="col-md-4">
+                @using (Html.BeginForm("Edit", "Profile", new { Id = @Model.ID }, FormMethod.Get))
+                {
+                    <input type="submit" name="action" value="Edit" class="col-md-12 btn btn-warning" />
+                }
+            </div>
+            <div class="col-md-4">
+                @using (Html.BeginForm("Delete", "Profile", new { Id = @Model.ID }, FormMethod.Get))
+                {
+                    <input type="submit" name="action" value="Delete" class="col-md-12 btn btn-danger" />
+                }
+            </div>
+        </div>
+    }
+}

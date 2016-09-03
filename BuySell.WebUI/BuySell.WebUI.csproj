@@ -299,11 +299,10 @@
     <Content Include="Views\BikeAds\Edit.cshtml" />
     <Content Include="Views\BikeAds\Index.cshtml" />
     <Content Include="Views\Shared\_BikeAdControlReviewPartial.cshtml" />
-    <Content Include="Views\Profile\Create.cshtml" />
     <Content Include="Views\Profile\Delete.cshtml" />
     <Content Include="Views\Profile\Details.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_ProfileControlPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,75 +1,75 @@
 ﻿@model IEnumerable<BuySell.Models.Seller>
 
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Recently Registered Users";
 }
 
-<h2>Index</h2>
+<h1>Recently Registered Users</h1>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.City.Name)
+            @Html.Label("Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Country.Name)
+            @Html.Label("Username")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.State.Name)
+            @Html.Label("Email")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.Label("Phone")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Username)
+            @Html.Label("Location")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.Label("Joined")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MobileNumber)
+            @Html.Label("Ads")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.JoinDate)
+            @Html.Label("Reviews")
         </th>
-        <th></th>
+        <th>
+            @Html.Label("Control")
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.City.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.State.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MobileNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JoinDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", "Profile", new { area = "", id = item.ID }, new { target = "_blank" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.Name), @Html.DisplayFor(modelItem => item.State.Name), @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JoinDate)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Ads.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reviews.Count)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

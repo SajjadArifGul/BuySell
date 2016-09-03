@@ -4,79 +4,35 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Seller</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.City.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.State.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.State.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MobileNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MobileNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JoinDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JoinDate)
-        </dd>
-
-    </dl>
+        <!-- Portfolio Item Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            @Model.Name
+        </h1>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!-- /.row -->
+<!-- Portfolio Item Row -->
+<div class="row">
+
+    <div class="col-md-4">
+        @Html.GravatarImage(@Model.Email, new GravatarOptions { Size = 300, CssClass = "img-responsive" })
+    </div>
+
+    <div class="col-md-4">
+        <h3>About</h3>
+        <ul>
+            <li>Username: @Html.DisplayFor(model => model.Username)</li>
+            <li>Location: @Html.DisplayFor(model => model.City.Name), @Html.DisplayFor(model => model.State.Name), @Html.DisplayFor(model => model.Country.Name)</li>
+            <li>Phone: @Html.DisplayFor(model => model.MobileNumber)</li>
+            <li>Joined On: @Html.DisplayFor(model => model.JoinDate)</li>
+
+            <li>Ads: @Html.DisplayFor(model => model.Ads.Count)</li>
+            <li>Reviews: @Html.DisplayFor(model => model.Reviews.Count)</li>
+        </ul>
+    </div>
+
+    @Html.Partial("_ProfileControlPartial")
+</div>
+<!-- /.row -->

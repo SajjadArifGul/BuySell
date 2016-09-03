@@ -15,13 +15,6 @@ namespace BuySell.WebUI.Controllers
     {
         private DataContext db = new DataContext();
 
-        // GET: Profile
-        public ActionResult Index()
-        {
-            var sellers = db.Sellers.Include(s => s.City).Include(s => s.Country).Include(s => s.State);
-            return View(sellers.ToList());
-        }
-
         // GET: Profile/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,35 +27,7 @@ namespace BuySell.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-            return View(seller);
-        }
 
-        // GET: Profile/Create
-        public ActionResult Create()
-        {
-            ViewBag.CityID = new SelectList(db.Cities, "ID", "Name");
-            ViewBag.CountryID = new SelectList(db.Countries, "ID", "Name");
-            ViewBag.StateID = new SelectList(db.States, "ID", "Name");
-            return View();
-        }
-
-        // POST: Profile/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Email,Username,Name,CountryID,StateID,CityID,MobileNumber,JoinDate")] Seller seller)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Sellers.Add(seller);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CityID = new SelectList(db.Cities, "ID", "Name", seller.CityID);
-            ViewBag.CountryID = new SelectList(db.Countries, "ID", "Name", seller.CountryID);
-            ViewBag.StateID = new SelectList(db.States, "ID", "Name", seller.StateID);
             return View(seller);
         }
 
@@ -78,9 +43,9 @@ namespace BuySell.WebUI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CityID = new SelectList(db.Cities, "ID", "Name", seller.CityID);
+            ViewBag.CityID = new SelectList(db.Cities.Where(s => s.StateID == seller.StateID), "ID", "Name", seller.CityID);
             ViewBag.CountryID = new SelectList(db.Countries, "ID", "Name", seller.CountryID);
-            ViewBag.StateID = new SelectList(db.States, "ID", "Name", seller.StateID);
+            ViewBag.StateID = new SelectList(db.States.Where(s=>s.CountryID == seller.CountryID), "ID", "Name", seller.StateID);
             return View(seller);
         }
 
