@@ -172,8 +172,10 @@
     <Compile Include="Areas\Dashboard\Controllers\HomeController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\LaptopsController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\ReviewsController.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\RolesController.cs" />
     <Compile Include="Areas\Dashboard\Controllers\SellersController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Dashboard\Models\UserRolesViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AJAXController.cs" />
     <Compile Include="Controllers\BikeAdsController.cs" />
@@ -232,6 +234,7 @@
     <Content Include="Areas\Dashboard\Views\Reviews\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Sellers\Delete.cshtml" />
     <Content Include="Areas\Dashboard\Views\Sellers\Index.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -306,7 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Dashboard\Models\" />
     <Folder Include="images\" />
     <Folder Include="Views\AJAX\" />
   </ItemGroup>

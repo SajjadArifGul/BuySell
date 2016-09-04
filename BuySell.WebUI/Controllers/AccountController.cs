@@ -19,11 +19,18 @@ namespace BuySell.WebUI.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+
+        DataContext myDataContext = new DataContext();
+
+        IRepositoryBase<Country> Countries;
+
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            Countries = new CountriesRepository(myDataContext);
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -145,15 +152,16 @@ namespace BuySell.WebUI.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            IRepositoryBase<Country> Countries = new CountriesRepository(new DataContext());
-            IRepositoryBase<State> States = new StatesRepository(new DataContext());
-            IRepositoryBase<City> Cities = new CitiesRepository(new DataContext());
-
-            Country country = Countries.GetAll().Where(c => c.Name == "Pakistan").FirstOrDefault();
+            //IRepositoryBase<State> States = new StatesRepository(myDataContext);
+            //IRepositoryBase<City> Cities = new CitiesRepository(myDataContext);
+            //Country country = Countries.GetAll().Where(c => c.Name == "Pakistan").FirstOrDefault();
             
             RegisterViewModel registerViewModel = new RegisterViewModel();
-            registerViewModel.CountriesList = Countries.GetAll();
 
+            registerViewModel.Country = Countries.GetByID(166);
+
+            registerViewModel.CountriesList = Countries.GetAll();
+                        
             return View(registerViewModel);
         }
 
@@ -173,12 +181,16 @@ namespace BuySell.WebUI.Controllers
                 {
                     var RegsitrationResult = RegisterASeller(user);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //Assign Default Seller Role to user Here      
+                    await this.UserManager.AddToRoleAsync(user.Id, "Seller");
+                    //Ends Here
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -186,7 +198,13 @@ namespace BuySell.WebUI.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            RegisterViewModel registerViewModel = new RegisterViewModel();
+
+            registerViewModel.Country = Countries.GetByID(166);
+
+            registerViewModel.CountriesList = Countries.GetAll();
+
+            return View(registerViewModel);
         }
 
         private bool RegisterASeller(ApplicationUser user)

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BuySell.WebUI.Areas.Dashboard.Models.UserRolesViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var UserRoleModel in Model)
+{
+    <li>@UserRoleModel.User.Name
+    @foreach (var Role in UserRoleModel.RoleNames)
+    {
+        <span> - @Role</span>
+    }
+    </li>
+}

@@ -1,6 +1,6 @@
 ﻿@model BuySell.WebUI.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Register User";
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -26,17 +26,17 @@
     <div class="form-group">
         @Html.Label("Country", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-2">
-            @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.CountriesList, "ID", "Name"), "Select Country", htmlAttributes: new { @class = "form-control", @onchange = "FillStates()" })
+            @Html.DropDownListFor(model => model.CountryID, new SelectList(Model.CountriesList, "ID", "Name", "Select Country"), htmlAttributes: new { @class = "form-control", @onchange = "FillStates()" })
             @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
         </div>
         @Html.Label("State", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-2">
-            @Html.DropDownListFor(model => model.StateID, new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "Select State", htmlAttributes: new { @class = "form-control", @onchange = "FillCities()" })
+            @Html.DropDownListFor(model => model.StateID, new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name", "Select State"), htmlAttributes: new { @class = "form-control", @onchange = "FillCities()" })
             @Html.ValidationMessageFor(model => model.StateID, "", new { @class = "text-danger" })
         </div>
         @Html.Label("City", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-2">
-            @Html.DropDownListFor(model => model.CityID, new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name"), "Select City", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.CityID, new SelectList(Enumerable.Empty<SelectListItem>(), "ID", "Name", "Select State"), htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CityID, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -71,5 +71,4 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/mylocfiller")
-
 }

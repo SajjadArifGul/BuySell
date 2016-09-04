@@ -72,15 +72,15 @@ namespace BuySell.WebUI.Models
         [Display(Name = "Username")]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Enter Country details.")]
         [Display(Name = "Country")]
         public int CountryID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select a Country State.")]
         [Display(Name = "State")]
         public int StateID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select a City.")]
         [Display(Name = "City")]
         public int CityID { get; set; }
 
@@ -103,8 +103,15 @@ namespace BuySell.WebUI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        
+
+        public virtual City City { get; set; }
+        public virtual State State { get; set; }
+        public virtual Country Country { get; set; }
+
+        //Lists for DropDowns
         public virtual IEnumerable<Country> CountriesList { get; set; }
+        public virtual IEnumerable<State> StatesList { get; set; }
+        public virtual IEnumerable<City> CitiesList { get; set; }
 
     }
 
