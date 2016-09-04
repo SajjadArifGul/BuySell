@@ -8,12 +8,12 @@
         var currentUser = manager.FindById(User.Identity.GetUserId());
 
         <div class="navbar-image">
-            @Html.GravatarImage(currentUser.Email, new GravatarOptions { Size = 30, CssClass = "img - circle" })
+            @Html.GravatarImage(currentUser.Email, new GravatarOptions { Size = 30, CssClass = "img-circle" })
         </div>
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + currentUser.Name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + currentUser.Name + "!", "Details", "Profile", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

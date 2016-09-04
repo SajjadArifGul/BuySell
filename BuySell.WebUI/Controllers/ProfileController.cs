@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BuySell.WebUI.Controllers
 {
@@ -20,7 +21,14 @@ namespace BuySell.WebUI.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //instead of showing him bad request, why not show user, his own profile :D
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+                string CurrentUserName = User.Identity.GetUserName();
+                id = db.Sellers.Where(s => s.Username == CurrentUserName).FirstOrDefault().ID;
+
+                if (id==null)
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Seller seller = db.Sellers.Find(id);
             if (seller == null)

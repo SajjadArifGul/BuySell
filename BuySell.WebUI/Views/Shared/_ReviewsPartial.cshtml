@@ -9,11 +9,13 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-12 well">
-                    @foreach (var Review in Model.Reviews)
+                    @foreach (var Review in ReviewsList)
                     {
+                        string ReviewerName = Review.Seller.Name;
+                        int ReviewerID = Review.Seller.ID;
                         <div class="row">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-user"></span> <b>@Html.ActionLink(Review.Seller.Name, "Details", "Profile", new { area = "", id = 1 }, new { target = "_blank" }) @Review.Seller.Name @Html.ActionLink(Review.Seller.Name, "Details", "LaptopAds", new { id = Review.Seller.ID }, null)</b> (@Review.Seller.Username)
+                                <span class="glyphicon glyphicon-user"></span> <b>@Html.ActionLink(ReviewerName, "Details", "Profile", new { area = "", id = ReviewerID }, new { target = "_blank" })</b>
                                 <span class="pull-right">Timestamp: <b>@Review.PostingTime</b></span>
                                 <br />
                                 <p>@Review.Content</p>
