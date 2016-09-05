@@ -23,25 +23,12 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         {
             List<UserRolesViewModel> userRolesViewModels = new List<UserRolesViewModel>();
 
-            var users = appcontext.Users;
-            var rolesfromDB = appcontext.Roles;
-            
+            var users = appcontext.Users.ToList();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(appcontext));
+
             foreach (var user in users)
             {
-                List<string> UserRoles = new List<string>();
-
-                var ThisUserRoles = user.Roles;
-
-                foreach (var Role in ThisUserRoles)
-                {
-                    foreach (var role in rolesfromDB)
-                    {
-                        if (Role.RoleId == role.Id)
-                        {
-                            UserRoles.Add(role.Name);
-                        }
-                    }
-                }
+                List<string> UserRoles = UserManager.GetRoles(user.Id).ToList();
 
                 UserRolesViewModel userRoleViewModel = new UserRolesViewModel();
 
@@ -83,9 +70,28 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         }
 
         // GET: Dashboard/Roles/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var user = appcontext.Users.Where(i => i.Id == id).FirstOrDefault();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(appcontext));
+
+            List<string> UserRoles = UserManager.GetRoles(user.Id).ToList();
+            
+            UserRolesViewModel userRoleViewModel = new UserRolesViewModel();
+            
+            userRoleViewModel.User = user;
+            userRoleViewModel.RoleNames = UserRoles;
+
+            var Roles = appcontext.Roles.ToList();
+
+            List<string> RoleNames = new List<string>();
+            foreach (var Role in Roles)
+            {
+                RoleNames.Add(Role.Name);
+            }
+
+            userRoleViewModel.AllRoles = RoleNames;
+            return View(userRoleViewModel);
         }
 
         // POST: Dashboard/Roles/Edit/5
@@ -102,6 +108,11 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             {
                 return View();
             }
+        }
+        [HttpPost]
+        public ActionResult AddRoleToUser(string RoleName)
+        {
+            return View();
         }
 
         // GET: Dashboard/Roles/Delete/5

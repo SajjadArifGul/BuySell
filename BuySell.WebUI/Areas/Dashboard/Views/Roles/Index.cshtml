@@ -4,14 +4,37 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Users &amp; Their Roles</h2>
 
-@foreach (var UserRoleModel in Model)
-{
-    <li>@UserRoleModel.User.Name
-    @foreach (var Role in UserRoleModel.RoleNames)
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("User Name")
+        </th>
+        <th>
+            @Html.Label("Roles")
+        </th>
+        <th>
+            @Html.Label("Control")
+        </th>
+    </tr>
+
+    @foreach (var UserRoleModel in Model)
     {
-        <span> - @Role</span>
+        <tr>
+            <td>
+                @UserRoleModel.User.Name
+            </td>
+            <td>
+                @foreach (var Role in UserRoleModel.RoleNames)
+                {
+                    <span>@Role, </span>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit Roles", "Edit", new { id = UserRoleModel.User.Id })
+            </td>
+        </tr>
     }
-    </li>
-}
+
+</table>

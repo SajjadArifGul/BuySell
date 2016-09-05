@@ -11,5 +11,10 @@ namespace BuySell.WebUI.Areas.Dashboard.Models
         public int ID { get; set; }
         public ApplicationUser User { get; set; }
         public ICollection<string> RoleNames { get; set; }
+
+        public ICollection<string> AllRoles { get; set; }
+
+        public string RoleName;
+
     }
 }
