@@ -5,71 +5,61 @@
     ViewBag.Title = "Recently Registered Users";
 }
 
-<h1>Recently Registered Users</h1>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("Name")
-        </th>
-        <th>
-            @Html.Label("Username")
-        </th>
-        <th>
-            @Html.Label("Email")
-        </th>
-        <th>
-            @Html.Label("Phone")
-        </th>
-        <th>
-            @Html.Label("Location")
-        </th>
-        <th>
-            @Html.Label("Joined")
-        </th>
-        <th>
-            @Html.Label("Ads")
-        </th>
-        <th>
-            @Html.Label("Reviews")
-        </th>
-        <th>
-            @Html.Label("Control")
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Recently Registered Users</h4></div>
+    <table class="table table-striped table-bordered">
         <tr>
-            <td>
-                @Html.ActionLink(item.Name, "Details", "Profile", new { area = "", id = item.ID }, new { target = "_blank" })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Username)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MobileNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City.Name), @Html.DisplayFor(modelItem => item.State.Name), @Html.DisplayFor(modelItem => item.Country.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JoinDate)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Ads.Count)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reviews.Count)
-            </td>
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
+            <th>
+                @Html.Label("Name")
+            </th>
+            <th>
+                @Html.Label("Email")
+            </th>
+            <th>
+                @Html.Label("Phone")
+            </th>
+            <th>
+                @Html.Label("Location")
+            </th>
+            <th>
+                @Html.Label("Joined")
+            </th>
+            <th>
+                @Html.Label("Roles")
+            </th>
+            <th>
+                @Html.Label("Control")
+            </th>
         </tr>
+
+        @foreach (var item in Model)
+    {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", "Profile", new { area = "", id = item.ID }, new { target = "_blank" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City.Name), @Html.DisplayFor(modelItem => item.State.Name), @Html.DisplayFor(modelItem => item.Country.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JoinDate)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Reviews.Count)*@
+                    WORKING
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
     }
 
-</table>
+    </table>
+</div>

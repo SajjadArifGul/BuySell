@@ -4,44 +4,47 @@
     ViewBag.Title = "Index";
 }
 
-<h1>Recent Reviews</h1>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Recent Reviews</h4></div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("Review By")
-        </th>
-        <th>
-            @Html.Label("Ad")
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PostingTime)
-        </th>
-        <th>
-            @Html.Label("Control")
-        </th>
-    </tr>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.Label("Review By")
+            </th>
+            <th>
+                @Html.Label("Ad")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostingTime)
+            </th>
+            <th>
+                @Html.Label("Control")
+            </th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seller.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ad.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostingTime)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seller.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ad.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostingTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
 }
-</table>
+    </table>
+</div>

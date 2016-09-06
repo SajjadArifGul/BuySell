@@ -5,66 +5,113 @@
 }
 
 <h2>Roles of @Model.User.Name</h2>
+<hr />
 
-<h3>Current Role(s) held by the User</h3>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <h4>Current Role(s) held by the User</h4>
+    </div>
+    <!-- Table -->
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("User Name")
+            </th>
+            <th>
+                @Html.Label("Roles")
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.User.Name
+            </td>
+            <td>
+                @foreach (var Role in Model.RoleNames)
+                {
+                    <span>@Role, </span>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("User Name")
-        </th>
-        <th>
-            @Html.Label("Roles")
-        </th>
-    </tr>
-    <tr>
-       <td>
-            @Model.User.Name
-      </td>
-      <td>
-          @foreach (var Role in Model.RoleNames)
-          {
-              <span>@Role, </span>
-          }
-      </td>
-    </tr>
-</table>
 
-<h3>Add a New Role to the User</h3>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.Label("User Name")
-        </th>
-        <th>
-            @Html.Label("Roles")
-        </th>
-    </tr>
-    <tr>
-        <td>
-            @Model.User.Name
-        </td>
-        <td>
-            @foreach (var Role in Model.RoleNames)
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Add a New Role to the User</h4></div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("User Name")
+            </th>
+            <th>
+                @Html.Label("Select Role")
+            </th>
+            <th>
+                @Html.Label("Add Role")
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.User.Name
+            </td>
+            <td>
+
+                @using (Html.BeginForm("AddRoleToUser", "Roles", null, FormMethod.Post))
             {
-                <span>@Role, </span>
-            }
-        </td>
-    </tr>
-</table>
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
 
-@using (Html.BeginForm("AddRoleToUser", "Roles", null, FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+                    @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.AllRoles), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                }
+            </td>
+            <td>
+                <input type="submit" value="Add" class="btn btn-success" />
+            </td>
+        </tr>
+    </table>
 
-    <div class="form-group">
-        @Html.Label("Role", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-4">
-            @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.AllRoles), htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
-        </div>
-   </div>
-        <input type="submit" value="Save" />
-}
+</div>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Delete a Role from User</h4></div>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.Label("User Name")
+            </th>
+            <th>
+                @Html.Label("Select Role")
+            </th>
+            <th>
+                @Html.Label("Delete Role")
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Model.User.Name
+            </td>
+            <td>
+
+                @using (Html.BeginForm("DeleteRoleFromUser", "Roles", null, FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.AllRoles), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
+                }
+            </td>
+            <td>
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </td>
+        </tr>
+    </table>
+
+</div>
