@@ -58,20 +58,19 @@
             <td>
                 @Model.User.Name
             </td>
-            <td>
-
-                @using (Html.BeginForm("AddRoleToUser", "Roles", null, FormMethod.Post))
+            @using (Html.BeginForm("AddRoleToUser", "Roles", null, FormMethod.Post))
             {
+            <td>
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
                     @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.AllRoles), htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
-                }
             </td>
             <td>
                 <input type="submit" value="Add" class="btn btn-success" />
             </td>
+                }
         </tr>
     </table>
 
@@ -90,28 +89,27 @@
                 @Html.Label("Select Role")
             </th>
             <th>
-                @Html.Label("Delete Role")
+                @Html.Label("Add Role")
             </th>
         </tr>
         <tr>
             <td>
                 @Model.User.Name
             </td>
-            <td>
-
-                @using (Html.BeginForm("DeleteRoleFromUser", "Roles", null, FormMethod.Post))
+            @using (Html.BeginForm("DeleteRoleFromUser", "Roles", null, FormMethod.Post))
             {
+
+                <td>
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
                     @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.AllRoles), htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
-                }
-            </td>
-            <td>
-                <input type="submit" value="Delete" class="btn btn-danger" />
-            </td>
+                </td>
+                <td>
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </td>
+            }
         </tr>
     </table>
-
 </div>
