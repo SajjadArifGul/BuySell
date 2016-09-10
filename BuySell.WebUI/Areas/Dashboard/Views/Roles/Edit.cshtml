@@ -13,7 +13,7 @@
         <h4>Current Role(s) held by the User</h4>
     </div>
     <!-- Table -->
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <tr>
             <th>
                 @Html.Label("User Name")
@@ -27,7 +27,7 @@
                 @Model.User.Name
             </td>
             <td>
-                @foreach (var Role in Model.RoleNames)
+                @foreach (var Role in Model.UserRoles)
                 {
                     <span>@Role, </span>
                 }
@@ -36,13 +36,11 @@
     </table>
 </div>
 
-
-
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading"><h4>Add a New Role to the User</h4></div>
 
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <tr>
             <th>
                 @Html.Label("User Name")
@@ -58,7 +56,7 @@
             <td>
                 @Model.User.Name
             </td>
-            @using (Html.BeginForm("AddRoleToUser", "Roles", null, FormMethod.Post))
+            @using (Html.BeginForm("AddRoleToUser", "Roles", new { id = Model.User.Id}, FormMethod.Post))
             {
             <td>
                     @Html.AntiForgeryToken()
@@ -70,7 +68,7 @@
             <td>
                 <input type="submit" value="Add" class="btn btn-success" />
             </td>
-                }
+             }
         </tr>
     </table>
 
@@ -80,7 +78,7 @@
     <!-- Default panel contents -->
     <div class="panel-heading"><h4>Delete a Role from User</h4></div>
 
-    <table class="table">
+    <table class="table table-striped table-bordered">
         <tr>
             <th>
                 @Html.Label("User Name")
@@ -96,14 +94,13 @@
             <td>
                 @Model.User.Name
             </td>
-            @using (Html.BeginForm("DeleteRoleFromUser", "Roles", null, FormMethod.Post))
+            @using (Html.BeginForm("DeleteRoleFromUser", "Roles", new { id=Model.User.Id }, FormMethod.Post))
             {
-
                 <td>
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
 
-                    @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.AllRoles), htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.RoleName, new SelectList(Model.UserRoles), htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.RoleName, "", new { @class = "text-danger" })
                 </td>
                 <td>

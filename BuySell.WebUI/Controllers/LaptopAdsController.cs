@@ -586,7 +586,7 @@ namespace BuySell.WebUI.Controllers
                 //Now return the user back to the details of this ad
                 return RedirectToAction("Details", "LaptopAds", new { id = id });
         }
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

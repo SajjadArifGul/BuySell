@@ -5,6 +5,19 @@
 }
 
 <div class="panel panel-default">
+    <div class="panel-body">
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                @Html.ActionLink("Add New Role", "AddNewRole", null, htmlAttributes: new { @class = "btn btn-success" })
+            </div>
+            <div class="btn-group" role="group">
+                @Html.ActionLink("Delete A Role", "DeleteARole", null, htmlAttributes: new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading"><h4>Administrators</h4></div>
 
@@ -31,7 +44,7 @@
                     Adminstrator
                 </td>
                 <td>
-                    @Html.ActionLink("Edit Roles", "Edit", new { id = Adminstrator.Id })
+                    @Html.ActionLink("More Details", "Details", new { id = Adminstrator.Id })
                 </td>
             </tr>
         }
@@ -65,7 +78,7 @@
                     Manager
                 </td>
                 <td>
-                    @Html.ActionLink("Edit Roles", "Edit", new { id = Manager.Id })
+                    @Html.ActionLink("More Details", "Details", new { id = Manager.Id })
                 </td>
             </tr>
         }
@@ -99,7 +112,7 @@
                     Seller
                 </td>
                 <td>
-                    @Html.ActionLink("Edit Roles", "Edit", new { id = Seller.Id })
+                    @Html.ActionLink("More Details", "Details", new { id = Seller.Id })
                 </td>
             </tr>
     }
