@@ -16,5 +16,6 @@ namespace BuySell.WebUI.Areas.Dashboard.Models
 
         public string RoleName;
 
+
     }
 }

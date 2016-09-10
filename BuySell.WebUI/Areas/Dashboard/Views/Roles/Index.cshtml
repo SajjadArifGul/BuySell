@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BuySell.WebUI.Areas.Dashboard.Models.UserRolesViewModel>
+﻿@model BuySell.WebUI.Areas.Dashboard.Models.UsersRolesViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,7 @@
 
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading"><h4>Users &amp; Their Roles</h4></div>
+    <div class="panel-heading"><h4>Administrators</h4></div>
 
     <table class="table table-striped table-bordered">
         <tr>
@@ -21,23 +21,87 @@
             </th>
         </tr>
 
-        @foreach (var UserRoleModel in Model)
+        @foreach (var Adminstrator in Model.Adminstrators)
+        {
+            <tr>
+                <td>
+                    @Adminstrator.Name
+                </td>
+                <td>
+                    Adminstrator
+                </td>
+                <td>
+                    @Html.ActionLink("Edit Roles", "Edit", new { id = Adminstrator.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Managers</h4></div>
+
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.Label("User Name")
+            </th>
+            <th>
+                @Html.Label("Roles")
+            </th>
+            <th>
+                @Html.Label("Control")
+            </th>
+        </tr>
+
+        @foreach (var Manager in Model.Managers)
+        {
+            <tr>
+                <td>
+                    @Manager.Name
+                </td>
+                <td>
+                    Manager
+                </td>
+                <td>
+                    @Html.ActionLink("Edit Roles", "Edit", new { id = Manager.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading"><h4>Sellers</h4></div>
+
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.Label("User Name")
+            </th>
+            <th>
+                @Html.Label("Roles")
+            </th>
+            <th>
+                @Html.Label("Control")
+            </th>
+        </tr>
+
+        @foreach (var Seller in Model.Sellers)
     {
             <tr>
                 <td>
-                    @UserRoleModel.User.Name
+                    @Seller.Name
                 </td>
                 <td>
-                    @foreach (var Role in UserRoleModel.RoleNames)
-                {
-                        <span>@Role, </span>
-                }
+                    Seller
                 </td>
                 <td>
-                    @Html.ActionLink("Edit Roles", "Edit", new { id = UserRoleModel.User.Id })
+                    @Html.ActionLink("Edit Roles", "Edit", new { id = Seller.Id })
                 </td>
             </tr>
     }
-
     </table>
 </div>

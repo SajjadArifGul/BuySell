@@ -21,24 +21,56 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         // GET: Dashboard/Roles
         public ActionResult Index()
         {
-            List<UserRolesViewModel> userRolesViewModels = new List<UserRolesViewModel>();
+            UsersRolesViewModel UsersWithRoles = new UsersRolesViewModel();
 
-            var users = appcontext.Users.ToList();
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(appcontext));
+            var allUsers = appcontext.Users.ToList();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(appcontext));
 
-            foreach (var user in users)
+            List<ApplicationUser> Adminstrators = new List<ApplicationUser>();
+            List<ApplicationUser> Managers = new List<ApplicationUser>();
+            List<ApplicationUser> Sellers = new List<ApplicationUser>();
+
+            foreach (var user in allUsers)
             {
-                List<string> UserRoles = UserManager.GetRoles(user.Id).ToList();
-
-                UserRolesViewModel userRoleViewModel = new UserRolesViewModel();
-
-                userRoleViewModel.User = user;
-                userRoleViewModel.RoleNames = UserRoles;
-
-                userRolesViewModels.Add(userRoleViewModel);
+                if (userManager.IsInRole(user.Id, "Admin"))
+                {
+                    Adminstrators.Add(user);
+                }
+                else if (userManager.IsInRole(user.Id, "Manager"))
+                {
+                    Managers.Add(user);
+                }
+                else if (userManager.IsInRole(user.Id, "Seller"))
+                {
+                    Sellers.Add(user);
+                }
             }
 
-            return View(userRolesViewModels);
+            UsersWithRoles.Adminstrators = Adminstrators;
+            UsersWithRoles.Managers = Managers;
+            UsersWithRoles.Sellers = Sellers;
+
+
+            //List<UserRolesViewModel> userRolesViewModels = new List<UserRolesViewModel>();
+
+            //var users = appcontext.Users.ToList();
+            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(appcontext));
+
+            //var b = UserManager.IsInRole("","Admin");
+
+            //foreach (var user in users)
+            //{
+            //    List<string> UserRoles = UserManager.GetRoles(user.Id).ToList();
+
+            //    UserRolesViewModel userRoleViewModel = new UserRolesViewModel();
+
+            //    userRoleViewModel.User = user;
+            //    userRoleViewModel.RoleNames = UserRoles;
+
+            //    userRolesViewModels.Add(userRoleViewModel);
+            //}
+
+            return View(UsersWithRoles);
         }
 
         // GET: Dashboard/Roles/Details/5
