@@ -237,6 +237,9 @@
     <Content Include="Areas\Dashboard\Views\Sellers\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Roles\Index.cshtml" />
     <Content Include="Areas\Dashboard\Views\Roles\Edit.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\Details.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\AddNewRole.cshtml" />
+    <Content Include="Areas\Dashboard\Views\Roles\DeleteRole.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

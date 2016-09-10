@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Add New Role";
+}
+
+<h2>Add New Role</h2>
+<hr />
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>
+                    @Html.Label("Role Name")
+                </th>
+                <th>
+                    @Html.Label("Add Role")
+                </th>
+            </tr>
+            <tr>
+                @using (Html.BeginForm("AddNewRole", "Roles", null, FormMethod.Post))
+            {
+                    <td>
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <input class="form-control text-box single-line" required data-val="true" data-val-required="Add Role Name." id="RoleName" name="RoleName" type="text" value="" />
+                    </td>
+                    <td>
+                        <input type="submit" value="Add" class="btn btn-success" />
+                    </td>
+                }
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

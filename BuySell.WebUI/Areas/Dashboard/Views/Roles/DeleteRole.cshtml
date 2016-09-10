@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Delete Role";
+}
+
+<h2>Delete Role</h2>
+<hr />
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <table class="table table-striped table-bordered">
+            <tr>
+                <th>
+                    @Html.Label("Role Name")
+                </th>
+                <th>
+                    @Html.Label("Delete Role")
+                </th>
+            </tr>
+            <tr>
+                @using (Html.BeginForm("DeleteRole", "Roles", null, FormMethod.Post))
+            {
+                    <td>
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <input class="form-control text-box single-line" required data-val="true" data-val-required="Add Role Name." id="RoleName" name="RoleName" type="text" value="" />
+                        @Html.DropDownList("Codes", (IEnumerable<SelectListItem>)ViewBag.AllRoles, null)
+                    </td>
+                    <td>
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </td>
+                }
+            </tr>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

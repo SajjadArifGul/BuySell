@@ -98,7 +98,63 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [HttpPost]
         public ActionResult AddNewRole(string RoleName)
         {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(appcontext));
+            
+            // check if this doesnt already exists    
+            if (!roleManager.RoleExists(RoleName))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = RoleName;
+                roleManager.Create(role);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        // GET: Dashboard/Roles/Create
+        public ActionResult DeleteRole()
+        {
+            ViewBag.AllRoles = appcontext.Roles.ToList();
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult DeleteRole(string RoleName)
+        {
+            if (RoleName.Equals("Admin") || RoleName.Equals("Manager") || RoleName.Equals("Seller"))
+            {
+                //These are must roles & no should delete it
+            }
+
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(appcontext));
+
+            // check if this exists    
+            if (roleManager.RoleExists(RoleName))
+            {
+                //var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                //role.Name = RoleName;
+                //roleManager.Delete(role);
+                // Above Isnt working. Lets delete role from DB directly instead
+
+                var Role = appcontext.Roles.Where(r => r.Name == RoleName).FirstOrDefault();
+
+                appcontext.Roles.Remove(Role);
+                appcontext.SaveChanges();
+
+                //I should also delete Roles from Users too here.
+                var allUsers = appcontext.Users.ToList();
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(appcontext));
+
+                foreach (var user in allUsers)
+                {
+                    if (userManager.IsInRole(user.Id, RoleName))
+                    {
+                        userManager.RemoveFromRole(user.Id, RoleName);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         // POST: Dashboard/Roles/Create
@@ -203,7 +259,6 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
 
             userManager.RemoveFromRole(user.Id, RoleName);
 
-            //Now return the user back to the details of this ad
             return RedirectToAction("Index");
         }
 
