@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
+using BuySell.WebUI.Models;
 
 namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
@@ -45,6 +46,16 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             Seller seller = db.Sellers.Find(id);
             db.Sellers.Remove(seller);
             db.SaveChanges();
+
+            // Now also delete the corresponding user from Users table.
+            //bcz we have a shit of 2 different tables for users & sellers.
+
+            ApplicationDbContext applicationDbContext = new ApplicationDbContext();
+
+            var user = applicationDbContext.Users.Where(u => u.UserName == seller.Username).FirstOrDefault();
+            applicationDbContext.Users.Remove(user);
+            applicationDbContext.SaveChanges();
+
             return RedirectToAction("Index");
         }
 

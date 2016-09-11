@@ -14,6 +14,7 @@ namespace BuySell.DAL.Data
         {
 
         }
+
         public DbSet<AccessoryBrand> AccessoryBrands { get; set; }
         public DbSet<Ad> Ads { get; set; }
         public DbSet<City> Cities { get; set; }
