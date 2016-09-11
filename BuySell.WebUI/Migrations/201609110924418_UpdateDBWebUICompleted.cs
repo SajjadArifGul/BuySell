@@ -3,12 +3,12 @@ namespace BuySell.WebUI.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ASPUserTableMigrations : DbMigration
+    public partial class UpdateDBWebUICompleted : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Role",
+                "dbo.Roles",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -18,20 +18,20 @@ namespace BuySell.WebUI.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.UserRole",
+                "dbo.UserRoles",
                 c => new
                     {
                         UserId = c.String(nullable: false, maxLength: 128),
                         RoleId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.Role", t => t.RoleId, cascadeDelete: true)
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Roles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.User",
+                "dbo.Users",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -56,7 +56,7 @@ namespace BuySell.WebUI.Migrations
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
-                "dbo.UserClaim",
+                "dbo.UserClaims",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -65,11 +65,11 @@ namespace BuySell.WebUI.Migrations
                         ClaimValue = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.UserLogin",
+                "dbo.UserLogins",
                 c => new
                     {
                         LoginProvider = c.String(nullable: false, maxLength: 128),
@@ -77,28 +77,28 @@ namespace BuySell.WebUI.Migrations
                         UserId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
-                .ForeignKey("dbo.User", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.UserRole", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserLogin", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserClaim", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserRole", "RoleId", "dbo.Role");
-            DropIndex("dbo.UserLogin", new[] { "UserId" });
-            DropIndex("dbo.UserClaim", new[] { "UserId" });
-            DropIndex("dbo.User", "UserNameIndex");
-            DropIndex("dbo.UserRole", new[] { "RoleId" });
-            DropIndex("dbo.UserRole", new[] { "UserId" });
-            DropIndex("dbo.Role", "RoleNameIndex");
-            DropTable("dbo.UserLogin");
-            DropTable("dbo.UserClaim");
-            DropTable("dbo.User");
-            DropTable("dbo.UserRole");
-            DropTable("dbo.Role");
+            DropForeignKey("dbo.UserRoles", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserLogins", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserClaims", "UserId", "dbo.Users");
+            DropForeignKey("dbo.UserRoles", "RoleId", "dbo.Roles");
+            DropIndex("dbo.UserLogins", new[] { "UserId" });
+            DropIndex("dbo.UserClaims", new[] { "UserId" });
+            DropIndex("dbo.Users", "UserNameIndex");
+            DropIndex("dbo.UserRoles", new[] { "RoleId" });
+            DropIndex("dbo.UserRoles", new[] { "UserId" });
+            DropIndex("dbo.Roles", "RoleNameIndex");
+            DropTable("dbo.UserLogins");
+            DropTable("dbo.UserClaims");
+            DropTable("dbo.Users");
+            DropTable("dbo.UserRoles");
+            DropTable("dbo.Roles");
         }
     }
 }

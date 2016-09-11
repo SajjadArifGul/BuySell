@@ -50,29 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DataContext.cs" />
-    <Compile Include="Migrations\201608311124408_ReviewsModelAdded.cs" />
-    <Compile Include="Migrations\201608311124408_ReviewsModelAdded.Designer.cs">
-      <DependentUpon>201608311124408_ReviewsModelAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201608311456447_ReviewModelDetailsAdded.cs" />
-    <Compile Include="Migrations\201608311456447_ReviewModelDetailsAdded.Designer.cs">
-      <DependentUpon>201608311456447_ReviewModelDetailsAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609011024409_ReviewModelUpdatedMin50Chars.cs" />
-    <Compile Include="Migrations\201609011024409_ReviewModelUpdatedMin50Chars.Designer.cs">
-      <DependentUpon>201609011024409_ReviewModelUpdatedMin50Chars.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609011323293_CellPhoneModelAdded.cs" />
-    <Compile Include="Migrations\201609011323293_CellPhoneModelAdded.Designer.cs">
-      <DependentUpon>201609011323293_CellPhoneModelAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609020726456_AddedBikeModel.cs" />
-    <Compile Include="Migrations\201609020726456_AddedBikeModel.Designer.cs">
-      <DependentUpon>201609020726456_AddedBikeModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609031540327_AddedAdsInSeller.cs" />
-    <Compile Include="Migrations\201609031540327_AddedAdsInSeller.Designer.cs">
-      <DependentUpon>201609031540327_AddedAdsInSeller.cs</DependentUpon>
+    <Compile Include="Migrations\201609110928393_UpdateDBDALCompleted.cs" />
+    <Compile Include="Migrations\201609110928393_UpdateDBDALCompleted.Designer.cs">
+      <DependentUpon>201609110928393_UpdateDBDALCompleted.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,23 +90,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608311124408_ReviewsModelAdded.resx">
-      <DependentUpon>201608311124408_ReviewsModelAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201608311456447_ReviewModelDetailsAdded.resx">
-      <DependentUpon>201608311456447_ReviewModelDetailsAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609011024409_ReviewModelUpdatedMin50Chars.resx">
-      <DependentUpon>201609011024409_ReviewModelUpdatedMin50Chars.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609011323293_CellPhoneModelAdded.resx">
-      <DependentUpon>201609011323293_CellPhoneModelAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609020726456_AddedBikeModel.resx">
-      <DependentUpon>201609020726456_AddedBikeModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609031540327_AddedAdsInSeller.resx">
-      <DependentUpon>201609031540327_AddedAdsInSeller.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609110928393_UpdateDBDALCompleted.resx">
+      <DependentUpon>201609110928393_UpdateDBDALCompleted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

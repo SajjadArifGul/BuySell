@@ -7,13 +7,13 @@ namespace BuySell.WebUI.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ASPUserTableMigrations : IMigrationMetadata
+    public sealed partial class UpdateDBWebUICompleted : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ASPUserTableMigrations));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateDBWebUICompleted));
         
         string IMigrationMetadata.Id
         {
-            get { return "201608290844318_ASPUserTableMigrations"; }
+            get { return "201609110924418_UpdateDBWebUICompleted"; }
         }
         
         string IMigrationMetadata.Source

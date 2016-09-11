@@ -12,10 +12,5 @@ C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\bin\Debug\EntityFramework.Sq
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.csprojResolveAssemblyReference.cache
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.dll
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.pdb
-C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.ReviewsModelAdded.resources
+C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.UpdateDBDALCompleted.resources
 C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.csproj.GenerateResource.Cache
-C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.ReviewModelDetailsAdded.resources
-C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.ReviewModelUpdatedMin50Chars.resources
-C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.CellPhoneModelAdded.resources
-C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.AddedBikeModel.resources
-C:\Users\cdrgu\Documents\GitHub\BuySell\BuySell.DAL\obj\Debug\BuySell.DAL.Migrations.AddedAdsInSeller.resources

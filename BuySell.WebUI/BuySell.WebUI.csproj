@@ -191,13 +191,9 @@
     </Compile>
     <Compile Include="Helpers\GravatarHelper.cs" />
     <Compile Include="Helpers\GravatarOptions.cs" />
-    <Compile Include="Migrations\201608290844318_ASPUserTableMigrations.cs" />
-    <Compile Include="Migrations\201608290844318_ASPUserTableMigrations.Designer.cs">
-      <DependentUpon>201608290844318_ASPUserTableMigrations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609011024149_ReviewModelUpdatedMin50Chars.cs" />
-    <Compile Include="Migrations\201609011024149_ReviewModelUpdatedMin50Chars.Designer.cs">
-      <DependentUpon>201609011024149_ReviewModelUpdatedMin50Chars.cs</DependentUpon>
+    <Compile Include="Migrations\201609110924418_UpdateDBWebUICompleted.cs" />
+    <Compile Include="Migrations\201609110924418_UpdateDBWebUICompleted.Designer.cs">
+      <DependentUpon>201609110924418_UpdateDBWebUICompleted.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -340,11 +336,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201608290844318_ASPUserTableMigrations.resx">
-      <DependentUpon>201608290844318_ASPUserTableMigrations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609011024149_ReviewModelUpdatedMin50Chars.resx">
-      <DependentUpon>201609011024149_ReviewModelUpdatedMin50Chars.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609110924418_UpdateDBWebUICompleted.resx">
+      <DependentUpon>201609110924418_UpdateDBWebUICompleted.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
