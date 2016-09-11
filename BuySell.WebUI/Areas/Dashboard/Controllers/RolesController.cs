@@ -114,7 +114,21 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         // GET: Dashboard/Roles/Create
         public ActionResult DeleteRole()
         {
-            ViewBag.AllRoles = appcontext.Roles.ToList();
+
+            var Roles = appcontext.Roles.ToList();
+
+            //List<string> AllRoleNames = new List<string>();
+
+            //foreach (var Role in Roles)
+            //{
+            //    AllRoleNames.Add(Role.Name);
+            //}
+            //ViewBag.AllRoles = AllRoleNames;
+
+            var AllRoleNames = (from r in Roles
+                     select new SelectListItem { Text = r.Name, Value = r.Name });
+
+            ViewBag.AllRoles = AllRoleNames;
 
             return View();
         }
@@ -124,6 +138,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             if (RoleName.Equals("Admin") || RoleName.Equals("Manager") || RoleName.Equals("Seller"))
             {
                 //These are must roles & no should delete it
+                return RedirectToAction("Index");
             }
 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(appcontext));
