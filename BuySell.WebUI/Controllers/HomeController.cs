@@ -35,9 +35,9 @@ namespace BuySell.WebUI.Controllers
             List<CellPhoneAdViewModel> cellPhoneAdViewModels = new List<CellPhoneAdViewModel>();
 
             //Get from DB - only send 3 items from all catgories to Homepage
-            List<Bike> BikesList = Bikes.GetAll().Take(3).OrderByDescending(b =>b.Ad.PostingTime).ToList();
-            List<CellPhone> CellPhonesList = CellPhones.GetAll().Take(3).OrderByDescending(b => b.Ad.PostingTime).ToList();
-            List<Laptop> LaptopsList = Laptops.GetAll().Take(3).OrderByDescending(b => b.Ad.PostingTime).ToList();
+            List<Bike> BikesList = Bikes.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(3).ToList();
+            List<CellPhone> CellPhonesList = CellPhones.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(3).ToList();
+            List<Laptop> LaptopsList = Laptops.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(3).ToList();
 
             foreach (Bike bike in BikesList)
             {

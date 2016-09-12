@@ -23,48 +23,28 @@ namespace BuySell.WebUI
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            // creating Creating Seller role    
-            if (!roleManager.RoleExists("Seller"))
+            // In Startup iam creating first Admin Role and creating a default Admin User    
+            if (!roleManager.RoleExists("Admin"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Seller";
+                role.Name = "Admin";
                 roleManager.Create(role);
             }
 
             // creating Creating Manager role    
             if (!roleManager.RoleExists("Manager"))
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Manager";
-                roleManager.Create(role);
+                var role2 = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role2.Name = "Manager";
+                roleManager.Create(role2);
             }
 
-            // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("Admin"))
+            // creating Creating Seller role    
+            if (!roleManager.RoleExists("Seller"))
             {
-
-                // first we create Admin rool   
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Admin";
-                roleManager.Create(role);
-
-                //Here we create a Admin super user who will maintain the website                  
-                var user = new ApplicationUser();
-                user.UserName = "sajju";
-                user.Email = "sajjadarifgul@gmail.com";
-
-                string userPWD = "Gul12345'";
-
-                var chkUser = UserManager.Create(user, userPWD);
-
-                //Add default User to Role Admin   
-                if (chkUser.Succeeded)
-                {
-                    //Add all 3 Roles to our SuperAdmin
-                    var result1 = UserManager.AddToRole(user.Id, "Admin");
-                    var result2 = UserManager.AddToRole(user.Id, "Manager");
-                    var result3 = UserManager.AddToRole(user.Id, "Seller");
-                }
+                var role3 = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role3.Name = "Seller";
+                roleManager.Create(role3);
             }
         }
     }

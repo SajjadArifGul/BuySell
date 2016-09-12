@@ -555,13 +555,15 @@ namespace BuySell.WebUI.Controllers
         [Authorize]
         public ActionResult AddReview(LaptopAdViewModel laptopAdViewModel, int? id, string Review)
         {
+            if (Review.Length >= 50)
+            {
                 //Get the Ad Object from the ID by Laptop Object
                 Laptop laptop = Laptops.GetByID(id);
 
-            if (laptop == null)
-            {
-                return HttpNotFound();
-            }
+                if (laptop == null)
+                {
+                    return HttpNotFound();
+                }
 
                 //Get Current User Details to be send as Seller Details in Review Object
                 string CurrentUserName = User.Identity.GetUserName();
@@ -585,6 +587,10 @@ namespace BuySell.WebUI.Controllers
 
                 //Now return the user back to the details of this ad
                 return RedirectToAction("Details", "LaptopAds", new { id = id });
+            }
+            
+            //review was not correct. return back to URL
+            return RedirectToAction("Details", "LaptopAds", new { id = id });
         }
         
         protected override void Dispose(bool disposing)
