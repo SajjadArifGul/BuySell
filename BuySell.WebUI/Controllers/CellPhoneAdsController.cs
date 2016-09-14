@@ -52,7 +52,7 @@ namespace BuySell.WebUI.Controllers
         // GET: CellPhonesAds
         public ActionResult Index()
         {
-            List<CellPhone> CellPhonesList = CellPhones.GetAll().Take(12).OrderByDescending(b => b.Ad.PostingTime).ToList();
+            List<CellPhone> CellPhonesList = CellPhones.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(12).ToList();
 
             List<CellPhoneAdViewModel> cellPhoneAdViewModels = new List<CellPhoneAdViewModel>();
 
@@ -423,32 +423,36 @@ namespace BuySell.WebUI.Controllers
         [Authorize]
         public ActionResult AddReview(CellPhoneAdViewModel cellPhoneAdViewModel, int? id, string Review)
         {
-            CellPhone cellPhone = CellPhones.GetByID(id);
-
-            if (cellPhone == null)
+            if (Review.Length >= 50)
             {
-                return HttpNotFound();
+                CellPhone cellPhone = CellPhones.GetByID(id);
+
+                if (cellPhone == null)
+                {
+                    return HttpNotFound();
+                }
+
+                string CurrentUserName = User.Identity.GetUserName();
+
+                Review newReview = new Review();
+
+                newReview.Content = Review;
+                newReview.AdID = cellPhone.AdID;
+                newReview.Ad = cellPhone.Ad;
+                newReview.PostingTime = DateTime.Now;
+
+                Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
+
+                newReview.SellerID = seller.ID;
+                newReview.Seller = seller;
+
+                newReview.ReviewStars = 5;
+
+                Reviews.Insert(newReview);
+                Reviews.Commit();
+
+                return RedirectToAction("Details", "CellPhoneAds", new { id = id });
             }
-
-            string CurrentUserName = User.Identity.GetUserName();
-
-            Review newReview = new Review();
-
-            newReview.Content = Review;
-            newReview.AdID = cellPhone.AdID;
-            newReview.Ad = cellPhone.Ad;
-            newReview.PostingTime = DateTime.Now;
-
-            Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
-
-            newReview.SellerID = seller.ID;
-            newReview.Seller = seller;
-
-            newReview.ReviewStars = 5;
-
-            Reviews.Insert(newReview);
-            Reviews.Commit();
-
             return RedirectToAction("Details", "CellPhoneAds", new { id = id });
         }
 

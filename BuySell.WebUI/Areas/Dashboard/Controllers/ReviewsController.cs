@@ -8,18 +8,26 @@ using System.Web;
 using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
+using BuySell.Contracts.Repositories;
+using BuySell.DAL.Repository;
 
 namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
     public class ReviewsController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext myDataContext = new DataContext();
+        IRepositoryBase<Review> Reviews;
+
+        public ReviewsController()
+        {
+            Reviews = new ReviewsRepository(myDataContext);
+        }
 
         // GET: Dashboard/Reviews
         public ActionResult Index()
         {
-            var reviews = db.Reviews.Include(r => r.Ad).Include(r => r.Seller);
-            return View(reviews.ToList());
+            var reviews = Reviews.GetAll().OrderByDescending(r => r.PostingTime).Take(50).ToList();
+            return View(reviews);
         }
         
         // GET: Dashboard/Reviews/Delete/5
@@ -29,7 +37,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Review review = db.Reviews.Find(id);
+            Review review = Reviews.GetByID(id);
             if (review == null)
             {
                 return HttpNotFound();
@@ -42,9 +50,9 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Review review = db.Reviews.Find(id);
-            db.Reviews.Remove(review);
-            db.SaveChanges();
+            Review review = Reviews.GetByID(id);
+            Reviews.Delete(review);
+            Reviews.Commit();
             return RedirectToAction("Index");
         }
 
@@ -52,7 +60,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                myDataContext.Dispose();
             }
             base.Dispose(disposing);
         }

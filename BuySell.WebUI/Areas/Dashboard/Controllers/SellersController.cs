@@ -9,18 +9,26 @@ using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
 using BuySell.WebUI.Models;
+using BuySell.Contracts.Repositories;
+using BuySell.DAL.Repository;
 
 namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
     public class SellersController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext myDataContext = new DataContext();
+        IRepositoryBase<Seller> Sellers;
+
+        public SellersController()
+        {
+            Sellers = new SellersRepository(myDataContext);
+        }
 
         // GET: Dashboard/Sellers
         public ActionResult Index()
         {
-            var sellers = db.Sellers.Include(s => s.City).Include(s => s.Country).Include(s => s.State);
-            return View(sellers.ToList());
+            var sellers = Sellers.GetAll().OrderByDescending(s => s.JoinDate).Take(50).ToList();
+            return View(sellers);
         }
 
         // GET: Dashboard/Sellers/Delete/5
@@ -30,7 +38,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Seller seller = db.Sellers.Find(id);
+            Seller seller = Sellers.GetByID(id);
             if (seller == null)
             {
                 return HttpNotFound();
@@ -43,9 +51,9 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Seller seller = db.Sellers.Find(id);
-            db.Sellers.Remove(seller);
-            db.SaveChanges();
+            Seller seller = Sellers.GetByID(id);
+            Sellers.Delete(seller);
+            Sellers.Commit();
 
             // Now also delete the corresponding user from Users table.
             //bcz we have a shit of 2 different tables for users & sellers.
@@ -63,7 +71,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                myDataContext.Dispose();
             }
             base.Dispose(disposing);
         }

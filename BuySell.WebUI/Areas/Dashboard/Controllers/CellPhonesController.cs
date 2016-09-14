@@ -8,18 +8,26 @@ using System.Web;
 using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
+using BuySell.Contracts.Repositories;
+using BuySell.DAL.Repository;
 
 namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
     public class CellPhonesController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext myDataContext = new DataContext();
+        IRepositoryBase<CellPhone> CellPhones;
+
+        public CellPhonesController()
+        {
+            CellPhones = new CellPhonesRepository(myDataContext);
+        }
 
         // GET: Dashboard/CellPhones
         public ActionResult Index()
         {
-            var cellPhones = db.CellPhones.Include(c => c.AccessoryBrand).Include(c => c.Ad);
-            return View(cellPhones.ToList().Take(50).OrderByDescending(a=>a.Ad.PostingTime));
+            var cellPhones = CellPhones.GetAll().OrderByDescending(c => c.Ad.PostingTime).Take(50).ToList();
+            return View(cellPhones);
         }
 
         // GET: Dashboard/CellPhones/Delete/5
@@ -29,7 +37,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CellPhone cellPhone = db.CellPhones.Find(id);
+            CellPhone cellPhone = CellPhones.GetByID(id);
             if (cellPhone == null)
             {
                 return HttpNotFound();
@@ -42,9 +50,9 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CellPhone cellPhone = db.CellPhones.Find(id);
-            db.CellPhones.Remove(cellPhone);
-            db.SaveChanges();
+            CellPhone cellPhone = CellPhones.GetByID(id);
+            CellPhones.Delete(cellPhone);
+            CellPhones.Commit();
             return RedirectToAction("Index");
         }
 
@@ -52,7 +60,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                myDataContext.Dispose();
             }
             base.Dispose(disposing);
         }

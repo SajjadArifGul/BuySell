@@ -8,18 +8,26 @@ using System.Web;
 using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
+using BuySell.Contracts.Repositories;
+using BuySell.DAL.Repository;
 
 namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
     public class BikesController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext myDataContext = new DataContext();
+        IRepositoryBase<Bike> Bikes;
+
+        public BikesController()
+        {
+            Bikes = new BikesRepository(myDataContext);
+        }
 
         // GET: Dashboard/Bikes
         public ActionResult Index()
         {
-            var bikes = db.Bikes.Include(b => b.Ad).Include(b => b.Color).Include(b => b.VehicleBrand).Include(b => b.Year);
-            return View(bikes.Take(50).ToList().OrderByDescending(a=>a.Ad.PostingTime));
+            var bikes = Bikes.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(50).ToList();
+            return View(bikes);
         }
 
         // GET: Dashboard/Bikes/Delete/5
@@ -29,7 +37,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bike bike = db.Bikes.Find(id);
+            Bike bike = Bikes.GetByID(id);
             if (bike == null)
             {
                 return HttpNotFound();
@@ -42,9 +50,9 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bike bike = db.Bikes.Find(id);
-            db.Bikes.Remove(bike);
-            db.SaveChanges();
+            Bike bike = Bikes.GetByID(id);
+            Bikes.Delete(bike);
+            Bikes.Commit();
             return RedirectToAction("Index");
         }
 
@@ -52,7 +60,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                myDataContext.Dispose();
             }
             base.Dispose(disposing);
         }

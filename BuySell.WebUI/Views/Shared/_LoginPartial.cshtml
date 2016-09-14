@@ -13,7 +13,17 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + currentUser.Name + "!", "Details", "Profile", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + currentUser.Name + "!", "Details", null, routeValues: null, htmlAttributes: new { title = "Manage", @class="dropdown-toggle", data_toggle="dropdown", role="button", aria_haspopup="true", aria_expanded="false" })
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Hello " + currentUser.Name + "!", "Details", "Profile")
+                    </li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                </ul>
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

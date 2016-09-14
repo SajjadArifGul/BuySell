@@ -35,7 +35,7 @@
         @foreach (var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Ad.Seller.Name)
+                    @Html.ActionLink(item.Ad.Seller.Name, "Details", "Profile", new { area = "", id = item.Ad.Seller.ID }, new { target = "_blank" })
                 </td>
                 <td>
                     @Html.ActionLink(item.Ad.Title, "Details", "LaptopAds", new { area = "", id = item.ID }, new { target = "_blank" })

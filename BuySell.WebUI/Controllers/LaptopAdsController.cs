@@ -58,7 +58,7 @@ namespace BuySell.WebUI.Controllers
 
             //Get All Laptops as List
             //Aditionally I only want to get last 12 Laptop Ads in Descending Order so as not to bombard the Index Page
-            List<Laptop> LaptopsList = Laptops.GetAll().Take(12).OrderByDescending(b => b.Ad.PostingTime).ToList();
+            List<Laptop> LaptopsList = Laptops.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(12).ToList();
 
             //There will be many Laptop Ads so we created a whole List of LaptopAdViewModel
             List<LaptopAdViewModel> laptopAdViewModels = new List<LaptopAdViewModel>();

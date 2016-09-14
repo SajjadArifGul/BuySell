@@ -14,9 +14,8 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
     public class RolesController : Controller
     {
+        //Since Roles are manage by Microsoft Owin & Identity shit. We need a different datacontext for this.
         ApplicationDbContext appcontext = new ApplicationDbContext();
-
-        DataContext context = new DataContext();
         
         // GET: Dashboard/Roles
         public ActionResult Index()
@@ -98,32 +97,27 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [HttpPost]
         public ActionResult AddNewRole(string RoleName)
         {
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(appcontext));
-            
-            // check if this doesnt already exists    
-            if (!roleManager.RoleExists(RoleName))
+            if (!string.IsNullOrEmpty(RoleName) && !string.IsNullOrWhiteSpace(RoleName) && RoleName.Length > 5)
             {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = RoleName;
-                roleManager.Create(role);
-            }
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(appcontext));
 
+                // check if this doesnt already exists    
+                if (!roleManager.RoleExists(RoleName))
+                {
+                    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                    role.Name = RoleName;
+                    roleManager.Create(role);
+                }
+
+                return RedirectToAction("Index");
+            }
             return RedirectToAction("Index");
         }
 
         // GET: Dashboard/Roles/Create
         public ActionResult DeleteRole()
         {
-
             var Roles = appcontext.Roles.ToList();
-
-            //List<string> AllRoleNames = new List<string>();
-
-            //foreach (var Role in Roles)
-            //{
-            //    AllRoleNames.Add(Role.Name);
-            //}
-            //ViewBag.AllRoles = AllRoleNames;
 
             var AllRoleNames = (from r in Roles
                      select new SelectListItem { Text = r.Name, Value = r.Name });
@@ -146,11 +140,6 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             // check if this exists    
             if (roleManager.RoleExists(RoleName))
             {
-                //var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                //role.Name = RoleName;
-                //roleManager.Delete(role);
-                // Above Isnt working. Lets delete role from DB directly instead
-
                 var Role = appcontext.Roles.Where(r => r.Name == RoleName).FirstOrDefault();
 
                 appcontext.Roles.Remove(Role);
@@ -171,45 +160,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
 
             return RedirectToAction("Index");
         }
-
-        // POST: Dashboard/Roles/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
         
-        // GET: Dashboard/Roles/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Dashboard/Roles/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddRoleToUser(string id, string RoleName)

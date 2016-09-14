@@ -58,7 +58,7 @@ namespace BuySell.WebUI.Controllers
         // GET: BikeAds
         public ActionResult Index()
         {
-            List<Bike> BikesList = Bikes.GetAll().Take(12).OrderByDescending(b => b.Ad.PostingTime).ToList();
+            List<Bike> BikesList = Bikes.GetAll().OrderByDescending(b => b.Ad.PostingTime).Take(12).ToList();
 
             List<BikeAdViewModel> bikeAdViewModels = new List<BikeAdViewModel>();
 
@@ -456,32 +456,36 @@ namespace BuySell.WebUI.Controllers
         [Authorize]
         public ActionResult AddReview(BikeAdViewModel bikeAdViewModel, int? id, string Review)
         {
-            Bike bike = Bikes.GetByID(id);
-
-            if (bike == null)
+            if (Review.Length >= 50)
             {
-                return HttpNotFound();
+                Bike bike = Bikes.GetByID(id);
+
+                if (bike == null)
+                {
+                    return HttpNotFound();
+                }
+
+                string CurrentUserName = User.Identity.GetUserName();
+
+                Review newReview = new Review();
+
+                newReview.Content = Review;
+                newReview.AdID = bike.AdID;
+                newReview.Ad = bike.Ad;
+                newReview.PostingTime = DateTime.Now;
+
+                Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
+
+                newReview.SellerID = seller.ID;
+                newReview.Seller = seller;
+
+                newReview.ReviewStars = 5;
+
+                Reviews.Insert(newReview);
+                Reviews.Commit();
+
+                return RedirectToAction("Details", "BikeAds", new { id = id });
             }
-
-            string CurrentUserName = User.Identity.GetUserName();
-
-            Review newReview = new Review();
-
-            newReview.Content = Review;
-            newReview.AdID = bike.AdID;
-            newReview.Ad = bike.Ad;
-            newReview.PostingTime = DateTime.Now;
-
-            Seller seller = Sellers.GetAll().Where(s => s.Username == CurrentUserName).FirstOrDefault();
-
-            newReview.SellerID = seller.ID;
-            newReview.Seller = seller;
-
-            newReview.ReviewStars = 5;
-
-            Reviews.Insert(newReview);
-            Reviews.Commit();
-
             return RedirectToAction("Details", "BikeAds", new { id = id });
         }
 

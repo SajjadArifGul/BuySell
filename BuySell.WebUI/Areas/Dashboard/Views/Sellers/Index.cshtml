@@ -26,9 +26,6 @@
                 @Html.Label("Joined")
             </th>
             <th>
-                @Html.Label("Roles")
-            </th>
-            <th>
                 @Html.Label("Control")
             </th>
         </tr>
@@ -50,10 +47,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.JoinDate)
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.Reviews.Count)*@
-                    WORKING
                 </td>
                 <td>
                     @Html.ActionLink("Delete", "Delete", new { id = item.ID })

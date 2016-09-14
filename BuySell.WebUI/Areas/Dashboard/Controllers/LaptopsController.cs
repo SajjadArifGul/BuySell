@@ -8,18 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using BuySell.DAL.Data;
 using BuySell.Models;
+using BuySell.Contracts.Repositories;
+using BuySell.DAL.Repository;
 
 namespace BuySell.WebUI.Areas.Dashboard.Controllers
 {
     public class LaptopsController : Controller
     {
-        private DataContext db = new DataContext();
+        private DataContext myDataContext = new DataContext();
+        IRepositoryBase<Laptop> Laptops;
+
+        public LaptopsController()
+        {
+            Laptops = new LaptopsRepository(myDataContext);
+        }
 
         // GET: Dashboard/Laptops
         public ActionResult Index()
         {
-            var laptops = db.Laptops.Include(l => l.AccessoryBrand).Include(l => l.Ad);
-            return View(laptops.Take(50).ToList().OrderByDescending(a=>a.Ad.PostingTime));
+            var laptops = Laptops.GetAll().OrderByDescending(l => l.Ad.PostingTime).Take(50).ToList();
+            
+            return View(laptops);
         }
 
         // GET: Dashboard/Laptops/Delete/5
@@ -29,7 +38,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Laptop laptop = db.Laptops.Find(id);
+            Laptop laptop = Laptops.GetByID(id);
             if (laptop == null)
             {
                 return HttpNotFound();
@@ -42,9 +51,9 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Laptop laptop = db.Laptops.Find(id);
-            db.Laptops.Remove(laptop);
-            db.SaveChanges();
+            Laptop laptop = Laptops.GetByID(id);
+            Laptops.Delete(laptop);
+            Laptops.Commit();
             return RedirectToAction("Index");
         }
 
@@ -52,7 +61,7 @@ namespace BuySell.WebUI.Areas.Dashboard.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                myDataContext.Dispose();
             }
             base.Dispose(disposing);
         }
