@@ -8,76 +8,101 @@
     @Html.Partial("_CategoriesPartial")
     <div class="col-md-9">
         <div class="row">
-            @foreach (var item in Model.Laptops)
-            {
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <a href="@Url.Action("Details", "LaptopAds", new { id = item.ID })">
-                            <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
-                        </a>
-                        <div class="caption">
-                            <h4 title="@item.Title">
-                                @Html.ActionLink(item.Title, "Details", "LaptopAds", new { id = item.ID }, null)
-                            </h4>
-                            <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Ram) Ram, @Html.DisplayFor(modelItem => item.Processor) Processor, @Html.DisplayFor(modelItem => item.HardDisk) Hard Disk Size, @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
-                        </div>
-                        <div class="ratings">
-                            <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
-                            <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
-                                <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
-                            </p>
-                        </div>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Recent Laptop Ads</h2>
                 </div>
-            }
+                <div class="panel-body">
+
+                    @foreach (var item in Model.Laptops)
+                    {
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="thumbnail">
+                                <a href="@Url.Action("Details", "LaptopAds", new { id = item.ID })">
+                                    <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
+                                </a>
+                                <div class="caption">
+                                    <h4 title="@item.Title">
+                                        @Html.ActionLink(item.Title, "Details", "LaptopAds", new { id = item.ID }, null)
+                                    </h4>
+                                    <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Ram) Ram, @Html.DisplayFor(modelItem => item.Processor) Processor, @Html.DisplayFor(modelItem => item.HardDisk) Hard Disk Size, @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
+                                </div>
+                                <div class="ratings">
+                                    <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
+                                    <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
+                                        <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
         <div class="row">
-            @foreach (var item in Model.CellPhones)
-            {
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <a href="@Url.Action("Details", "CellPhoneAds", new { id = item.ID })">
-                            <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
-                        </a>
-                        <div class="caption">
-                            <h4 title="@item.Title">
-                                @Html.ActionLink(item.Title, "Details", "CellPhoneAds", new { id = item.ID }, null)
-                            </h4>
-                            <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
-                        </div>
-                        <div class="ratings">
-                            <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
-                            <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
-                                <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
-                            </p>
-                        </div>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Recent Cell Phone Ads</h2>
                 </div>
-            }
+                <div class="panel-body">
+
+                    @foreach (var item in Model.CellPhones)
+                    {
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="thumbnail">
+                                <a href="@Url.Action("Details", "CellPhoneAds", new { id = item.ID })">
+                                    <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
+                                </a>
+                                <div class="caption">
+                                    <h4 title="@item.Title">
+                                        @Html.ActionLink(item.Title, "Details", "CellPhoneAds", new { id = item.ID }, null)
+                                    </h4>
+                                    <p>@Html.DisplayFor(modelItem => item.AccessoryBrand.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
+                                </div>
+                                <div class="ratings">
+                                    <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
+                                    <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
+                                        <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
         <div class="row">
-            @foreach (var item in Model.Bikes)
-            {
-                <div class="col-sm-4 col-lg-4 col-md-4">
-                    <div class="thumbnail">
-                        <a href="@Url.Action("Details", "BikeAds", new { id = item.ID })">
-                            <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
-                        </a>
-                        <div class="caption">
-                            <h4 title="@item.Title">
-                                @Html.ActionLink(item.Title, "Details", "BikeAds", new { id = item.ID }, null)
-                            </h4>
-                            <p>@Html.DisplayFor(modelItem => item.VehicleBrand.Name), @Html.DisplayFor(modelItem => item.Year.YearNo), @Html.DisplayFor(modelItem => item.DrivenKilometers) KMs Driven, @Html.DisplayFor(modelItem => item.Color.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
-                        </div>
-                        <div class="ratings">
-                            <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
-                            <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
-                                <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
-                            </p>
-                        </div>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Recent Bike Ads</h2>
                 </div>
-            }
+                <div class="panel-body">
+
+                    @foreach (var item in Model.Bikes)
+                    {
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="thumbnail">
+                                <a href="@Url.Action("Details", "BikeAds", new { id = item.ID })">
+                                    <img title="@item.Title" src="~/images/@item.Images.First().Path" alt="@item.Title">
+                                </a>
+                                <div class="caption">
+                                    <h4 title="@item.Title">
+                                        @Html.ActionLink(item.Title, "Details", "BikeAds", new { id = item.ID }, null)
+                                    </h4>
+                                    <p>@Html.DisplayFor(modelItem => item.VehicleBrand.Name), @Html.DisplayFor(modelItem => item.Year.YearNo), @Html.DisplayFor(modelItem => item.DrivenKilometers) KMs Driven, @Html.DisplayFor(modelItem => item.Color.Name), @Html.DisplayFor(modelItem => item.Condition.ConditionType) Condition. @Html.DisplayFor(modelItem => item.Description)</p>
+                                </div>
+                                <div class="ratings">
+                                    <p title="@item.Currency.Name : @item.Price" class="pull-right"><i class="glyphicon glyphicon-tags"></i>&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Currency.ISOCode) @Html.DisplayFor(modelItem => item.Price)</p>
+                                    <p title="@item.City.Name, @item.State.Name, @item.Country.Name">
+                                        <i class="glyphicon glyphicon-map-marker"></i>&nbsp;@Html.DisplayFor(modelItem => item.City.Name)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
